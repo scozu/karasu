@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karasu (カラス) - Color Palette Showcase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #121212;
+            color: #d4c5b9;
+            font-family: 'Courier New', monospace;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid #333333;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #d8a657;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: #a89984;
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+        .inspiration {
+            color: #928374;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            color: #89b482;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #d8a657;
+            padding-left: 1rem;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .color-card {
+            background: #1a1a1a;
+            border: 1px solid #222222;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .color-card:hover {
+            border-color: #d8a657;
+            transform: translateY(-2px);
+        }
+
+        .color-swatch {
+            height: 80px;
+            margin-bottom: 0.75rem;
+            border: 1px solid #2a2a2a;
+        }
+
+        .color-name {
+            color: #d4c5b9;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .color-hex {
+            color: #d8a657;
+            font-size: 0.875rem;
+            font-family: monospace;
+        }
+
+        .color-usage {
+            color: #928374;
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .base16-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .base16-card {
+            background: #1a1a1a;
+            border: 1px solid #222222;
+            padding: 0.75rem;
+        }
+
+        .base16-card .color-swatch {
+            height: 60px;
+        }
+
+        .base16-label {
+            color: #a89984;
+            font-size: 0.75rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .ansi-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .ansi-card {
+            text-align: center;
+        }
+
+        .ansi-card .color-swatch {
+            height: 60px;
+            margin-bottom: 0.5rem;
+        }
+
+        .ansi-name {
+            color: #928374;
+            font-size: 0.7rem;
+        }
+
+        .code-preview {
+            background: #121212;
+            border: 1px solid #2a2a2a;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+
+        .code-comment { color: #665c54; }
+        .code-keyword { color: #a987a8; }
+        .code-function { color: #7c9fa8; }
+        .code-string { color: #95b572; }
+        .code-number { color: #c4a657; }
+        .code-type { color: #85a585; }
+        .code-variable { color: #d4c5b9; }
+        .code-operator { color: #d6936b; }
+        .code-accent { color: #c4746e; }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid #2a2a2a;
+            margin-top: 3rem;
+            color: #665c54;
+            font-size: 0.875rem;
+        }
+
+        .links {
+            margin-top: 1rem;
+        }
+
+        .links a {
+            color: #7c9fa8;
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+
+        .links a:hover {
+            color: #8ba4b0;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>KARASU (カラス)</h1>
+            <p class="subtitle">A Warm, Atmospheric Colorscheme for Developers</p>
+            <p class="inspiration">Inspired by Gruvbox Material Dark, Kanagawa Dragon, and Black Metal aesthetics</p>
+        </header>
+
+        <section>
+            <h2>Background Layers</h2>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #121212;"></div>
+                    <div class="color-name">karasuBg0</div>
+                    <div class="color-hex">#121212</div>
+                    <div class="color-usage">Main background - Material dark</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #1a1a1a;"></div>
+                    <div class="color-name">karasuBg1</div>
+                    <div class="color-hex">#1a1a1a</div>
+                    <div class="color-usage">Elevated surfaces</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #222222;"></div>
+                    <div class="color-name">karasuBg2</div>
+                    <div class="color-hex">#222222</div>
+                    <div class="color-usage">Popups, menus</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #2a2a2a;"></div>
+                    <div class="color-name">karasuBg3</div>
+                    <div class="color-hex">#2a2a2a</div>
+                    <div class="color-usage">Higher elevation</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #333333;"></div>
+                    <div class="color-name">karasuBg4</div>
+                    <div class="color-hex">#333333</div>
+                    <div class="color-usage">Borders, separators</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #2d3437;"></div>
+                    <div class="color-name">karasuBgVisual</div>
+                    <div class="color-hex">#2d3437</div>
+                    <div class="color-usage">Visual selection</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #3c4144;"></div>
+                    <div class="color-name">karasuBgSearch</div>
+                    <div class="color-hex">#3c4144</div>
+                    <div class="color-usage">Search highlights</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Foreground Tones</h2>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #d4c5b9;"></div>
+                    <div class="color-name">karasuFg0</div>
+                    <div class="color-hex">#d4c5b9</div>
+                    <div class="color-usage">Primary text - warm cream</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #c5b6aa;"></div>
+                    <div class="color-name">karasuFg1</div>
+                    <div class="color-hex">#c5b6aa</div>
+                    <div class="color-usage">Secondary text</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #a89984;"></div>
+                    <div class="color-name">karasuFg2</div>
+                    <div class="color-hex">#a89984</div>
+                    <div class="color-usage">Tertiary text</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #928374;"></div>
+                    <div class="color-name">karasuFg3</div>
+                    <div class="color-hex">#928374</div>
+                    <div class="color-usage">Muted text</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #665c54;"></div>
+                    <div class="color-name">karasuFgDim</div>
+                    <div class="color-hex">#665c54</div>
+                    <div class="color-usage">Dimmed text, comments</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Syntax Colors (Saturated)</h2>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #c4746e;"></div>
+                    <div class="color-name">karasuRed</div>
+                    <div class="color-hex">#c4746e</div>
+                    <div class="color-usage">Errors, deletions, important keywords</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #95b572;"></div>
+                    <div class="color-name">karasuGreen</div>
+                    <div class="color-hex">#95b572</div>
+                    <div class="color-usage">Strings, additions, success</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #c4a657;"></div>
+                    <div class="color-name">karasuYellow</div>
+                    <div class="color-hex">#c4a657</div>
+                    <div class="color-usage">Warnings, numbers, constants</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #7c9fa8;"></div>
+                    <div class="color-name">karasuBlue</div>
+                    <div class="color-hex">#7c9fa8</div>
+                    <div class="color-usage">Functions, methods, identifiers</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #a987a8;"></div>
+                    <div class="color-name">karasuPurple</div>
+                    <div class="color-hex">#a987a8</div>
+                    <div class="color-usage">Keywords, control flow</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #85a585;"></div>
+                    <div class="color-name">karasuAqua</div>
+                    <div class="color-hex">#85a585</div>
+                    <div class="color-usage">Classes, types, special</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #d6936b;"></div>
+                    <div class="color-name">karasuOrange</div>
+                    <div class="color-hex">#d6936b</div>
+                    <div class="color-usage">Parameters, attributes, operators</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Bright Accents</h2>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #ea6962;"></div>
+                    <div class="color-name">karasuBrightRed</div>
+                    <div class="color-hex">#ea6962</div>
+                    <div class="color-usage">Terminal bright red</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #a9b665;"></div>
+                    <div class="color-name">karasuBrightGreen</div>
+                    <div class="color-hex">#a9b665</div>
+                    <div class="color-usage">Terminal bright green</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #d8a657;"></div>
+                    <div class="color-name">karasuBrightYellow</div>
+                    <div class="color-hex">#d8a657</div>
+                    <div class="color-usage">Terminal bright yellow</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #8ba4b0;"></div>
+                    <div class="color-name">karasuBrightBlue</div>
+                    <div class="color-hex">#8ba4b0</div>
+                    <div class="color-usage">Terminal bright blue</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #d3869b;"></div>
+                    <div class="color-name">karasuBrightMagenta</div>
+                    <div class="color-hex">#d3869b</div>
+                    <div class="color-usage">Terminal bright magenta</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #89b482;"></div>
+                    <div class="color-name">karasuBrightCyan</div>
+                    <div class="color-hex">#89b482</div>
+                    <div class="color-usage">Terminal bright cyan</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background: #fbf1c7;"></div>
+                    <div class="color-name">karasuBrightWhite</div>
+                    <div class="color-hex">#fbf1c7</div>
+                    <div class="color-usage">Terminal bright white</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>ANSI Terminal Colors</h2>
+            <h3 style="color: #928374; font-size: 1rem; margin: 1rem 0;">Standard Colors</h3>
+            <div class="ansi-grid">
+                <div class="ansi-card">
+                    <div class="color-swatch" style="background: #121212;"></div>
+                    <div class="ansi-name">Black</div>
+                    <div class="color-hex">#121212</div>
+                </div>
+                <div class="ansi-card">
+                    <div class="color-swatch" style="background: #c4746e;"></div>
+                    <div class="ansi-name">Red</div>
+                    <div class="color-hex">#c4746e</div>
+                </div>
+                <div class="ansi-card">
+                    <div class="color-swatch" style="background: #95b572;"></div>
+                    <div class="ansi-name">Green</div>
+                    <div class="color-hex">#95b572</div>
+                </div>
+                <div class="ansi-card">
+                    <div class="color-swatch" style="background: #c4a657;"></div>
+                    <div class="ansi-name">Yellow</div>
+                    <div class="color-hex">#c4a657</div>
+                </div>
+                <div class="ansi-card">
+                    <div class="color-swatch" style="background: #7c9fa8;"></div>
+                    <div class="ansi-name">Blue</div>
+                    <div class="color-hex">#7c9fa8</div>
+                </div>
+                <div class="ansi-card">
+                    <div class="color-swatch" style="background: #a987a8;"></div>
+                    <div class="ansi-name">Magenta</div>
+                    <div class="color-hex">#a987a8</div>
+                </div>
+                <div class="ansi-card">
+                    <div class="color-swatch" style="background: #85a585;"></div>
+                    <div class="ansi-name">Cyan</div>
+                    <div class="color-hex">#85a585</div>
+                </div>
+                <div class="ansi-card">
+                    <div class="color-swatch" style="background: #d4c5b9;"></div>
+                    <div class="ansi-name">White</div>
+                    <div class="color-hex">#d4c5b9</div>
+                </div>
+            </div>
+
+            <h3 style="color: #928374; font-size: 1rem; margin: 1rem 0;">Bright Colors</h3>
+            <div class="ansi-grid">
+                <div class="ansi-card">
+                    <div class="color-swatch" style="background: #665c54;"></div>
+                    <div class="ansi-name">Bright Black</div>
+                    <div class="color-hex">#665c54</div>
+                </div>
+                <div class="ansi-card">
+                    <div class="color-swatch" style="background: #ea6962;"></div>
+                    <div class="ansi-name">Bright Red</div>
+                    <div class="color-hex">#ea6962</div>
+                </div>
+                <div class="ansi-card">
+                    <div class="color-swatch" style="background: #a9b665;"></div>
+                    <div class="ansi-name">Bright Green</div>
+                    <div class="color-hex">#a9b665</div>
+                </div>
+                <div class="ansi-card">
+                    <div class="color-swatch" style="background: #d8a657;"></div>
+                    <div class="ansi-name">Bright Yellow</div>
+                    <div class="color-hex">#d8a657</div>
+                </div>
+                <div class="ansi-card">
+                    <div class="color-swatch" style="background: #8ba4b0;"></div>
+                    <div class="ansi-name">Bright Blue</div>
+                    <div class="color-hex">#8ba4b0</div>
+                </div>
+                <div class="ansi-card">
+                    <div class="color-swatch" style="background: #d3869b;"></div>
+                    <div class="ansi-name">Bright Magenta</div>
+                    <div class="color-hex">#d3869b</div>
+                </div>
+                <div class="ansi-card">
+                    <div class="color-swatch" style="background: #89b482;"></div>
+                    <div class="ansi-name">Bright Cyan</div>
+                    <div class="color-hex">#89b482</div>
+                </div>
+                <div class="ansi-card">
+                    <div class="color-swatch" style="background: #fbf1c7;"></div>
+                    <div class="ansi-name">Bright White</div>
+                    <div class="color-hex">#fbf1c7</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Code Preview</h2>
+            <div class="code-preview">
+<span class="code-comment">// Karasu theme - warm, atmospheric syntax highlighting</span>
+<span class="code-keyword">function</span> <span class="code-function">calculateTotal</span>(<span class="code-variable">items</span><span class="code-operator">:</span> <span class="code-type">Array</span>&lt;<span class="code-type">Item</span>&gt;)<span class="code-operator">:</span> <span class="code-type">number</span> {
+  <span class="code-keyword">const</span> <span class="code-variable">TAX_RATE</span> <span class="code-operator">=</span> <span class="code-number">0.08</span><span class="code-operator">;</span>
+  <span class="code-keyword">let</span> <span class="code-variable">subtotal</span> <span class="code-operator">=</span> <span class="code-number">0</span><span class="code-operator">;</span>
+
+  <span class="code-keyword">for</span> (<span class="code-keyword">const</span> <span class="code-variable">item</span> <span class="code-keyword">of</span> <span class="code-variable">items</span>) {
+    <span class="code-variable">subtotal</span> <span class="code-operator">+=</span> <span class="code-variable">item</span><span class="code-operator">.</span><span class="code-variable">price</span> <span class="code-operator">*</span> <span class="code-variable">item</span><span class="code-operator">.</span><span class="code-variable">quantity</span><span class="code-operator">;</span>
+  }
+
+  <span class="code-keyword">return</span> <span class="code-variable">subtotal</span> <span class="code-operator">*</span> (<span class="code-number">1</span> <span class="code-operator">+</span> <span class="code-variable">TAX_RATE</span>)<span class="code-operator">;</span>
+}
+
+<span class="code-comment">// Type error with diagnostic color</span>
+<span class="code-keyword">const</span> <span class="code-variable">result</span> <span class="code-operator">=</span> <span class="code-function">calculateTotal</span>(<span class="code-string">"not an array"</span>)<span class="code-operator">;</span> <span class="code-accent">// Error: Type mismatch</span>
+            </div>
+        </section>
+
+        <footer>
+            <p>Karasu (カラス) - A Warm, Atmospheric Colorscheme</p>
+            <p>Inspired by Gruvbox Material Dark, Kanagawa Dragon, and Black Metal aesthetics</p>
+            <div class="links">
+                <a href="https://github.com/f4z3r/gruvbox-material.nvim" target="_blank">Gruvbox Material</a>
+                <a href="https://github.com/rebelot/kanagawa.nvim" target="_blank">Kanagawa</a>
+                <a href="https://github.com/metalelf0/base16-black-metal-scheme" target="_blank">Black Metal</a>
+            </div>
+            <p style="margin-top: 1rem; font-size: 0.75rem;">Material dark (#121212) • Warm earth tones • Balanced contrast</p>
+        </footer>
+    </div>
+</body>
+</html>
