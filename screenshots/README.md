@@ -2,6 +2,18 @@
 
 This directory contains screenshots showcasing the Karasu colorscheme's syntax highlighting across different platforms and languages.
 
+## Quick Start
+
+1. **Read the Guide**: Check out [`screenshot-guide.md`](./screenshot-guide.md) for comprehensive strategies and best practices
+2. **Use Sample Code**: Sample code files are in [`sample-code/`](./sample-code/) - designed to showcase all syntax elements
+3. **Run Helper Script**: Use [`screenshot-helper.sh`](./screenshot-helper.sh) to prepare your environment
+
+## Resources
+
+- **[Screenshot Guide](./screenshot-guide.md)** - Complete guide on creating professional theme screenshots
+- **[Sample Code](./sample-code/)** - Pre-written code samples for each language
+- **[Helper Script](./screenshot-helper.sh)** - Interactive script to help prepare screenshots
+
 ## Directory Structure
 
 ```

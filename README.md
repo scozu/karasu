@@ -343,6 +343,8 @@ return {
 
 ## Screenshots
 
+> **📸 Need help creating screenshots?** See [`screenshots/screenshot-guide.md`](screenshots/screenshot-guide.md) for comprehensive strategies and best practices. Sample code files are available in [`screenshots/sample-code/`](screenshots/sample-code/).
+
 ### Neovim
 
 #### Python
