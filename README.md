@@ -73,6 +73,9 @@ karasu/
 ├── README.md
 ├── LICENSE
 ├── palette-showcase.html    # Interactive color preview
+├── screenshots/             # Syntax highlighting screenshots
+│   ├── README.md
+│   └── *.png                # Platform and language screenshots
 │
 ├── palette/
 │   ├── colors.json          # Master color palette (portable)
@@ -337,6 +340,42 @@ return {
 - **Modified**: `karasuYellow` (#c4a657)
 - **Removed**: `karasuRed` (#c4746e)
 - **Conflict**: `karasuOrange` (#d6936b)
+
+## Screenshots
+
+> **📸 Need help creating screenshots?** See [`screenshots/screenshot-guide.md`](screenshots/screenshot-guide.md) for comprehensive strategies and best practices. Sample code files are available in [`screenshots/sample-code/`](screenshots/sample-code/).
+
+### Neovim
+
+#### Python
+![Neovim Python Syntax Highlighting](screenshots/neovim-python.png)
+
+#### TypeScript/JavaScript
+![Neovim TypeScript Syntax Highlighting](screenshots/neovim-typescript.png)
+
+#### Rust
+![Neovim Rust Syntax Highlighting](screenshots/neovim-rust.png)
+
+#### Lua
+![Neovim Lua Syntax Highlighting](screenshots/neovim-lua.png)
+
+### Cursor (VS Code)
+
+#### TypeScript with LSP
+![Cursor TypeScript Syntax Highlighting](screenshots/cursor-typescript.png)
+
+#### Python with Semantic Tokens
+![Cursor Python Syntax Highlighting](screenshots/cursor-python.png)
+
+### Zed
+
+#### Multi-language Workspace
+![Zed Multi-language Syntax Highlighting](screenshots/zed-multilang.png)
+
+### Terminal (Ghostty)
+
+#### Syntax Highlighted Output
+![Ghostty Terminal Syntax Highlighting](screenshots/ghostty-terminal.png)
 
 ## Development Workflow
 
