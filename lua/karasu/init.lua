@@ -8,9 +8,6 @@ local karasu = {}
 -- Load color palette
 local colors = require("karasu.colors")
 
--- Load utilities
-local utils = require("karasu.utils")
-
 -- Load theme definitions
 local themes = require("karasu.themes")
 
@@ -32,8 +29,5 @@ function karasu.setup(opts)
   -- Apply theme
   themes.load(karasu.config)
 end
-
--- Default setup
-karasu.setup()
 
 return karasu

@@ -9,9 +9,13 @@ A warm, atmospheric colorscheme for Neovim combining Material Design dark backgr
 **packer.nvim**:
 ```lua
 use {
-  "your-username/karasu",
+  "scozu/karasu",
   config = function()
-    require("karasu").setup()
+    require("karasu").setup({
+      transparent = false,
+      italic_comments = true,
+      contrast = "medium"
+    })
   end
 }
 ```
@@ -19,30 +23,41 @@ use {
 **lazy.nvim**:
 ```lua
 {
-  "your-username/karasu",
+  "scozu/karasu",
   lazy = false,
   priority = 1000,
   config = function()
-    require("karasu").setup()
+    require("karasu").setup({
+      transparent = false,
+      italic_comments = true,
+      contrast = "medium"
+    })
   end
 }
 ```
 
 **vim-plug**:
 ```vim
-Plug 'your-username/karasu'
+Plug 'scozu/karasu'
 ```
 
 ### Manual Installation
 
-1. Clone this repository
-2. Copy the `neovim` directory contents to your Neovim config:
+1. Clone this repository:
    ```bash
-   cp -r neovim/lua/karasu ~/.config/nvim/lua/
+   git clone https://github.com/scozu/karasu.git
+   ```
+2. Copy the `lua/karasu` directory to your Neovim config:
+   ```bash
+   cp -r karasu/lua/karasu ~/.config/nvim/lua/
    ```
 3. Add to your `init.lua`:
    ```lua
-   require("karasu").setup()
+   require("karasu").setup({
+     transparent = false,
+     italic_comments = true,
+     contrast = "medium"
+   })
    ```
 
 ## Configuration
@@ -125,4 +140,4 @@ Contributions welcome! Please open an issue for discussion before submitting PRs
 
 ## License
 
-TBD - Likely MIT License
+MIT License

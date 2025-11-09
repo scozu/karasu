@@ -6,6 +6,49 @@ A dark, atmospheric colorscheme combining the warmth of Gruvbox Material Dark wi
 
 Karasu blends Material Design dark backgrounds with carefully balanced warm earth tones, creating a sophisticated palette that's both comfortable for long coding sessions and visually striking. The scheme emphasizes readability while maintaining atmospheric depth through layered backgrounds and harmonious color relationships.
 
+## Quick Install
+
+### Neovim
+```lua
+-- Using lazy.nvim
+{
+  'scozu/karasu',
+  lazy = false,
+  priority = 1000,
+  config = function()
+    require('karasu').setup({
+      transparent = false,
+      italic_comments = true,
+      contrast = 'medium'
+    })
+  end
+}
+```
+
+### Cursor (VS Code)
+Install from the VS Code Marketplace: `scozu.karasu`
+
+### Ghostty
+```bash
+# Download to Ghostty config directory
+curl -o ~/.config/ghostty/themes/karasu https://raw.githubusercontent.com/scozu/karasu/main/ghostty/karasu
+echo "include ~/.config/ghostty/themes/karasu" >> ~/.config/ghostty/config
+```
+
+### Zed
+Install from the Zed extensions marketplace or manually:
+```bash
+# Clone to Zed extensions directory
+git clone https://github.com/scozu/karasu ~/.config/zed/extensions/karasu
+```
+
+### Terminal Emulators
+See platform-specific READMEs in respective directories:
+- [Alacritty](extras/alacritty/) - TOML configuration
+- [Kitty](extras/kitty/) - `.conf` format  
+- [WezTerm](extras/wezterm/) - Lua configuration
+- [iTerm2](extras/iterm2/) - `.itermcolors` file
+
 ## Design Philosophy
 
 - **Material dark backgrounds** - Elevated surfaces with subtle depth (#121212 base)
@@ -77,27 +120,26 @@ karasu/
 │   ├── README.md
 │   └── *.png                # Platform and language screenshots
 │
+├── lua/
+│   └── karasu/             # Neovim colorscheme
+│       ├── init.lua         # Main entry
+│       ├── colors.lua       # Color palette
+│       ├── themes.lua       # Theme definitions
+│       ├── highlights/      # Organized highlight groups
+│       │   ├── editor.lua
+│       │   ├── syntax.lua
+│       │   ├── treesitter.lua
+│       │   ├── lsp.lua
+│       │   └── plugins.lua
+│       └── utils.lua
+│
 ├── palette/
 │   ├── colors.json          # Master color palette (portable)
 │   ├── colors.lua           # Lua definitions (Neovim)
 │   └── README.md            # Color documentation
 │
-├── neovim/
-│   ├── lua/karasu/
-│   │   ├── init.lua         # Main entry
-│   │   ├── colors.lua       # Color palette
-│   │   ├── themes.lua       # Theme definitions
-│   │   ├── highlights/      # Organized highlight groups
-│   │   │   ├── editor.lua
-│   │   │   ├── syntax.lua
-│   │   │   ├── treesitter.lua
-│   │   │   ├── lsp.lua
-│   │   │   └── plugins.lua
-│   │   └── utils.lua
-│   └── README.md
-│
 ├── ghostty/
-│   ├── karasu.conf
+│   ├── karasu
 │   └── README.md
 │
 ├── zed/
