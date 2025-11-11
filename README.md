@@ -42,6 +42,8 @@ Install from Zed extensions marketplace or manually:
 git clone https://github.com/scozu/karasu ~/.config/zed/extensions/karasu
 ```
 
+**Features**: Complete UI theming, syntax highlighting, multiplayer support, terminal ANSI colors
+
 ### Terminal Emulators
 See platform-specific READMEs in respective directories:
 - [Alacritty](extras/alacritty/) - TOML configuration
@@ -105,7 +107,7 @@ karasuBrightWhite: #fbf1c7
 
 - ✅ **Neovim** - Full Lua-based colorscheme with TreeSitter & LSP support
 - ✅ **Ghostty** - Terminal configuration with ANSI colors
-- ✅ **Zed** - JSON theme with complete UI mapping
+- ✅ **Zed** - Complete extension with comprehensive UI theming, syntax highlighting, multiplayer support
 - ✅ **Cursor** - VS Code compatible theme with semantic tokens
 - 🔄 **Terminal extras** - Alacritty, Kitty, WezTerm, iTerm2
 
@@ -225,7 +227,7 @@ For detailed installation and configuration instructions for each platform:
 
 ## Development
 
-For insights into the development process, technical decisions, and implementation details, see [Development.md](Development.md).
+For insights into the development process, technical decisions, and implementation details, see [Development Documentation](docs/development.md).
 
 ## License
 
@@ -255,7 +257,7 @@ Contributions welcome! Please open an issue for discussion before submitting PRs
 
 ### Documentation & Standards
 - [VS Code Theme Documentation](https://code.visualstudio.com/api/extension-guides/color-theme)
-- [Zed Theme Schema](https://zed.dev/schema/themes/v0.1.0.json)
+- [Zed Theme Schema](https://zed.dev/schema/themes/v0.2.0.json)
 - [Neovim Highlight Groups](https://neovim.io/doc/user/syntax.html#highlight-groups)
 - [TreeSitter Queries](https://tree-sitter.github.io/tree-sitter/syntax-highlighting)
 - [ANSI Color Standards](https://en.wikipedia.org/wiki/ANSI_escape_code#Colors)
