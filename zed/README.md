@@ -88,7 +88,7 @@ The theme follows Zed's v0.2.0 schema with comprehensive styling:
 If the theme doesn't appear:
 1. Ensure the extension is in `~/.config/zed/extensions/karasu/`
 2. Check that both `extension.toml` and `themes/karasu.json` are present
-3. Verify JSON syntax is valid (use `python3 -m json.tool karasu.json`)
+3. Verify JSON syntax is valid (use `python3 -m json.tool themes/karasu.json`)
 4. Restart Zed completely
 5. Check Zed's extension manager for any errors
 6. Verify the theme appears in Settings → Themes
