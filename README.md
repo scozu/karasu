@@ -2,7 +2,7 @@
 
 A dark, atmospheric colorscheme combining the warmth of Gruvbox Material Dark with the sophistication of Kanagawa Dragon and minimalist elegance of Black Metal aesthetics. Karasu (meaning "crow" in Japanese) provides a unified, refined dark experience across multiple editors and terminals.
 
-[![](https://raw.githubusercontent.com/scozu/karasu/main/screenshots/karasu-banner-sm.png)](https://raw.githubusercontent.com/scozu/karasu/main/screenshots/karasu-banner-sm.png)
+[![](https://raw.githubusercontent.com/scozu/karasu/main/karasu-banner.png)](https://raw.githubusercontent.com/scozu/karasu/main/karasu-banner.png)
 
 ## Overview
 
