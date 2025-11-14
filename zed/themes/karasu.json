@@ -351,9 +351,9 @@
         "terminal.ansi.dim_white": "#928374",
         "players": [
           {
-            "background": "#ff6b6b33",
-            "cursor": "#ff6b6b",
-            "selection": "#ff6b6b33"
+            "background": "#d8a65733",
+            "cursor": "#d8a657",
+            "selection": "#d8a65733"
           },
           {
             "background": "#4ecdc433",
