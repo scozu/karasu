@@ -1,6 +1,6 @@
 # カラス
 
-Karasu is a terminal-first, atmospheric colorscheme 
+Karasu is a terminal-first, atmospheric colorscheme with a touch of warmth.
 
 [![](https://raw.githubusercontent.com/scozu/karasu/main/karasu-banner.png)](https://raw.githubusercontent.com/scozu/karasu/main/karasu-banner.png)
 
