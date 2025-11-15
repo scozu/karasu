@@ -4,7 +4,7 @@ Karasu is a terminal-first, atmospheric colorscheme with a touch of warmth.
 
 [![](https://raw.githubusercontent.com/scozu/karasu/main/karasu-banner.png)](https://raw.githubusercontent.com/scozu/karasu/main/karasu-banner.png)
 
-## Quick Install
+## Installation
 
 ### Neovim
 ```lua
@@ -23,9 +23,6 @@ Karasu is a terminal-first, atmospheric colorscheme with a touch of warmth.
 }
 ```
 
-### Cursor (VS Code)
-Install from VS Code Marketplace: `scozu.karasu`
-
 ### Ghostty
 ```bash
 # Download to Ghostty config directory
@@ -34,24 +31,22 @@ echo "include ~/.config/ghostty/themes/karasu" >> ~/.config/ghostty/config
 ```
 
 ### Zed
-Install from Zed extensions marketplace or manually:
 ```bash
 # Clone to Zed extensions directory
 git clone https://github.com/scozu/karasu ~/.config/zed/extensions/karasu
 ```
 
-**Features**: Complete UI theming, syntax highlighting, multiplayer support, terminal ANSI colors
+## In Development
 
-### Terminal Emulators
-See platform-specific READMEs in respective directories:
-- [Alacritty](extras/alacritty/) - TOML configuration
-- [Kitty](extras/kitty/) - `.conf` format  
-- [WezTerm](extras/wezterm/) - Lua configuration
-- [iTerm2](extras/iterm2/) - `.itermcolors` file
+- **Cursor** - VS Code compatible theme with semantic tokens
+- **Alacritty** - Terminal emulator with TOML configuration
+- **Kitty** - Terminal emulator with `.conf` format
+- **WezTerm** - Terminal emulator with Lua configuration  
+- **iTerm2** - Terminal emulator with `.itermcolors` file
 
 ## Design Philosophy
 
-- **Material dark backgrounds** - Elevated surfaces with subtle depth (#121212 base)
+- **Material Dark** - Elevated surfaces with subtle depth (#121212 base)
 - **Warm earth tones** - Muted, saturated colors inspired by natural materials
 - **Balanced contrast** - Readable without eye strain, optimized for long sessions
 - **Consistent experience** - Unified palette across all supported platforms
@@ -100,14 +95,6 @@ karasuBrightMagenta: #d3869b
 karasuBrightCyan: #89b482
 karasuBrightWhite: #fbf1c7
 ```
-
-## Platform Support
-
-- ✅ **Neovim** - Full Lua-based colorscheme with TreeSitter & LSP support
-- ✅ **Ghostty** - Terminal configuration with ANSI colors
-- ✅ **Zed** - Complete extension with comprehensive UI theming, syntax highlighting, multiplayer support
-- ✅ **Cursor** - VS Code compatible theme with semantic tokens
-- 🔄 **Terminal extras** - Alacritty, Kitty, WezTerm, iTerm2
 
 ## Configuration
 
@@ -220,7 +207,7 @@ For detailed installation and configuration instructions for each platform:
 - [Neovim Documentation](neovim/README.md)
 - [Ghostty Documentation](ghostty/README.md)
 - [Zed Documentation](zed/README.md)
-- [Cursor Documentation](cursor/README.md)
+
 - [Terminal Extras](extras/)
 
 ## Development
@@ -237,6 +224,7 @@ This colorscheme draws inspiration from several excellent themes:
 
 - **[Gruvbox Material Dark](https://github.com/f4z3r/gruvbox-material.nvim)** - Warm earth tones, Material Design backgrounds, proven color relationships
 - **[Kanagawa Dragon](https://github.com/rebelot/kanagawa.nvim)** - Sophisticated muted palette, excellent contrast ratios, structural patterns
+- **[Kanso](https://github.com/0xstepit/flow.nvim)** - Minimalist aesthetic, refined color harmony, subtle depth
 - **[Black Metal (Gorgoroth)](https://github.com/metalelf0/base16-black-metal-scheme)** - Minimalist aesthetic, stark contrasts, atmospheric depth
 
 ### Key Differences
@@ -244,6 +232,8 @@ This colorscheme draws inspiration from several excellent themes:
 **From Gruvbox**: More saturated accent colors, warmer foreground tones, deeper Material backgrounds
 
 **From Kanagawa**: Warmer palette, less blue/teal emphasis, Material design influence
+
+**From Kanso**: Enhanced color harmony, more sophisticated depth, refined balance
 
 **From Black Metal**: More color variety, warmer tones, less monochromatic
 
