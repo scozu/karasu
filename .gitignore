@@ -33,7 +33,7 @@ __pycache__/
 *.log
 
 # Screenshot generation
-screenshots/*.png
+!screenshots/*.png
 !screenshots/*.md
 !screenshots/sample-code/
 
