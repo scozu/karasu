@@ -154,16 +154,16 @@ karasuBrightWhite: #fbf1c7    /* Terminal white - bright text, highlights */
 ### Neovim
 
 #### Python
-![Neovim Python Syntax Highlighting](screenshots/neovim-python.png)
+![Neovim Python Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-python.png)
 
 #### TypeScript/JavaScript
-![Neovim TypeScript Syntax Highlighting](screenshots/neovim-typescript.png)
+![Neovim TypeScript Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-typescript.png)
 
 #### Rust
-![Neovim Rust Syntax Highlighting](screenshots/neovim-rust.png)
+![Neovim Rust Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-rust.png)
 
 #### Lua
-![Neovim Lua Syntax Highlighting](screenshots/neovim-lua.png)
+![Neovim Lua Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-lua.png)
 
 ### Cursor (VS Code)
 
@@ -176,7 +176,7 @@ karasuBrightWhite: #fbf1c7    /* Terminal white - bright text, highlights */
 ### Zed
 
 #### Multi-language Workspace
-![Zed Multi-language Syntax Highlighting](screenshots/zed-multilang.png)
+![Zed Multi-language Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/zed-multilang.png)
 
 ### Terminal (Ghostty)
 
