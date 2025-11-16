@@ -104,13 +104,13 @@ karasuOrange: #d6936b    /* Parameters, attributes, operators */
 
 ### Bright Accents
 ```
-karasuBrightRed: #ea6962
-karasuBrightGreen: #a9b665
-karasuBrightYellow: #d8a657
-karasuBrightBlue: #8ba4b0
-karasuBrightMagenta: #d3869b
-karasuBrightCyan: #89b482
-karasuBrightWhite: #fbf1c7
+karasuBrightRed: #ea6962      /* Terminal red - errors, critical warnings */
+karasuBrightGreen: #a9b665    /* Terminal green - success, active indicators */
+karasuBrightYellow: #d8a657   /* Terminal yellow - warnings, attention */
+karasuBrightBlue: #8ba4b0     /* Terminal blue - information, links */
+karasuBrightMagenta: #d3869b  /* Terminal magenta - special emphasis */
+karasuBrightCyan: #89b482     /* Terminal cyan - info, secondary emphasis */
+karasuBrightWhite: #fbf1c7    /* Terminal white - bright text, highlights */
 ```
 
 ## Syntax Highlighting Strategy
