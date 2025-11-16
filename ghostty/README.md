@@ -4,25 +4,32 @@ A warm, atmospheric terminal colorscheme for Ghostty combining Material Design d
 
 ## Installation
 
-### Method 1: Direct Download
+### Installation
+
+**Method 1: Git Clone (Recommended)**
 ```bash
-# Download to Ghostty config directory
-curl -o ~/.config/ghostty/themes/karasu https://raw.githubusercontent.com/scozu/karasu/main/ghostty/karasu
-echo "include ~/.config/ghostty/themes/karasu" >> ~/.config/ghostty/config
+git clone https://github.com/scozu/karasu.git ~/.config/ghostty/themes/karasu
+echo "theme = karasu" >> ~/.config/ghostty/config
 ```
 
-### Method 2: Manual Installation
-1. Copy `karasu` to your Ghostty themes directory:
-   ```bash
-   cp ghostty/karasu ~/.config/ghostty/themes/karasu
-   ```
+**Method 2: Direct Download**
+```bash
+# Create themes directory if it doesn't exist
+mkdir -p ~/.config/ghostty/themes
 
-2. Include it in your main Ghostty config (`~/.config/ghostty/config`):
-   ```
-   include ~/.config/ghostty/themes/karasu
-   ```
+# Download theme file directly
+curl -o ~/.config/ghostty/themes/karasu https://raw.githubusercontent.com/scozu/karasu/main/ghostty/karasu
 
-3. Restart Ghostty or reload configuration
+# Add to your Ghostty config
+echo "theme = karasu" >> ~/.config/ghostty/config
+```
+
+**Method 3: Manual Installation**
+1. Download [`ghostty/karasu`](https://raw.githubusercontent.com/scozu/karasu/main/ghostty/karasu) from the repository
+2. Save it as `~/.config/ghostty/themes/karasu`
+3. Add `theme = karasu` to your Ghostty config
+
+After installation, restart Ghostty or reload configuration (Cmd/Ctrl + R).
 
 ## Configuration
 

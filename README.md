@@ -7,44 +7,63 @@ Karasu is a terminal-first, atmospheric colorscheme with a touch of warmth.
 ## Installation
 
 ### Neovim
+
+**lazy.nvim**:
 ```lua
--- Using lazy.nvim
 {
   'scozu/karasu',
   lazy = false,
   priority = 1000,
   config = function()
-    require('karasu').setup({
-      transparent = false,
-      italic_comments = true,
-      contrast = 'medium'
-    })
+    require('karasu').setup()
   end
 }
 ```
 
+**packer.nvim**:
+```lua
+use {
+  'scozu/karasu',
+  config = function()
+    require('karasu').setup()
+  end
+}
+```
+
+**vim-plug**:
+```vim
+Plug 'scozu/karasu'
+```
+
+**Requirements**: Neovim 0.8.0+ with `termguicolors` enabled.
+
+**Configuration** (optional - defaults shown):
+```lua
+require('karasu').setup({
+  transparent = false,        -- Enable transparent background
+  italic_comments = false,     -- Italic comments
+  italic_keywords = false,     -- Italic keywords
+  italic_functions = false,    -- Italic functions
+  italic_strings = false,     -- Italic strings
+  italic_variables = false,    -- Italic variables
+  contrast = "medium",         -- "soft", "medium", "hard"
+})
+```
+
 ### Ghostty
 ```bash
-# Download to Ghostty config directory
-curl -o ~/.config/ghostty/themes/karasu https://raw.githubusercontent.com/scozu/karasu/main/ghostty/karasu
-echo "include ~/.config/ghostty/themes/karasu" >> ~/.config/ghostty/config
+git clone https://github.com/scozu/karasu.git ~/.config/ghostty/themes/karasu
+echo "theme = karasu" >> ~/.config/ghostty/config
 ```
+Then restart Ghostty or reload the configuration (Cmd/Ctrl + R).
 
 ### Zed
 ```bash
-# Clone to Zed extensions directory
 git clone https://github.com/scozu/karasu ~/.config/zed/extensions/karasu
 ```
+Then select "Karasu" in Zed's theme settings (Cmd/Ctrl + , → Themes).
 
-## In Development
-
-- **Cursor** - VS Code compatible theme with semantic tokens
-- **Alacritty** - Terminal emulator with TOML configuration
-- **Kitty** - Terminal emulator with `.conf` format
-- **WezTerm** - Terminal emulator with Lua configuration  
-- **iTerm2** - Terminal emulator with `.itermcolors` file
-
-## Design Philosophy
+## Design 
 
 - **Material Dark** - Elevated surfaces with subtle depth (#121212 base)
 - **Warm earth tones** - Muted, saturated colors inspired by natural materials
@@ -94,30 +113,6 @@ karasuBrightBlue: #8ba4b0
 karasuBrightMagenta: #d3869b
 karasuBrightCyan: #89b482
 karasuBrightWhite: #fbf1c7
-```
-
-## Configuration
-
-### Neovim Options
-```lua
-require('karasu').setup({
-  transparent = false,        -- Enable transparent background
-  italic_comments = false,     -- Italic comments
-  italic_keywords = false,     -- Italic keywords
-  italic_functions = false,    -- Italic functions
-  italic_strings = false,     -- Italic strings
-  italic_variables = false,    -- Italic variables
-  contrast = "medium",         -- "soft", "medium", "hard"
-})
-```
-
-### Usage
-```vim
-" Load colorscheme
-:colorscheme karasu
-
-" Or with Lua
-lua require('karasu').setup()
 ```
 
 ## Syntax Highlighting Strategy
@@ -197,10 +192,9 @@ lua require('karasu').setup()
 - **Foreground contrast**: karasuFg0 on karasuBg0 = ~11:1 (WCAG AAA)
 - **Syntax colors**: All maintain >4.5:1 contrast (WCAG AA)
 - **Bright variants**: karasuBright* colors available for terminal emphasis
-- **Colorblind friendly**: Distinct hues with brightness differences
 - **Low light optimized**: Warm tones reduce eye strain
 
-## Platform-Specific Documentation
+## Documentation
 
 For detailed installation and configuration instructions for each platform:
 
@@ -210,15 +204,7 @@ For detailed installation and configuration instructions for each platform:
 
 - [Terminal Extras](extras/)
 
-## Development
-
-For insights into the development process, technical decisions, and implementation details, see [Development Documentation](docs/development.md).
-
-## License
-
-MIT License
-
-## Inspiration & References
+### References
 
 This colorscheme draws inspiration from several excellent themes:
 
@@ -227,23 +213,8 @@ This colorscheme draws inspiration from several excellent themes:
 - **[Kanso](https://github.com/0xstepit/flow.nvim)** - Minimalist aesthetic, refined color harmony, subtle depth
 - **[Black Metal (Gorgoroth)](https://github.com/metalelf0/base16-black-metal-scheme)** - Minimalist aesthetic, stark contrasts, atmospheric depth
 
-### Key Differences
+## Resources
 
-**From Gruvbox**: More saturated accent colors, warmer foreground tones, deeper Material backgrounds
-
-**From Kanagawa**: Warmer palette, less blue/teal emphasis, Material design influence
-
-**From Kanso**: Enhanced color harmony, more sophisticated depth, refined balance
-
-**From Black Metal**: More color variety, warmer tones, less monochromatic
-
-## Contributing
-
-Contributions welcome! Please open an issue for discussion before submitting PRs.
-
-## Resources & References
-
-### Documentation & Standards
 - [VS Code Theme Documentation](https://code.visualstudio.com/api/extension-guides/color-theme)
 - [Zed Theme Schema](https://zed.dev/schema/themes/v0.2.0.json)
 - [Neovim Highlight Groups](https://neovim.io/doc/user/syntax.html#highlight-groups)
