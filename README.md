@@ -71,8 +71,6 @@ Then select "Karasu" in Zed's theme settings (Cmd/Ctrl + , → Themes).
 - **Consistent experience** - Unified palette across all supported platforms
 - **Sophisticated palette** - Carefully chosen colors that work harmoniously together
 
-## Color Palette
-
 ### Background Layers
 ```
 karasuBg0: #121212       /* Main background - Material dark */
@@ -213,7 +211,7 @@ This colorscheme draws inspiration from several excellent themes:
 - **[Kanso](https://github.com/0xstepit/flow.nvim)** - Minimalist aesthetic, refined color harmony, subtle depth
 - **[Black Metal (Gorgoroth)](https://github.com/metalelf0/base16-black-metal-scheme)** - Minimalist aesthetic, stark contrasts, atmospheric depth
 
-## Resources
+### Resources
 
 - [VS Code Theme Documentation](https://code.visualstudio.com/api/extension-guides/color-theme)
 - [Zed Theme Schema](https://zed.dev/schema/themes/v0.2.0.json)
