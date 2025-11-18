@@ -197,8 +197,7 @@ For detailed installation and configuration instructions for each platform:
 - [Neovim Documentation](neovim/README.md)
 - [Ghostty Documentation](ghostty/README.md)
 - [Zed Documentation](zed/README.md)
-
-- [Terminal Extras](extras/)
+- [OpenCode Documentation](opencode/README.md)
 
 ### References
 

@@ -93,7 +93,7 @@ karasu/
 │   └── init.lua        # Main plugin interface
 ├── colors/
 │   └── karasu.vim     # Vimscript wrapper
-└── extras/             # Port configurations for other tools
+└── opencode/           # OpenCode theme
 ```
 
 ### Configuration System

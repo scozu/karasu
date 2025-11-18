@@ -25,7 +25,6 @@
 - `palette/` - Source of truth for color definitions
 - `lua/karasu/` - Neovim plugin implementation
 - Platform-specific directories for theme files
-- `extras/` - Terminal emulator configurations
 
 ### Naming Conventions
 - Colors: `karasuRed`, `karasuBg0` (camelCase with prefix)
