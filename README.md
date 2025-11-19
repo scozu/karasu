@@ -63,6 +63,40 @@ git clone https://github.com/scozu/karasu ~/.config/zed/extensions/karasu
 ```
 Then select "Karasu" in Zed's theme settings (Cmd/Ctrl + , → Themes).
 
+## Screenshots
+
+### Neovim
+
+#### Python
+![Neovim Python Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-python.png)
+
+#### TypeScript/JavaScript
+![Neovim TypeScript Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-typescript.png)
+
+#### Rust
+![Neovim Rust Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-rust.png)
+
+#### Lua
+![Neovim Lua Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-lua.png)
+
+### Cursor (VS Code)
+
+#### TypeScript with LSP
+![Cursor TypeScript Syntax Highlighting](screenshots/cursor-typescript.png)
+
+#### Python with Semantic Tokens
+![Cursor Python Syntax Highlighting](screenshots/cursor-python.png)
+
+### Zed
+
+#### Multi-language Workspace
+![Zed Multi-language Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/zed-multilang.png)
+
+### Terminal (Ghostty)
+
+#### Syntax Highlighted Output
+![Ghostty Terminal Syntax Highlighting](screenshots/ghostty-terminal.png)
+
 ## Design 
 
 - **Material Dark** - Elevated surfaces with subtle depth (#121212 base)
@@ -148,8 +182,6 @@ karasuBrightWhite: #fbf1c7    /* Terminal white - bright text, highlights */
 - **Modified**: `karasuYellow` (#c4a657)
 - **Removed**: `karasuRed` (#c4746e)
 - **Conflict**: `karasuOrange` (#d6936b)
-
-## Screenshots
 
 ### Neovim
 
