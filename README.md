@@ -65,37 +65,16 @@ Then select "Karasu" in Zed's theme settings (Cmd/Ctrl + , → Themes).
 
 ## Screenshots
 
-### Neovim
+### Neovim & Ghostty
 
-#### Python
-![Neovim Python Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-python.png)
-
-#### TypeScript/JavaScript
-![Neovim TypeScript Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-typescript.png)
-
-#### Rust
-![Neovim Rust Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-rust.png)
-
-#### Lua
-![Neovim Lua Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-lua.png)
-
-### Cursor (VS Code)
-
-#### TypeScript with LSP
-![Cursor TypeScript Syntax Highlighting](screenshots/cursor-typescript.png)
-
-#### Python with Semantic Tokens
-![Cursor Python Syntax Highlighting](screenshots/cursor-python.png)
+![Neovim Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-python.png)
+![Neovim Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-typescript.png)
+![Neovim Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-rust.png)
+![Neovim Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-lua.png)
 
 ### Zed
 
-#### Multi-language Workspace
 ![Zed Multi-language Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/zed-multilang.png)
-
-### Terminal (Ghostty)
-
-#### Syntax Highlighted Output
-![Ghostty Terminal Syntax Highlighting](screenshots/ghostty-terminal.png)
 
 ## Design 
 
@@ -183,37 +162,7 @@ karasuBrightWhite: #fbf1c7    /* Terminal white - bright text, highlights */
 - **Removed**: `karasuRed` (#c4746e)
 - **Conflict**: `karasuOrange` (#d6936b)
 
-### Neovim
 
-#### Python
-![Neovim Python Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-python.png)
-
-#### TypeScript/JavaScript
-![Neovim TypeScript Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-typescript.png)
-
-#### Rust
-![Neovim Rust Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-rust.png)
-
-#### Lua
-![Neovim Lua Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-lua.png)
-
-### Cursor (VS Code)
-
-#### TypeScript with LSP
-![Cursor TypeScript Syntax Highlighting](screenshots/cursor-typescript.png)
-
-#### Python with Semantic Tokens
-![Cursor Python Syntax Highlighting](screenshots/cursor-python.png)
-
-### Zed
-
-#### Multi-language Workspace
-![Zed Multi-language Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/zed-multilang.png)
-
-### Terminal (Ghostty)
-
-#### Syntax Highlighted Output
-![Ghostty Terminal Syntax Highlighting](screenshots/ghostty-terminal.png)
 
 ## Accessibility
 
