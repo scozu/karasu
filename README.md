@@ -4,7 +4,7 @@ Karasu is a terminal-first, atmospheric colorscheme with a touch of warmth.
 
 [![](https://raw.githubusercontent.com/scozu/karasu/main/karasu-banner.png)](https://raw.githubusercontent.com/scozu/karasu/main/karasu-banner.png)
 
-[![](https://github.com/scozu/karasu/releases/download/screenshot-assets/karasu-palette.svg)](https://github.com/scozu/karasu/releases/download/screenshot-assets/karasu-palette.svg)
+![Karasu Color Palette](https://raw.githubusercontent.com/scozu/karasu/main/karasu-palette.svg)
 
 ## Installation
 
