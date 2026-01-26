@@ -1,15 +1,29 @@
 # Karasu Colorscheme for Ghostty
 
-A warm, atmospheric terminal colorscheme for Ghostty combining Material Design dark backgrounds with warm earth tones.
+Atmospheric terminal themes for Ghostty with Night & Snow variants that adapt to your environment. Combines Material Design backgrounds with warm earth tones.
 
 ## Installation
 
-### Installation
+### Dual Theme Installation (Recommended)
 
-**Method 1: Git Clone (Recommended)**
+For automatic theme switching:
 ```bash
 git clone https://github.com/scozu/karasu.git ~/.config/ghostty/themes/karasu
-echo "theme = karasu" >> ~/.config/ghostty/config
+echo "theme = dark:karasu-night,light:karasu-snow" >> ~/.config/ghostty/config
+```
+
+### Single Theme Installation
+
+**For Night Only**:
+```bash
+git clone https://github.com/scozu/karasu.git ~/.config/ghostty/themes/karasu
+echo "theme = karasu-night" >> ~/.config/ghostty/config
+```
+
+**For Snow Only**:
+```bash
+git clone https://github.com/scozu/karasu.git ~/.config/ghostty/themes/karasu
+echo "theme = karasu-snow" >> ~/.config/ghostty/config
 ```
 
 **Method 2: Direct Download**
@@ -40,12 +54,19 @@ The theme includes:
 - Selection colors
 - Full ANSI color support for terminal applications
 
-## Color Palette
+## Color Palettes
 
+### Karasu Night
 - **Background**: #121212 (Material dark)
 - **Foreground**: #d4c5b9 (Warm cream)
 - **Cursor**: #d8a657 (Bright yellow)
 - **Selection**: #2d3437 (Visual selection)
+
+### Karasu Snow
+- **Background**: #f8f7f6 (Warm off-white)
+- **Foreground**: #3c3836 (Warm dark gray)
+- **Cursor**: #c4a657 (Yellow)
+- **Selection**: #d6d4d1 (Visual selection)
 
 ## Customization
 

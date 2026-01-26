@@ -1,7 +1,7 @@
 {
   "name": "karasu",
   "displayName": "Karasu",
-  "description": "A warm, atmospheric colorscheme combining Material Design dark backgrounds with warm earth tones",
+  "description": "Atmospheric themes with Night & Snow variants that adapt to your environment",
   "version": "0.1.0",
   "publisher": "karasu",
   "engines": {
@@ -13,22 +13,29 @@
   "contributes": {
     "themes": [
       {
-        "label": "Karasu",
+        "label": "Karasu Night",
         "uiTheme": "vs-dark",
-        "path": "./themes/karasu.json"
+        "path": "./themes/karasu-night.json"
+      },
+      {
+        "label": "Karasu Snow",
+        "uiTheme": "vs",
+        "path": "./themes/karasu-snow.json"
       }
     ]
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/karasu.git"
+    "url": "https://github.com/scozu/karasu.git"
   },
   "keywords": [
     "theme",
     "dark",
+    "light",
     "warm",
     "material",
-    "colorscheme"
+    "colorscheme",
+    "auto-switching"
   ],
   "license": "MIT"
 }

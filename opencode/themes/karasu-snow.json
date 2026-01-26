@@ -1,18 +1,18 @@
 {
   "$schema": "https://opencode.ai/theme.json",
   "defs": {
-    "karasuSnowBg0": "#f8f7f6",
-    "karasuSnowBg1": "#f1f0ef",
-    "karasuSnowBg2": "#ebe9e8",
-    "karasuSnowBg3": "#e5e3e2",
-    "karasuSnowBg4": "#dfdddb",
-    "karasuSnowBgVisual": "#d6d4d1",
-    "karasuSnowBgSearch": "#cdc9c5",
-    "karasuSnowFg0": "#3c3836",
-    "karasuSnowFg1": "#504945",
-    "karasuSnowFg2": "#665c54",
-    "karasuSnowFg3": "#7c6f64",
-    "karasuSnowFgDim": "#928374",
+    "karasuBg0": "#f8f7f6",
+    "karasuBg1": "#f1f0ef",
+    "karasuBg2": "#ebe9e8",
+    "karasuBg3": "#e5e3e2",
+    "karasuBg4": "#dfdddb",
+    "karasuBgVisual": "#d6d4d1",
+    "karasuBgSearch": "#cdc9c5",
+    "karasuFg0": "#3c3836",
+    "karasuFg1": "#504945",
+    "karasuFg2": "#665c54",
+    "karasuFg3": "#7c6f64",
+    "karasuFgDim": "#928374",
     "karasuRed": "#c4746e",
     "karasuGreen": "#95b572",
     "karasuYellow": "#c4a657",
@@ -20,13 +20,13 @@
     "karasuPurple": "#a987a8",
     "karasuAqua": "#85a585",
     "karasuOrange": "#d6936b",
-    "karasuSnowBrightRed": "#cc241d",
-    "karasuSnowBrightGreen": "#98971a",
-    "karasuSnowBrightYellow": "#d79921",
-    "karasuSnowBrightBlue": "#458588",
-    "karasuSnowBrightMagenta": "#b16286",
-    "karasuSnowBrightCyan": "#689d6a",
-    "karasuSnowBrightWhite": "#504945"
+    "karasuBrightRed": "#cc241d",
+    "karasuBrightGreen": "#98971a",
+    "karasuBrightYellow": "#d79921",
+    "karasuBrightBlue": "#458588",
+    "karasuBrightMagenta": "#b16286",
+    "karasuBrightCyan": "#689d6a",
+    "karasuBrightWhite": "#504945"
   },
   "theme": {
     "primary": {
@@ -58,36 +58,36 @@
       "light": "karasuBlue"
     },
     "text": {
-      "dark": "karasuSnowFg0",
-      "light": "karasuSnowBg0"
+      "dark": "karasuFg0",
+      "light": "karasuBg0"
     },
     "textMuted": {
-      "dark": "karasuSnowFg3",
-      "light": "karasuSnowFg2"
+      "dark": "karasuFg3",
+      "light": "karasuFg2"
     },
     "background": {
-      "dark": "karasuSnowBg0",
-      "light": "karasuSnowFg0"
+      "dark": "karasuBg0",
+      "light": "karasuFg0"
     },
     "backgroundPanel": {
-      "dark": "karasuSnowBg1",
-      "light": "karasuSnowFg1"
+      "dark": "karasuBg1",
+      "light": "karasuFg1"
     },
     "backgroundElement": {
-      "dark": "karasuSnowBg2",
-      "light": "karasuSnowFg2"
+      "dark": "karasuBg2",
+      "light": "karasuFg2"
     },
     "border": {
-      "dark": "karasuSnowBg3",
-      "light": "karasuSnowFg3"
+      "dark": "karasuBg3",
+      "light": "karasuFg3"
     },
     "borderActive": {
       "dark": "karasuBlue",
       "light": "karasuBlue"
     },
     "borderSubtle": {
-      "dark": "karasuSnowBg2",
-      "light": "karasuSnowFg2"
+      "dark": "karasuBg2",
+      "light": "karasuFg2"
     },
     "diffAdded": {
       "dark": "karasuGreen",
@@ -98,12 +98,12 @@
       "light": "karasuRed"
     },
     "diffContext": {
-      "dark": "karasuSnowBg3",
-      "light": "karasuSnowFg3"
+      "dark": "karasuBg3",
+      "light": "karasuFg3"
     },
     "diffHunkHeader": {
-      "dark": "karasuSnowBg3",
-      "light": "karasuSnowFg3"
+      "dark": "karasuBg3",
+      "light": "karasuFg3"
     },
     "diffHighlightAdded": {
       "dark": "karasuGreen",
@@ -122,12 +122,12 @@
       "light": "#f2e8e8"
     },
     "diffContextBg": {
-      "dark": "karasuSnowBg1",
-      "light": "karasuSnowFg1"
+      "dark": "karasuBg1",
+      "light": "karasuFg1"
     },
     "diffLineNumber": {
-      "dark": "karasuSnowFg3",
-      "light": "karasuSnowFg2"
+      "dark": "karasuFg3",
+      "light": "karasuFg2"
     },
     "diffAddedLineNumberBg": {
       "dark": "#e8f2e8",
@@ -138,8 +138,8 @@
       "light": "#f2e8e8"
     },
     "markdownText": {
-      "dark": "karasuSnowFg0",
-      "light": "karasuSnowBg0"
+      "dark": "karasuFg0",
+      "light": "karasuBg0"
     },
     "markdownHeading": {
       "dark": "karasuBlue",
@@ -158,8 +158,8 @@
       "light": "karasuGreen"
     },
     "markdownBlockQuote": {
-      "dark": "karasuSnowFg3",
-      "light": "karasuSnowFg2"
+      "dark": "karasuFg3",
+      "light": "karasuFg2"
     },
     "markdownEmph": {
       "dark": "karasuYellow",
@@ -170,8 +170,8 @@
       "light": "karasuOrange"
     },
     "markdownHorizontalRule": {
-      "dark": "karasuSnowBg3",
-      "light": "karasuSnowFg3"
+      "dark": "karasuBg3",
+      "light": "karasuFg3"
     },
     "markdownListItem": {
       "dark": "karasuBlue",
@@ -190,12 +190,12 @@
       "light": "karasuAqua"
     },
     "markdownCodeBlock": {
-      "dark": "karasuSnowFg0",
-      "light": "karasuSnowBg0"
+      "dark": "karasuFg0",
+      "light": "karasuBg0"
     },
     "syntaxComment": {
-      "dark": "karasuSnowFgDim",
-      "light": "karasuSnowFg3"
+      "dark": "karasuFgDim",
+      "light": "karasuFg3"
     },
     "syntaxKeyword": {
       "dark": "karasuPurple",
@@ -206,8 +206,8 @@
       "light": "karasuBlue"
     },
     "syntaxVariable": {
-      "dark": "karasuSnowFg0",
-      "light": "karasuSnowBg0"
+      "dark": "karasuFg0",
+      "light": "karasuBg0"
     },
     "syntaxString": {
       "dark": "karasuGreen",
@@ -226,12 +226,12 @@
       "light": "karasuOrange"
     },
     "syntaxPunctuation": {
-      "dark": "karasuSnowFg2",
-      "light": "karasuSnowFg2"
+      "dark": "karasuFg2",
+      "light": "karasuFg2"
     },
     "cursor": {
-      "dark": "karasuSnowBrightYellow",
-      "light": "karasuSnowBrightYellow"
+      "dark": "karasuBrightYellow",
+      "light": "karasuBrightYellow"
     }
   }
 }

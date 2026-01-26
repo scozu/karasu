@@ -71,16 +71,21 @@ require('karasu').setup({
 ```
 
 ### Ghostty
+
+For automatic theme switching:
 ```bash
 git clone https://github.com/scozu/karasu.git ~/.config/ghostty/themes/karasu
 echo "theme = dark:karasu-night,light:karasu-snow" >> ~/.config/ghostty/config
 ```
+
 Then restart Ghostty or reload the configuration (Cmd/Ctrl + R).
 
 ### Zed
+
 ```bash
 git clone https://github.com/scozu/karasu ~/.config/zed/extensions/karasu
 ```
+
 Then configure Zed to use both themes in your settings.json:
 ```json
 {
@@ -94,9 +99,11 @@ Then configure Zed to use both themes in your settings.json:
 Zed will automatically switch between themes based on your system settings.
 
 ### OpenCode
+
 ```bash
 git clone https://github.com/scozu/karasu ~/.config/opencode/themes/karasu
 ```
+
 Then configure OpenCode to use both themes by adding to your config.json:
 ```json
 {
@@ -109,25 +116,16 @@ Then configure OpenCode to use both themes by adding to your config.json:
 ```
 OpenCode will automatically switch between Karasu Night and Snow based on your system settings.
 
-### Zed
-```bash
-git clone https://github.com/scozu/karasu ~/.config/zed/extensions/karasu
-```
-Then configure Zed to use both themes in your settings.json:
-```json
-{
-  "theme": {
-    "mode": "system",
-    "light": "Karasu Snow",
-    "dark": "Karasu Night"
-  }
-}
-```
-Zed will automatically switch between themes based on your system settings.
-
 ## Screenshots
 
 ### Neovim & Ghostty
+
+![Neovim Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-python.png)
+![Neovim Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-typescript.png)
+![Neovim Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-rust.png)
+![Neovim Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-lua.png)
+
+### Zed
 
 ![Zed Multi-language Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/zed-multilang.png)
 
@@ -159,70 +157,6 @@ karasuBg3: #2a2a2a       /* Higher elevation */
 karasuBg4: #333333       /* Borders, separators */
 karasuBgVisual: #2d3437  /* Visual selection */
 karasuBgSearch: #3c4144  /* Search highlights */
-```
-
-#### Karasu Snow
-```
-karasuBg0: #f8f7f6       /* Main background - warm off-white */
-karasuBg1: #f1f0ef       /* Elevated surfaces */
-karasuBg2: #ebe9e8       /* Popups, menus */
-karasuBg3: #e5e3e2       /* Higher elevation */
-karasuBg4: #dfdddb       /* Borders, separators */
-karasuBgVisual: #d6d4d1  /* Visual selection */
-karasuBgSearch: #cdc9c5  /* Search highlights */
-```
-Then configure Zed to use both themes in your settings.json:
-```json
-{
-  "theme": {
-    "mode": "system",
-    "light": "Karasu Snow",
-    "dark": "Karasu Night"
-  }
-}
-```
-Zed will automatically switch between themes based on your system settings.
-
-## Screenshots
-
-### Neovim & Ghostty
-
-![Neovim Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-python.png)
-![Neovim Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-typescript.png)
-![Neovim Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-rust.png)
-![Neovim Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/neovim-lua.png)
-
-### Zed
-
-![Zed Multi-language Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/zed-multilang.png)
-
-## Design
-
-### Karasu Night (Dark)
-- **Material Dark** - Elevated surfaces with subtle depth (#121212 base)
-- **Warm earth tones** - Muted, saturated colors inspired by natural materials
-- **Balanced contrast** - Readable without eye strain, optimized for long sessions
-
-### Background Layers
-
-#### Karasu Night
-```
-karasuBg0: #121212       /* Main background - Material dark */
-karasuBg1: #1a1a1a       /* Elevated surfaces */
-karasuBg2: #222222       /* Popups, menus */
-karasuBg3: #2a2a2a       /* Higher elevation */
-karasuBg4: #333333       /* Borders, separators */
-karasuBgVisual: #2d3437  /* Visual selection */
-karasuBgSearch: #3c4144  /* Search highlights */
-```
-
-#### Karasu Snow
-```
-karasuBg0: #f8f7f6       /* Main background - warm off-white */
-karasuBg1: #f1f0ef       /* Elevated surfaces */
-karasuBg2: #ebe9e8       /* Popups, menus */
-karasuBg3: #e5e3e2       /* Higher elevation */
-karasuBg4: #dfdddb       /* Borders, separators */
 ```
 
 #### Karasu Snow
@@ -316,8 +250,6 @@ karasuSnowBrightWhite: #504945   /* Terminal white - dark gray for highest contr
 - **Removed**: `karasuRed` (#c4746e)
 - **Conflict**: `karasuOrange` (#d6936b)
 
-
-
 ## Color Preview
 
 See all colors from both Karasu Night and Snow themes side-by-side:
@@ -338,22 +270,6 @@ For detailed installation and configuration instructions for each platform:
 
 - [Neovim Documentation](neovim/README.md)
 - [Ghostty Documentation](ghostty/README.md)
-### OpenCode
-```bash
-git clone https://github.com/scozu/karasu ~/.config/opencode/themes/karasu
-```
-Then configure OpenCode to use both themes by adding to your config.json:
-```json
-{
-  "theme": {
-    "mode": "system",
-    "light": "karasu-snow",
-    "dark": "karasu-night"
-  }
-}
-```
-OpenCode will automatically switch between Karasu Night and Snow based on your system settings.
-
 - [Zed Documentation](zed/README.md)
 - [OpenCode Documentation](opencode/README.md)
 

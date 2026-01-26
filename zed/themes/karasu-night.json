@@ -1,10 +1,10 @@
 {
   "$schema": "https://zed.dev/schema/themes/v0.2.0.json",
-  "name": "Karasu",
+      "name": "Karasu Night",
   "author": "Karasu Contributors",
   "themes": [
     {
-      "name": "Karasu",
+  "name": "Karasu Night",
       "appearance": "dark",
       "style": {
         "background": "#121212",
