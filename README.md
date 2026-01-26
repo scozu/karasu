@@ -2,6 +2,21 @@
 
 Karasu is a terminal-first, atmospheric colorscheme with a touch of warmth.
 
+## Theme Variants
+
+Karasu adapts to your environment with atmospheric themes:
+
+### Karasu Night
+The original dark theme, optimized for focused work in low-light environments.
+
+### Karasu Snow  
+A crisp light theme, designed for daylight clarity in bright environments.
+
+### Auto-Switching
+Karasu automatically follows your system theme preferences. Set your OS to dark/light mode and Karasu will adapt instantly.
+
+For manual control, use `:set background=dark` for Night or `:set background=light` for Snow.
+
 [![](https://raw.githubusercontent.com/scozu/karasu/main/karasu-banner.png)](https://raw.githubusercontent.com/scozu/karasu/main/karasu-banner.png)
 
 ![Karasu Color Palette](https://raw.githubusercontent.com/scozu/karasu/main/karasu-palette.svg)
@@ -37,11 +52,14 @@ use {
 Plug 'scozu/karasu'
 ```
 
+**Auto-switching**: With `mode = "auto"` (default), Karasu will automatically switch between Night and Snow when your system changes themes.
+
 **Requirements**: Neovim 0.8.0+ with `termguicolors` enabled.
 
 **Configuration** (optional - defaults shown):
 ```lua
 require('karasu').setup({
+  mode = "auto",             -- "auto", "night", "snow"
   transparent = false,        -- Enable transparent background
   italic_comments = false,     -- Italic comments
   italic_keywords = false,     -- Italic keywords
@@ -55,7 +73,7 @@ require('karasu').setup({
 ### Ghostty
 ```bash
 git clone https://github.com/scozu/karasu.git ~/.config/ghostty/themes/karasu
-echo "theme = karasu" >> ~/.config/ghostty/config
+echo "theme = dark:karasu-night,light:karasu-snow" >> ~/.config/ghostty/config
 ```
 Then restart Ghostty or reload the configuration (Cmd/Ctrl + R).
 
@@ -63,7 +81,17 @@ Then restart Ghostty or reload the configuration (Cmd/Ctrl + R).
 ```bash
 git clone https://github.com/scozu/karasu ~/.config/zed/extensions/karasu
 ```
-Then select "Karasu" in Zed's theme settings (Cmd/Ctrl + , → Themes).
+Then configure Zed to use both themes in your settings.json:
+```json
+{
+  "theme": {
+    "mode": "system",
+    "light": "Karasu Snow",
+    "dark": "Karasu Night"
+  }
+}
+```
+Zed will automatically switch between themes based on your system settings.
 
 ## Screenshots
 
@@ -78,15 +106,16 @@ Then select "Karasu" in Zed's theme settings (Cmd/Ctrl + , → Themes).
 
 ![Zed Multi-language Syntax Highlighting](https://github.com/scozu/karasu/releases/download/screenshot-assets/zed-multilang.png)
 
-## Design 
+## Design
 
+### Karasu Night (Dark)
 - **Material Dark** - Elevated surfaces with subtle depth (#121212 base)
 - **Warm earth tones** - Muted, saturated colors inspired by natural materials
 - **Balanced contrast** - Readable without eye strain, optimized for long sessions
-- **Consistent experience** - Unified palette across all supported platforms
-- **Sophisticated palette** - Carefully chosen colors that work harmoniously together
 
 ### Background Layers
+
+#### Karasu Night
 ```
 karasuBg0: #121212       /* Main background - Material dark */
 karasuBg1: #1a1a1a       /* Elevated surfaces */
@@ -95,6 +124,26 @@ karasuBg3: #2a2a2a       /* Higher elevation */
 karasuBg4: #333333       /* Borders, separators */
 karasuBgVisual: #2d3437  /* Visual selection */
 karasuBgSearch: #3c4144  /* Search highlights */
+```
+
+#### Karasu Snow
+```
+karasuBg0: #f8f7f6       /* Main background - warm off-white */
+karasuBg1: #f1f0ef       /* Elevated surfaces */
+karasuBg2: #ebe9e8       /* Popups, menus */
+karasuBg3: #e5e3e2       /* Higher elevation */
+karasuBg4: #dfdddb       /* Borders, separators */
+```
+
+#### Karasu Snow
+```
+karasuBg0: #f8f7f6       /* Main background - warm off-white */
+karasuBg1: #f1f0ef       /* Elevated surfaces */
+karasuBg2: #ebe9e8       /* Popups, menus */
+karasuBg3: #e5e3e2       /* Higher elevation */
+karasuBg4: #dfdddb       /* Borders, separators */
+karasuBgVisual: #d6d4d1  /* Visual selection */
+karasuBgSearch: #cdc9c5  /* Search highlights */
 ```
 
 ### Foreground Tones
@@ -118,6 +167,8 @@ karasuOrange: #d6936b    /* Parameters, attributes, operators */
 ```
 
 ### Bright Accents
+
+#### Karasu Night (Dark)
 ```
 karasuBrightRed: #ea6962      /* Terminal red - errors, critical warnings */
 karasuBrightGreen: #a9b665    /* Terminal green - success, active indicators */
@@ -126,6 +177,17 @@ karasuBrightBlue: #8ba4b0     /* Terminal blue - information, links */
 karasuBrightMagenta: #d3869b  /* Terminal magenta - special emphasis */
 karasuBrightCyan: #89b482     /* Terminal cyan - info, secondary emphasis */
 karasuBrightWhite: #fbf1c7    /* Terminal white - bright text, highlights */
+```
+
+#### Karasu Snow (Light)
+```
+karasuSnowBrightRed: #cc241d    /* Terminal red - deeper red for contrast */
+karasuSnowBrightGreen: #98971a  /* Terminal green - darker green for contrast */
+karasuSnowBrightYellow: #d79921 /* Terminal yellow - darker yellow for contrast */
+karasuSnowBrightBlue: #458588    /* Terminal blue - darker blue for contrast */
+karasuSnowBrightMagenta: #b16286 /* Terminal magenta - darker magenta for contrast */
+karasuSnowBrightCyan: #689d6a   /* Terminal cyan - darker cyan for contrast */
+karasuSnowBrightWhite: #504945   /* Terminal white - dark gray for highest contrast */
 ```
 
 ## Syntax Highlighting Strategy
@@ -166,12 +228,19 @@ karasuBrightWhite: #fbf1c7    /* Terminal white - bright text, highlights */
 
 
 
+## Color Preview
+
+See all colors from both Karasu Night and Snow themes side-by-side:
+- **HTML Preview**: [Open colors-preview.html](./colors-preview.html)
+
 ## Accessibility
 
-- **Foreground contrast**: karasuFg0 on karasuBg0 = ~11:1 (WCAG AAA)
+Both Karasu Night and Snow maintain the same accessibility standards:
+
+- **Foreground contrast**: ~11:1 (WCAG AAA) for primary text
 - **Syntax colors**: All maintain >4.5:1 contrast (WCAG AA)
-- **Bright variants**: karasuBright* colors available for terminal emphasis
-- **Low light optimized**: Warm tones reduce eye strain
+- **Bright variants**: Terminal colors optimized for both themes
+- **Comfort-focused**: Both themes designed for extended usage without eye strain
 
 ## Documentation
 
@@ -179,6 +248,22 @@ For detailed installation and configuration instructions for each platform:
 
 - [Neovim Documentation](neovim/README.md)
 - [Ghostty Documentation](ghostty/README.md)
+### OpenCode
+```bash
+git clone https://github.com/scozu/karasu ~/.config/opencode/themes/karasu
+```
+Then configure OpenCode to use both themes by adding to your config.json:
+```json
+{
+  "theme": {
+    "mode": "system",
+    "light": "karasu-snow",
+    "dark": "karasu-night"
+  }
+}
+```
+OpenCode will automatically switch between Karasu Night and Snow based on your system settings.
+
 - [Zed Documentation](zed/README.md)
 - [OpenCode Documentation](opencode/README.md)
 

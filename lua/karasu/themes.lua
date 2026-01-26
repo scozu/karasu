@@ -1,13 +1,13 @@
 -- Karasu Theme Definitions
 -- Applies highlight groups based on configuration
 
-local colors = require("karasu.colors")
+local colors_module = require("karasu.colors")
 local utils = require("karasu.utils")
 
 local M = {}
 
 -- Load highlight groups
-local function load_highlights(config)
+local function load_highlights(config, colors)
   -- Load editor highlights
   require("karasu.highlights.editor").setup(colors, config)
   
@@ -24,7 +24,7 @@ local function load_highlights(config)
   require("karasu.highlights.plugins").setup(colors, config)
 end
 
-function M.load(config)
+function M.load_with_colors(colors, config)
   config = config or {}
   
   -- Clear existing highlights
@@ -33,8 +33,9 @@ function M.load(config)
     vim.cmd("syntax reset")
   end
   
-  -- Set background
-  vim.o.background = "dark"
+  -- Set background based on palette
+  local is_dark = (colors.bg0 == "#121212")
+  vim.o.background = is_dark and "dark" or "light"
   
   -- Set terminal colors
   vim.g.terminal_color_0 = colors.bg0
@@ -46,19 +47,24 @@ function M.load(config)
   vim.g.terminal_color_6 = colors.aqua
   vim.g.terminal_color_7 = colors.fg0
   vim.g.terminal_color_8 = colors.fgDim
-  vim.g.terminal_color_9 = colors.brightRed
-  vim.g.terminal_color_10 = colors.brightGreen
-  vim.g.terminal_color_11 = colors.brightYellow
-  vim.g.terminal_color_12 = colors.brightBlue
-  vim.g.terminal_color_13 = colors.brightMagenta
-  vim.g.terminal_color_14 = colors.brightCyan
-  vim.g.terminal_color_15 = colors.brightWhite
+  vim.g.terminal_color_9 = colors.bright_red
+  vim.g.terminal_color_10 = colors.bright_green
+  vim.g.terminal_color_11 = colors.bright_yellow
+  vim.g.terminal_color_12 = colors.bright_blue
+  vim.g.terminal_color_13 = colors.bright_magenta
+  vim.g.terminal_color_14 = colors.bright_cyan
+  vim.g.terminal_color_15 = colors.bright_white
   
   -- Load all highlight groups
-  load_highlights(config)
+  load_highlights(config, colors)
   
   -- Set colorscheme name
   vim.g.colors_name = "karasu"
+end
+
+function M.load(config)
+  local colors = colors_module.get()
+  M.load_with_colors(colors, config)
 end
 
 return M

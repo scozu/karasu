@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Karasu Color Palettes</title>
+  <style>
+    body { 
+      background: #000; 
+      color: #fff; 
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace; 
+      padding: 20px; 
+      margin: 0;
+    }
+    .container { max-width: 1400px; margin: 0 auto; }
+    .themes { display: flex; gap: 40px; justify-content: space-between; }
+    .theme { flex: 1; min-width: 0; }
+    h1 { text-align: center; margin-bottom: 40px; font-weight: 300; }
+    h2 { text-align: center; margin-bottom: 20px; font-weight: 300; }
+    .category { margin-bottom: 30px; }
+    .category-title { 
+      font-size: 14px; 
+      text-transform: uppercase; 
+      letter-spacing: 1px; 
+      opacity: 0.7; 
+      margin-bottom: 10px; 
+    }
+    .color { 
+      display: flex; 
+      align-items: center; 
+      padding: 12px 15px; 
+      margin: 5px 0; 
+      border-radius: 6px; 
+      font-size: 13px;
+      transition: transform 0.1s ease;
+    }
+    .color:hover { transform: translateX(5px); }
+    .swatch { 
+      width: 24px; 
+      height: 24px; 
+      border-radius: 4px; 
+      margin-right: 15px; 
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .label { 
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace; 
+      flex: 1; 
+    }
+    .hex { 
+      opacity: 0.6; 
+      font-size: 11px; 
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Karasu Color Palettes</h1>
+    
+    <div class="themes">
+      <!-- Karasu Night -->
+      <div class="theme">
+        <h2>Karasu Night</h2>
+        
+        <div class="category">
+          <div class="category-title">Background</div>
+          <div class="color" style="background: #121212; color: #d4c5b9;">
+            <div class="swatch" style="background: #121212;"></div>
+            <div class="label">karasuNightBg0</div>
+            <div class="hex">#121212</div>
+          </div>
+          <div class="color" style="background: #1a1a1a; color: #d4c5b9;">
+            <div class="swatch" style="background: #1a1a1a;"></div>
+            <div class="label">karasuNightBg1</div>
+            <div class="hex">#1a1a1a</div>
+          </div>
+          <div class="color" style="background: #222222; color: #d4c5b9;">
+            <div class="swatch" style="background: #222222;"></div>
+            <div class="label">karasuNightBg2</div>
+            <div class="hex">#222222</div>
+          </div>
+          <div class="color" style="background: #2a2a2a; color: #d4c5b9;">
+            <div class="swatch" style="background: #2a2a2a;"></div>
+            <div class="label">karasuNightBg3</div>
+            <div class="hex">#2a2a2a</div>
+          </div>
+          <div class="color" style="background: #333333; color: #d4c5b9;">
+            <div class="swatch" style="background: #333333;"></div>
+            <div class="label">karasuNightBg4</div>
+            <div class="hex">#333333</div>
+          </div>
+          <div class="color" style="background: #2d3437; color: #d4c5b9;">
+            <div class="swatch" style="background: #2d3437;"></div>
+            <div class="label">karasuNightBgVisual</div>
+            <div class="hex">#2d3437</div>
+          </div>
+          <div class="color" style="background: #3c4144; color: #d4c5b9;">
+            <div class="swatch" style="background: #3c4144;"></div>
+            <div class="label">karasuNightBgSearch</div>
+            <div class="hex">#3c4144</div>
+          </div>
+        </div>
+
+        <div class="category">
+          <div class="category-title">Foreground</div>
+          <div class="color" style="background: #121212; color: #d4c5b9;">
+            <div class="swatch" style="background: #d4c5b9;"></div>
+            <div class="label">karasuNightFg0</div>
+            <div class="hex">#d4c5b9</div>
+          </div>
+          <div class="color" style="background: #121212; color: #c5b6aa;">
+            <div class="swatch" style="background: #c5b6aa;"></div>
+            <div class="label">karasuNightFg1</div>
+            <div class="hex">#c5b6aa</div>
+          </div>
+          <div class="color" style="background: #121212; color: #a89984;">
+            <div class="swatch" style="background: #a89984;"></div>
+            <div class="label">karasuNightFg2</div>
+            <div class="hex">#a89984</div>
+          </div>
+          <div class="color" style="background: #121212; color: #928374;">
+            <div class="swatch" style="background: #928374;"></div>
+            <div class="label">karasuNightFg3</div>
+            <div class="hex">#928374</div>
+          </div>
+          <div class="color" style="background: #121212; color: #665c54;">
+            <div class="swatch" style="background: #665c54;"></div>
+            <div class="label">karasuNightFgDim</div>
+            <div class="hex">#665c54</div>
+          </div>
+        </div>
+
+        <div class="category">
+          <div class="category-title">Syntax</div>
+          <div class="color" style="background: #121212; color: #c4746e;">
+            <div class="swatch" style="background: #c4746e;"></div>
+            <div class="label">karasuRed</div>
+            <div class="hex">#c4746e</div>
+          </div>
+          <div class="color" style="background: #121212; color: #95b572;">
+            <div class="swatch" style="background: #95b572;"></div>
+            <div class="label">karasuGreen</div>
+            <div class="hex">#95b572</div>
+          </div>
+          <div class="color" style="background: #121212; color: #c4a657;">
+            <div class="swatch" style="background: #c4a657;"></div>
+            <div class="label">karasuYellow</div>
+            <div class="hex">#c4a657</div>
+          </div>
+          <div class="color" style="background: #121212; color: #7c9fa8;">
+            <div class="swatch" style="background: #7c9fa8;"></div>
+            <div class="label">karasuBlue</div>
+            <div class="hex">#7c9fa8</div>
+          </div>
+          <div class="color" style="background: #121212; color: #a987a8;">
+            <div class="swatch" style="background: #a987a8;"></div>
+            <div class="label">karasuPurple</div>
+            <div class="hex">#a987a8</div>
+          </div>
+          <div class="color" style="background: #121212; color: #85a585;">
+            <div class="swatch" style="background: #85a585;"></div>
+            <div class="label">karasuAqua</div>
+            <div class="hex">#85a585</div>
+          </div>
+          <div class="color" style="background: #121212; color: #d6936b;">
+            <div class="swatch" style="background: #d6936b;"></div>
+            <div class="label">karasuOrange</div>
+            <div class="hex">#d6936b</div>
+          </div>
+        </div>
+
+        <div class="category">
+          <div class="category-title">Bright</div>
+          <div class="color" style="background: #121212; color: #ea6962;">
+            <div class="swatch" style="background: #ea6962;"></div>
+            <div class="label">karasuNightBrightRed</div>
+            <div class="hex">#ea6962</div>
+          </div>
+          <div class="color" style="background: #121212; color: #a9b665;">
+            <div class="swatch" style="background: #a9b665;"></div>
+            <div class="label">karasuNightBrightGreen</div>
+            <div class="hex">#a9b665</div>
+          </div>
+          <div class="color" style="background: #121212; color: #d8a657;">
+            <div class="swatch" style="background: #d8a657;"></div>
+            <div class="label">karasuNightBrightYellow</div>
+            <div class="hex">#d8a657</div>
+          </div>
+          <div class="color" style="background: #121212; color: #8ba4b0;">
+            <div class="swatch" style="background: #8ba4b0;"></div>
+            <div class="label">karasuNightBrightBlue</div>
+            <div class="hex">#8ba4b0</div>
+          </div>
+          <div class="color" style="background: #121212; color: #d3869b;">
+            <div class="swatch" style="background: #d3869b;"></div>
+            <div class="label">karasuNightBrightMagenta</div>
+            <div class="hex">#d3869b</div>
+          </div>
+          <div class="color" style="background: #121212; color: #89b482;">
+            <div class="swatch" style="background: #89b482;"></div>
+            <div class="label">karasuNightBrightCyan</div>
+            <div class="hex">#89b482</div>
+          </div>
+          <div class="color" style="background: #121212; color: #fbf1c7;">
+            <div class="swatch" style="background: #fbf1c7;"></div>
+            <div class="label">karasuNightBrightWhite</div>
+            <div class="hex">#fbf1c7</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Karasu Snow -->
+      <div class="theme">
+        <h2>Karasu Snow</h2>
+        
+        <div class="category">
+          <div class="category-title">Background</div>
+          <div class="color" style="background: #f8f7f6; color: #3c3836;">
+            <div class="swatch" style="background: #f8f7f6;"></div>
+            <div class="label">karasuSnowBg0</div>
+            <div class="hex">#f8f7f6</div>
+          </div>
+          <div class="color" style="background: #f1f0ef; color: #3c3836;">
+            <div class="swatch" style="background: #f1f0ef;"></div>
+            <div class="label">karasuSnowBg1</div>
+            <div class="hex">#f1f0ef</div>
+          </div>
+          <div class="color" style="background: #ebe9e8; color: #3c3836;">
+            <div class="swatch" style="background: #ebe9e8;"></div>
+            <div class="label">karasuSnowBg2</div>
+            <div class="hex">#ebe9e8</div>
+          </div>
+          <div class="color" style="background: #e5e3e2; color: #3c3836;">
+            <div class="swatch" style="background: #e5e3e2;"></div>
+            <div class="label">karasuSnowBg3</div>
+            <div class="hex">#e5e3e2</div>
+          </div>
+          <div class="color" style="background: #dfdddb; color: #3c3836;">
+            <div class="swatch" style="background: #dfdddb;"></div>
+            <div class="label">karasuSnowBg4</div>
+            <div class="hex">#dfdddb</div>
+          </div>
+          <div class="color" style="background: #d6d4d1; color: #3c3836;">
+            <div class="swatch" style="background: #d6d4d1;"></div>
+            <div class="label">karasuSnowBgVisual</div>
+            <div class="hex">#d6d4d1</div>
+          </div>
+          <div class="color" style="background: #cdc9c5; color: #3c3836;">
+            <div class="swatch" style="background: #cdc9c5;"></div>
+            <div class="label">karasuSnowBgSearch</div>
+            <div class="hex">#cdc9c5</div>
+          </div>
+        </div>
+
+        <div class="category">
+          <div class="category-title">Foreground</div>
+          <div class="color" style="background: #f8f7f6; color: #3c3836;">
+            <div class="swatch" style="background: #3c3836;"></div>
+            <div class="label">karasuSnowFg0</div>
+            <div class="hex">#3c3836</div>
+          </div>
+          <div class="color" style="background: #f8f7f6; color: #504945;">
+            <div class="swatch" style="background: #504945;"></div>
+            <div class="label">karasuSnowFg1</div>
+            <div class="hex">#504945</div>
+          </div>
+          <div class="color" style="background: #f8f7f6; color: #665c54;">
+            <div class="swatch" style="background: #665c54;"></div>
+            <div class="label">karasuSnowFg2</div>
+            <div class="hex">#665c54</div>
+          </div>
+          <div class="color" style="background: #f8f7f6; color: #7c6f64;">
+            <div class="swatch" style="background: #7c6f64;"></div>
+            <div class="label">karasuSnowFg3</div>
+            <div class="hex">#7c6f64</div>
+          </div>
+          <div class="color" style="background: #f8f7f6; color: #928374;">
+            <div class="swatch" style="background: #928374;"></div>
+            <div class="label">karasuSnowFgDim</div>
+            <div class="hex">#928374</div>
+          </div>
+        </div>
+
+        <div class="category">
+          <div class="category-title">Syntax</div>
+          <div class="color" style="background: #f8f7f6; color: #c4746e;">
+            <div class="swatch" style="background: #c4746e;"></div>
+            <div class="label">karasuRed</div>
+            <div class="hex">#c4746e</div>
+          </div>
+          <div class="color" style="background: #f8f7f6; color: #95b572;">
+            <div class="swatch" style="background: #95b572;"></div>
+            <div class="label">karasuGreen</div>
+            <div class="hex">#95b572</div>
+          </div>
+          <div class="color" style="background: #f8f7f6; color: #c4a657;">
+            <div class="swatch" style="background: #c4a657;"></div>
+            <div class="label">karasuYellow</div>
+            <div class="hex">#c4a657</div>
+          </div>
+          <div class="color" style="background: #f8f7f6; color: #7c9fa8;">
+            <div class="swatch" style="background: #7c9fa8;"></div>
+            <div class="label">karasuBlue</div>
+            <div class="hex">#7c9fa8</div>
+          </div>
+          <div class="color" style="background: #f8f7f6; color: #a987a8;">
+            <div class="swatch" style="background: #a987a8;"></div>
+            <div class="label">karasuPurple</div>
+            <div class="hex">#a987a8</div>
+          </div>
+          <div class="color" style="background: #f8f7f6; color: #85a585;">
+            <div class="swatch" style="background: #85a585;"></div>
+            <div class="label">karasuAqua</div>
+            <div class="hex">#85a585</div>
+          </div>
+          <div class="color" style="background: #f8f7f6; color: #d6936b;">
+            <div class="swatch" style="background: #d6936b;"></div>
+            <div class="label">karasuOrange</div>
+            <div class="hex">#d6936b</div>
+          </div>
+        </div>
+
+        <div class="category">
+          <div class="category-title">Bright</div>
+          <div class="color" style="background: #f8f7f6; color: #cc241d;">
+            <div class="swatch" style="background: #cc241d;"></div>
+            <div class="label">karasuSnowBrightRed</div>
+            <div class="hex">#cc241d</div>
+          </div>
+          <div class="color" style="background: #f8f7f6; color: #98971a;">
+            <div class="swatch" style="background: #98971a;"></div>
+            <div class="label">karasuSnowBrightGreen</div>
+            <div class="hex">#98971a</div>
+          </div>
+          <div class="color" style="background: #f8f7f6; color: #d79921;">
+            <div class="swatch" style="background: #d79921;"></div>
+            <div class="label">karasuSnowBrightYellow</div>
+            <div class="hex">#d79921</div>
+          </div>
+          <div class="color" style="background: #f8f7f6; color: #458588;">
+            <div class="swatch" style="background: #458588;"></div>
+            <div class="label">karasuSnowBrightBlue</div>
+            <div class="hex">#458588</div>
+          </div>
+          <div class="color" style="background: #f8f7f6; color: #b16286;">
+            <div class="swatch" style="background: #b16286;"></div>
+            <div class="label">karasuSnowBrightMagenta</div>
+            <div class="hex">#b16286</div>
+          </div>
+          <div class="color" style="background: #f8f7f6; color: #689d6a;">
+            <div class="swatch" style="background: #689d6a;"></div>
+            <div class="label">karasuSnowBrightCyan</div>
+            <div class="hex">#689d6a</div>
+          </div>
+          <div class="color" style="background: #f8f7f6; color: #504945;">
+            <div class="swatch" style="background: #504945;"></div>
+            <div class="label">karasuSnowBrightWhite</div>
+            <div class="hex">#504945</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
