@@ -1,8 +1,8 @@
 -- Karasu Snow Palette
--- Light theme colors with warm off-white backgrounds
+-- Generated from palette/snow.json
 
 local M = {
-  -- Background layers (warm off-white)
+  -- Background layers
   bg0 = "#f8f7f6",
   bg1 = "#f1f0ef",
   bg2 = "#ebe9e8",
@@ -11,14 +11,14 @@ local M = {
   bg_visual = "#d6d4d1",
   bg_search = "#cdc9c5",
 
-  -- Foreground tones (warm dark grays)
+  -- Foreground tones
   fg0 = "#3c3836",
   fg1 = "#504945",
   fg2 = "#665c54",
   fg3 = "#7c6f64",
   fg_dim = "#928374",
 
-  -- Syntax colors (same as night for consistency)
+  -- Syntax colors
   red = "#c4746e",
   green = "#95b572",
   yellow = "#c4a657",
@@ -27,7 +27,7 @@ local M = {
   aqua = "#85a585",
   orange = "#d6936b",
 
-  -- Bright colors for terminal (darker for contrast on light)
+  -- Bright colors for terminal
   bright_red = "#cc241d",
   bright_green = "#98971a",
   bright_yellow = "#d79921",

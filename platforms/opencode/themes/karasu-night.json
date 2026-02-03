@@ -1,0 +1,262 @@
+{
+  "$schema": "https://opencode.ai/theme.json",
+  "defs": {
+    "karasuBg0": 0,
+    "karasuBg1": 234,
+    "karasuBg2": 235,
+    "karasuBg3": 235,
+    "karasuBg4": 236,
+    "karasuBgVisual": 236,
+    "karasuBgSearch": 238,
+    "karasuFg0": 7,
+    "karasuFg1": 181,
+    "karasuFg2": 138,
+    "karasuFg3": 244,
+    "karasuFgDim": 8,
+    "karasuRed": 1,
+    "karasuGreen": 2,
+    "karasuYellow": 3,
+    "karasuBlue": 4,
+    "karasuPurple": 5,
+    "karasuAqua": 6,
+    "karasuOrange": 173,
+    "karasuBrightRed": 9,
+    "karasuBrightGreen": 10,
+    "karasuBrightYellow": 11,
+    "karasuBrightBlue": 12,
+    "karasuBrightMagenta": 13,
+    "karasuBrightCyan": 14,
+    "karasuBrightWhite": 15,
+    "ansi_black": 0,
+    "ansi_red": 1,
+    "ansi_green": 2,
+    "ansi_yellow": 3,
+    "ansi_blue": 4,
+    "ansi_magenta": 5,
+    "ansi_cyan": 6,
+    "ansi_white": 7,
+    "ansi_bright_black": 8,
+    "ansi_bright_red": 9,
+    "ansi_bright_green": 10,
+    "ansi_bright_yellow": 11,
+    "ansi_bright_blue": 12,
+    "ansi_bright_magenta": 13,
+    "ansi_bright_cyan": 14,
+    "ansi_bright_white": 15,
+    "cursor": 11,
+    "cursorText": 0,
+    "selectionBg": 236,
+    "selectionFg": 7,
+    "searchBg": 238,
+    "searchFg": 7,
+    "diffAddedBg": 235,
+    "diffRemovedBg": 235,
+    "diffContextBg": 234
+  },
+  "theme": {
+    "primary": {
+      "dark": "karasuBlue",
+      "light": "karasuBlue"
+    },
+    "secondary": {
+      "dark": "karasuPurple",
+      "light": "karasuPurple"
+    },
+    "accent": {
+      "dark": "karasuAqua",
+      "light": "karasuAqua"
+    },
+    "error": {
+      "dark": "karasuRed",
+      "light": "karasuRed"
+    },
+    "warning": {
+      "dark": "karasuYellow",
+      "light": "karasuYellow"
+    },
+    "success": {
+      "dark": "karasuGreen",
+      "light": "karasuGreen"
+    },
+    "info": {
+      "dark": "karasuBlue",
+      "light": "karasuBlue"
+    },
+    "text": {
+      "dark": "karasuFg0",
+      "light": "karasuBg0"
+    },
+    "textMuted": {
+      "dark": "karasuFg3",
+      "light": "karasuFg2"
+    },
+    "background": {
+      "dark": "karasuBg0",
+      "light": "karasuFg0"
+    },
+    "backgroundPanel": {
+      "dark": "karasuBg1",
+      "light": "karasuFg1"
+    },
+    "backgroundElement": {
+      "dark": "karasuBg2",
+      "light": "karasuFg2"
+    },
+    "border": {
+      "dark": "karasuBg3",
+      "light": "karasuFg3"
+    },
+    "borderActive": {
+      "dark": "karasuBlue",
+      "light": "karasuBlue"
+    },
+    "borderSubtle": {
+      "dark": "karasuBg2",
+      "light": "karasuFg2"
+    },
+    "diffAdded": {
+      "dark": "karasuGreen",
+      "light": "karasuGreen"
+    },
+    "diffRemoved": {
+      "dark": "karasuRed",
+      "light": "karasuRed"
+    },
+    "diffContext": {
+      "dark": "karasuBg3",
+      "light": "karasuFg3"
+    },
+    "diffHunkHeader": {
+      "dark": "karasuBg3",
+      "light": "karasuFg3"
+    },
+    "diffHighlightAdded": {
+      "dark": "karasuGreen",
+      "light": "karasuGreen"
+    },
+    "diffHighlightRemoved": {
+      "dark": "karasuRed",
+      "light": "karasuRed"
+    },
+    "diffAddedBg": {
+      "dark": "diffAddedBg",
+      "light": 255
+    },
+    "diffRemovedBg": {
+      "dark": "diffRemovedBg",
+      "light": 255
+    },
+    "diffContextBg": {
+      "dark": "karasuBg1",
+      "light": "karasuFg1"
+    },
+    "diffLineNumber": {
+      "dark": "karasuFg3",
+      "light": "karasuFg2"
+    },
+    "diffAddedLineNumberBg": {
+      "dark": "diffAddedBg",
+      "light": 255
+    },
+    "diffRemovedLineNumberBg": {
+      "dark": "diffRemovedBg",
+      "light": 255
+    },
+    "markdownText": {
+      "dark": "karasuFg0",
+      "light": "karasuBg0"
+    },
+    "markdownHeading": {
+      "dark": "karasuBlue",
+      "light": "karasuBlue"
+    },
+    "markdownLink": {
+      "dark": "karasuBlue",
+      "light": "karasuBlue"
+    },
+    "markdownLinkText": {
+      "dark": "karasuAqua",
+      "light": "karasuAqua"
+    },
+    "markdownCode": {
+      "dark": "karasuGreen",
+      "light": "karasuGreen"
+    },
+    "markdownBlockQuote": {
+      "dark": "karasuFg3",
+      "light": "karasuFg2"
+    },
+    "markdownEmph": {
+      "dark": "karasuYellow",
+      "light": "karasuYellow"
+    },
+    "markdownStrong": {
+      "dark": "karasuOrange",
+      "light": "karasuOrange"
+    },
+    "markdownHorizontalRule": {
+      "dark": "karasuBg3",
+      "light": "karasuFg3"
+    },
+    "markdownListItem": {
+      "dark": "karasuBlue",
+      "light": "karasuBlue"
+    },
+    "markdownListEnumeration": {
+      "dark": "karasuAqua",
+      "light": "karasuAqua"
+    },
+    "markdownImage": {
+      "dark": "karasuBlue",
+      "light": "karasuBlue"
+    },
+    "markdownImageText": {
+      "dark": "karasuAqua",
+      "light": "karasuAqua"
+    },
+    "markdownCodeBlock": {
+      "dark": "karasuFg0",
+      "light": "karasuBg0"
+    },
+    "syntaxComment": {
+      "dark": "karasuFgDim",
+      "light": "karasuFg3"
+    },
+    "syntaxKeyword": {
+      "dark": "karasuPurple",
+      "light": "karasuPurple"
+    },
+    "syntaxFunction": {
+      "dark": "karasuBlue",
+      "light": "karasuBlue"
+    },
+    "syntaxVariable": {
+      "dark": "karasuFg0",
+      "light": "karasuBg0"
+    },
+    "syntaxString": {
+      "dark": "karasuGreen",
+      "light": "karasuGreen"
+    },
+    "syntaxNumber": {
+      "dark": "karasuYellow",
+      "light": "karasuYellow"
+    },
+    "syntaxType": {
+      "dark": "karasuAqua",
+      "light": "karasuAqua"
+    },
+    "syntaxOperator": {
+      "dark": "karasuOrange",
+      "light": "karasuOrange"
+    },
+    "syntaxPunctuation": {
+      "dark": "karasuFg2",
+      "light": "karasuFg2"
+    },
+    "cursor": {
+      "dark": "karasuBrightYellow",
+      "light": "karasuBrightYellow"
+    }
+  }
+}

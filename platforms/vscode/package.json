@@ -1,0 +1,36 @@
+{
+  "name": "karasu-theme",
+  "displayName": "Karasu",
+  "description": "Atmospheric themes with Night & Snow variants.",
+  "version": "0.1.0",
+  "publisher": "scozu",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "theme",
+    "colors",
+    "karasu"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Karasu Night",
+        "uiTheme": "vs-dark",
+        "path": "./themes/karasu-night-color-theme.json"
+      },
+      {
+        "label": "Karasu Snow",
+        "uiTheme": "vs-light",
+        "path": "./themes/karasu-snow-color-theme.json"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scozu/karasu"
+  }
+}

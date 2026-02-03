@@ -1,0 +1,458 @@
+import fs from "fs";
+import path from "path";
+
+const root = process.cwd();
+
+const palettes = {
+  night: readJson("palette/night.json"),
+  snow: readJson("palette/snow.json"),
+};
+const tokens = readJson("palette/tokens.json");
+
+const xtermColors = buildXtermColors();
+
+function readJson(relPath) {
+  return JSON.parse(fs.readFileSync(path.join(root, relPath), "utf8"));
+}
+
+function writeFile(relPath, contents) {
+  const fullPath = path.join(root, relPath);
+  fs.mkdirSync(path.dirname(fullPath), { recursive: true });
+  fs.writeFileSync(fullPath, contents);
+}
+
+function flattenPalette(palette) {
+  return {
+    ...palette.background,
+    ...palette.foreground,
+    ...palette.syntax,
+    ...palette.bright,
+    ansi_black: palette.ansi.normal.black,
+    ansi_red: palette.ansi.normal.red,
+    ansi_green: palette.ansi.normal.green,
+    ansi_yellow: palette.ansi.normal.yellow,
+    ansi_blue: palette.ansi.normal.blue,
+    ansi_magenta: palette.ansi.normal.magenta,
+    ansi_cyan: palette.ansi.normal.cyan,
+    ansi_white: palette.ansi.normal.white,
+    ansi_bright_black: palette.ansi.bright.black,
+    ansi_bright_red: palette.ansi.bright.red,
+    ansi_bright_green: palette.ansi.bright.green,
+    ansi_bright_yellow: palette.ansi.bright.yellow,
+    ansi_bright_blue: palette.ansi.bright.blue,
+    ansi_bright_magenta: palette.ansi.bright.magenta,
+    ansi_bright_cyan: palette.ansi.bright.cyan,
+    ansi_bright_white: palette.ansi.bright.white,
+  };
+}
+
+function getAnsiHexMap(palette) {
+  const order = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white"];
+  const map = {};
+  order.forEach((name, idx) => {
+    map[palette.ansi.normal[name]] = idx;
+  });
+  order.forEach((name, idx) => {
+    map[palette.ansi.bright[name]] = idx + 8;
+  });
+  return map;
+}
+
+function resolveToken(tokenValue, paletteMap) {
+  if (tokenValue.startsWith("#")) return tokenValue;
+  if (!paletteMap[tokenValue]) {
+    throw new Error(`Unknown palette key: ${tokenValue}`);
+  }
+  return paletteMap[tokenValue];
+}
+
+function renderTemplate(template, paletteMap) {
+  return template.replace(/\{\{([^}]+)\}\}/g, (_, key) => {
+    const value = paletteMap[key];
+    if (!value) {
+      throw new Error(`Unknown template key: ${key}`);
+    }
+    return value;
+  });
+}
+
+function hexToRgb(hex) {
+  const clean = hex.replace("#", "");
+  return [
+    parseInt(clean.slice(0, 2), 16),
+    parseInt(clean.slice(2, 4), 16),
+    parseInt(clean.slice(4, 6), 16),
+  ];
+}
+
+function rgbDistance(a, b) {
+  const dr = a[0] - b[0];
+  const dg = a[1] - b[1];
+  const db = a[2] - b[2];
+  return dr * dr + dg * dg + db * db;
+}
+
+function nearestXtermIndex(hex) {
+  const rgb = hexToRgb(hex);
+  let bestIndex = 0;
+  let bestDistance = Number.POSITIVE_INFINITY;
+  for (let i = 0; i < xtermColors.length; i += 1) {
+    const distance = rgbDistance(rgb, xtermColors[i]);
+    if (distance < bestDistance) {
+      bestDistance = distance;
+      bestIndex = i;
+    }
+  }
+  return bestIndex;
+}
+
+function ansiIndexForHex(hex, ansiHexMap) {
+  if (ansiHexMap[hex] !== undefined) return ansiHexMap[hex];
+  return nearestXtermIndex(hex);
+}
+
+function buildXtermColors() {
+  const colors = [];
+  const base = [
+    [0, 0, 0],
+    [205, 0, 0],
+    [0, 205, 0],
+    [205, 205, 0],
+    [0, 0, 238],
+    [205, 0, 205],
+    [0, 205, 205],
+    [229, 229, 229],
+    [127, 127, 127],
+    [255, 0, 0],
+    [0, 255, 0],
+    [255, 255, 0],
+    [92, 92, 255],
+    [255, 0, 255],
+    [0, 255, 255],
+    [255, 255, 255],
+  ];
+  colors.push(...base);
+
+  const steps = [0, 95, 135, 175, 215, 255];
+  for (let r = 0; r < 6; r += 1) {
+    for (let g = 0; g < 6; g += 1) {
+      for (let b = 0; b < 6; b += 1) {
+        colors.push([steps[r], steps[g], steps[b]]);
+      }
+    }
+  }
+
+  for (let i = 0; i < 24; i += 1) {
+    const level = 8 + i * 10;
+    colors.push([level, level, level]);
+  }
+
+  return colors;
+}
+
+function withAlpha(hex, alpha) {
+  if (!hex.startsWith("#") || hex.length !== 7) return hex;
+  return `${hex}${alpha}`;
+}
+
+function writeGhostty(variant, palette, paletteMap, tokenMap) {
+  const ansiOrder = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white"];
+  const lines = [];
+  ansiOrder.forEach((name, idx) => {
+    lines.push(`palette = ${idx}=${palette.ansi.normal[name]}`);
+  });
+  ansiOrder.forEach((name, idx) => {
+    lines.push(`palette = ${idx + 8}=${palette.ansi.bright[name]}`);
+  });
+
+  lines.push("");
+  lines.push(`background = ${paletteMap.karasuBg0}`);
+  lines.push(`foreground = ${paletteMap.karasuFg0}`);
+  lines.push(`cursor-color = ${tokenMap.cursor}`);
+  lines.push(`selection-background = ${tokenMap.selectionBg}`);
+  lines.push(`selection-foreground = ${tokenMap.selectionFg}`);
+
+  writeFile(`platforms/ghostty/karasu-${variant}`, `${lines.join("\n")}\n`);
+}
+
+function writeIterm2(variant, palette, paletteMap, tokenMap) {
+  const ansiOrder = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white"];
+  const entries = [];
+
+  function colorDict(hex) {
+    const [r, g, b] = hexToRgb(hex).map((value) => value / 255);
+    return [
+      "<dict>",
+      `<key>Red Component</key><real>${r}</real>`,
+      `<key>Green Component</key><real>${g}</real>`,
+      `<key>Blue Component</key><real>${b}</real>`,
+      "</dict>",
+    ].join("");
+  }
+
+  ansiOrder.forEach((name, idx) => {
+    entries.push(`<key>Ansi ${idx} Color</key>${colorDict(palette.ansi.normal[name])}`);
+  });
+  ansiOrder.forEach((name, idx) => {
+    entries.push(`<key>Ansi ${idx + 8} Color</key>${colorDict(palette.ansi.bright[name])}`);
+  });
+
+  entries.push(`<key>Background Color</key>${colorDict(paletteMap.karasuBg0)}`);
+  entries.push(`<key>Foreground Color</key>${colorDict(paletteMap.karasuFg0)}`);
+  entries.push(`<key>Cursor Color</key>${colorDict(tokenMap.cursor)}`);
+  entries.push(`<key>Cursor Text Color</key>${colorDict(tokenMap.cursorText)}`);
+  entries.push(`<key>Selection Color</key>${colorDict(tokenMap.selectionBg)}`);
+  entries.push(`<key>Selected Text Color</key>${colorDict(tokenMap.selectionFg)}`);
+
+  const plist = [
+    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
+    "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">",
+    "<plist version=\"1.0\">",
+    "<dict>",
+    entries.join(""),
+    "</dict>",
+    "</plist>",
+    "",
+  ].join("\n");
+
+  writeFile(`platforms/iterm2/karasu-${variant}.itermcolors`, plist);
+}
+
+function writeZed(variant, paletteMap, tokenMap) {
+  const templatePath = path.join(root, "platforms/zed/templates", `karasu-${variant}.json`);
+  const template = fs.readFileSync(templatePath, "utf8");
+  const rendered = renderTemplate(template, paletteMap);
+  const theme = JSON.parse(rendered);
+
+  const players = theme.themes?.[0]?.style?.players;
+  if (Array.isArray(players)) {
+    players.forEach((player) => {
+      player.cursor = tokenMap.cursor;
+      player.background = withAlpha(tokenMap.cursor, "33");
+      player.selection = withAlpha(tokenMap.cursor, "33");
+    });
+  }
+
+  writeFile(`platforms/zed/themes/karasu-${variant}.json`, `${JSON.stringify(theme, null, 2)}\n`);
+}
+
+function writeOpencode(variant, paletteMap, tokenMap, palette) {
+  const templatePath = path.join(root, "platforms/opencode/templates", `karasu-${variant}.json`);
+  const template = fs.readFileSync(templatePath, "utf8");
+  const rendered = renderTemplate(template, paletteMap);
+  const theme = JSON.parse(rendered);
+
+  const ansiHexMap = getAnsiHexMap(palette);
+  const defs = {};
+  const hexToKey = {};
+
+  Object.entries(paletteMap).forEach(([key, value]) => {
+    defs[key] = ansiIndexForHex(value, ansiHexMap);
+    hexToKey[value] = key;
+  });
+  Object.entries(tokenMap).forEach(([key, value]) => {
+    defs[key] = ansiIndexForHex(value, ansiHexMap);
+    hexToKey[value] = key;
+  });
+
+  theme.defs = defs;
+
+  function convertValue(value) {
+    if (typeof value === "string") {
+      if (defs[value] !== undefined) return value;
+      if (value.startsWith("#")) {
+        if (hexToKey[value]) return hexToKey[value];
+        return ansiIndexForHex(value, ansiHexMap);
+      }
+      return value;
+    }
+    if (Array.isArray(value)) return value.map(convertValue);
+    if (value && typeof value === "object") {
+      const next = {};
+      for (const [key, item] of Object.entries(value)) {
+        next[key] = convertValue(item);
+      }
+      return next;
+    }
+    return value;
+  }
+
+  theme.theme = convertValue(theme.theme);
+
+  writeFile(`platforms/opencode/themes/karasu-${variant}.json`, `${JSON.stringify(theme, null, 2)}\n`);
+}
+
+function writeVSCode(variant, paletteMap, tokenMap, palette) {
+  const isDark = variant === "night";
+  const theme = {
+    name: variant === "night" ? "Karasu Night" : "Karasu Snow",
+    type: isDark ? "dark" : "light",
+    colors: {
+      "editor.background": paletteMap.karasuBg0,
+      "editor.foreground": paletteMap.karasuFg0,
+      "editorCursor.foreground": tokenMap.cursor,
+      "editorCursor.background": tokenMap.cursorText,
+      "editor.selectionBackground": tokenMap.selectionBg,
+      "editor.selectionForeground": tokenMap.selectionFg,
+      "editor.lineHighlightBackground": paletteMap.karasuBg1,
+      "editorLineNumber.foreground": paletteMap.karasuFg3,
+      "editorLineNumber.activeForeground": paletteMap.karasuYellow,
+      "editorIndentGuide.background": paletteMap.karasuBg3,
+      "editorIndentGuide.activeBackground": paletteMap.karasuBg4,
+      "editorGroup.border": paletteMap.karasuBg3,
+      "editorWidget.background": paletteMap.karasuBg1,
+      "sideBar.background": paletteMap.karasuBg1,
+      "sideBar.foreground": paletteMap.karasuFg1,
+      "activityBar.background": paletteMap.karasuBg1,
+      "activityBar.foreground": paletteMap.karasuFg0,
+      "statusBar.background": paletteMap.karasuBg1,
+      "statusBar.foreground": paletteMap.karasuFg1,
+      "tab.activeBackground": paletteMap.karasuBg2,
+      "tab.inactiveBackground": paletteMap.karasuBg1,
+      "terminal.ansiBlack": palette.ansi.normal.black,
+      "terminal.ansiRed": palette.ansi.normal.red,
+      "terminal.ansiGreen": palette.ansi.normal.green,
+      "terminal.ansiYellow": palette.ansi.normal.yellow,
+      "terminal.ansiBlue": palette.ansi.normal.blue,
+      "terminal.ansiMagenta": palette.ansi.normal.magenta,
+      "terminal.ansiCyan": palette.ansi.normal.cyan,
+      "terminal.ansiWhite": palette.ansi.normal.white,
+      "terminal.ansiBrightBlack": palette.ansi.bright.black,
+      "terminal.ansiBrightRed": palette.ansi.bright.red,
+      "terminal.ansiBrightGreen": palette.ansi.bright.green,
+      "terminal.ansiBrightYellow": palette.ansi.bright.yellow,
+      "terminal.ansiBrightBlue": palette.ansi.bright.blue,
+      "terminal.ansiBrightMagenta": palette.ansi.bright.magenta,
+      "terminal.ansiBrightCyan": palette.ansi.bright.cyan,
+      "terminal.ansiBrightWhite": palette.ansi.bright.white,
+    },
+    tokenColors: [
+      {
+        scope: ["comment", "punctuation.definition.comment"],
+        settings: { foreground: paletteMap.karasuFgDim, fontStyle: "italic" },
+      },
+      {
+        scope: ["string", "constant.other.symbol"],
+        settings: { foreground: paletteMap.karasuGreen },
+      },
+      {
+        scope: ["keyword", "storage.type"],
+        settings: { foreground: paletteMap.karasuPurple },
+      },
+      {
+        scope: ["entity.name.function", "support.function"],
+        settings: { foreground: paletteMap.karasuBlue },
+      },
+      {
+        scope: ["variable", "identifier"],
+        settings: { foreground: paletteMap.karasuFg0 },
+      },
+      {
+        scope: ["constant.numeric", "constant.language.boolean"],
+        settings: { foreground: paletteMap.karasuYellow },
+      },
+      {
+        scope: ["entity.name.type", "support.type"],
+        settings: { foreground: paletteMap.karasuAqua },
+      },
+      {
+        scope: ["keyword.operator", "punctuation"],
+        settings: { foreground: paletteMap.karasuOrange },
+      },
+    ],
+  };
+
+  writeFile(
+    `platforms/vscode/themes/karasu-${variant}-color-theme.json`,
+    `${JSON.stringify(theme, null, 2)}\n`
+  );
+}
+
+function writeNeovimPalette(variant, paletteMap, palette) {
+  const isNight = variant === "night";
+  const lines = [];
+  lines.push(`-- Karasu ${isNight ? "Night" : "Snow"} Palette`);
+  lines.push(`-- Generated from palette/${variant}.json`);
+  lines.push("");
+  lines.push("local M = {");
+  lines.push("  -- Background layers");
+  lines.push(`  bg0 = "${paletteMap.karasuBg0}",`);
+  lines.push(`  bg1 = "${paletteMap.karasuBg1}",`);
+  lines.push(`  bg2 = "${paletteMap.karasuBg2}",`);
+  lines.push(`  bg3 = "${paletteMap.karasuBg3}",`);
+  lines.push(`  bg4 = "${paletteMap.karasuBg4}",`);
+  lines.push(`  bg_visual = "${paletteMap.karasuBgVisual}",`);
+  lines.push(`  bg_search = "${paletteMap.karasuBgSearch}",`);
+  lines.push("");
+  lines.push("  -- Foreground tones");
+  lines.push(`  fg0 = "${paletteMap.karasuFg0}",`);
+  lines.push(`  fg1 = "${paletteMap.karasuFg1}",`);
+  lines.push(`  fg2 = "${paletteMap.karasuFg2}",`);
+  lines.push(`  fg3 = "${paletteMap.karasuFg3}",`);
+  lines.push(`  fg_dim = "${paletteMap.karasuFgDim}",`);
+  lines.push("");
+  lines.push("  -- Syntax colors");
+  lines.push(`  red = "${paletteMap.karasuRed}",`);
+  lines.push(`  green = "${paletteMap.karasuGreen}",`);
+  lines.push(`  yellow = "${paletteMap.karasuYellow}",`);
+  lines.push(`  blue = "${paletteMap.karasuBlue}",`);
+  lines.push(`  purple = "${paletteMap.karasuPurple}",`);
+  lines.push(`  aqua = "${paletteMap.karasuAqua}",`);
+  lines.push(`  orange = "${paletteMap.karasuOrange}",`);
+  lines.push("");
+  lines.push("  -- Bright colors for terminal");
+  lines.push(`  bright_red = "${paletteMap.karasuBrightRed}",`);
+  lines.push(`  bright_green = "${paletteMap.karasuBrightGreen}",`);
+  lines.push(`  bright_yellow = "${paletteMap.karasuBrightYellow}",`);
+  lines.push(`  bright_blue = "${paletteMap.karasuBrightBlue}",`);
+  lines.push(`  bright_magenta = "${paletteMap.karasuBrightMagenta}",`);
+  lines.push(`  bright_cyan = "${paletteMap.karasuBrightCyan}",`);
+  lines.push(`  bright_white = "${paletteMap.karasuBrightWhite}",`);
+  lines.push("");
+  lines.push("  -- ANSI color mapping");
+  lines.push("  ansi = {");
+  lines.push(`    black = "${palette.ansi.normal.black}",`);
+  lines.push(`    red = "${palette.ansi.normal.red}",`);
+  lines.push(`    green = "${palette.ansi.normal.green}",`);
+  lines.push(`    yellow = "${palette.ansi.normal.yellow}",`);
+  lines.push(`    blue = "${palette.ansi.normal.blue}",`);
+  lines.push(`    magenta = "${palette.ansi.normal.magenta}",`);
+  lines.push(`    cyan = "${palette.ansi.normal.cyan}",`);
+  lines.push(`    white = "${palette.ansi.normal.white}",`);
+  lines.push(`    bright_black = "${palette.ansi.bright.black}",`);
+  lines.push(`    bright_red = "${palette.ansi.bright.red}",`);
+  lines.push(`    bright_green = "${palette.ansi.bright.green}",`);
+  lines.push(`    bright_yellow = "${palette.ansi.bright.yellow}",`);
+  lines.push(`    bright_blue = "${palette.ansi.bright.blue}",`);
+  lines.push(`    bright_magenta = "${palette.ansi.bright.magenta}",`);
+  lines.push(`    bright_cyan = "${palette.ansi.bright.cyan}",`);
+  lines.push(`    bright_white = "${palette.ansi.bright.white}",`);
+  lines.push("  }");
+  lines.push("}");
+  lines.push("");
+  lines.push("return M");
+  lines.push("");
+
+  writeFile(`lua/karasu/palette/${variant}.lua`, lines.join("\n"));
+}
+
+function buildVariant(variant) {
+  const palette = palettes[variant];
+  const paletteMap = flattenPalette(palette);
+
+  const tokenMap = Object.fromEntries(
+    Object.entries(tokens).map(([key, value]) => [key, resolveToken(value[variant], paletteMap)])
+  );
+
+  writeGhostty(variant, palette, paletteMap, tokenMap);
+  writeIterm2(variant, palette, paletteMap, tokenMap);
+  writeZed(variant, paletteMap, tokenMap);
+  writeOpencode(variant, paletteMap, tokenMap, palette);
+  writeVSCode(variant, paletteMap, tokenMap, palette);
+  writeNeovimPalette(variant, paletteMap, palette);
+}
+
+buildVariant("night");
+buildVariant("snow");
+
+console.log("Themes generated for Night and Snow.");

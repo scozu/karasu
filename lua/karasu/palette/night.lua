@@ -1,5 +1,5 @@
 -- Karasu Night Palette
--- Original dark theme colors with proper naming
+-- Generated from palette/night.json
 
 local M = {
   -- Background layers

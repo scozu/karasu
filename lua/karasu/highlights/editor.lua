@@ -10,7 +10,7 @@ local function setup(colors, config)
   utils.hl("NormalNC", { fg = colors.fg1, bg = config.transparent and "NONE" or colors.bg0 })
   
   -- Cursor
-  utils.hl("Cursor", { fg = colors.bg0, bg = colors.fg0 })
+  utils.hl("Cursor", { fg = colors.bg0, bg = colors.bright_yellow })
   utils.hl("CursorLine", { bg = colors.bg1 })
   utils.hl("CursorColumn", { bg = colors.bg1 })
   utils.hl("CursorLineNr", { fg = colors.yellow, bg = colors.bg1 })

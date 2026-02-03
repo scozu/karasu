@@ -1,5 +1,5 @@
 -- Karasu Colorscheme for Neovim
--- Atmospheric themes with Night & Snow variants that adapt to your environment.
+-- Atmospheric themes with Night & Snow variants with optional auto-switching.
 -- Combines Material Design backgrounds with warm earth tones inspired by
 -- Gruvbox Material Dark, Kanagawa Dragon, and Black Metal aesthetics.
 
@@ -16,7 +16,7 @@ function karasu.setup(opts)
   opts = opts or {}
   
   -- Handle mode selection
-  local mode = opts.mode or "auto"
+  local mode = opts.mode or "night"
   if mode == "night" then
     vim.o.background = "dark"
   elseif mode == "snow" then
@@ -25,7 +25,7 @@ function karasu.setup(opts)
   
   -- Set options
   karasu.config = {
-    mode = mode,  -- "auto", "night", "snow"
+    mode = mode,  -- "night", "snow", "auto"
     transparent = opts.transparent or false,
     italic_comments = opts.italic_comments or false,
     italic_keywords = opts.italic_keywords or false,
