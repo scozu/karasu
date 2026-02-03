@@ -106,3 +106,11 @@ node scripts/check-consistency.mjs
 - [VS Code](platforms/vscode/README.md)
 - [Cursor](platforms/cursor/README.md)
 - [iTerm2](platforms/iterm2/README.md)
+
+## References
+
+Karasu draws inspiration from:
+- [Gruvbox Material Dark](https://github.com/sainnhe/gruvbox-material)
+- [Kanagawa Dragon](https://github.com/rebelot/kanagawa.nvim)
+- [Kanso](https://github.com/webhooked/kanso.nvim)
+- [Black Metal (Gorgoroth)](https://github.com/metalelf0/black-metal-theme-neovim)
