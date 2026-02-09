@@ -1,20 +1,54 @@
 {
   "name": "karasu-theme",
-  "displayName": "Karasu",
-  "description": "Atmospheric themes with Night & Snow variants.",
-  "version": "0.1.0",
+  "displayName": "Karasu Theme",
+  "description": "Karasu is an atmospheric terminal-first theme for VS Code with Night and Snow variants.",
+  "version": "0.2.0",
   "publisher": "scozu",
+  "license": "MIT",
+  "icon": "icon.png",
+  "homepage": "https://github.com/scozu/karasu/tree/main/platforms/vscode",
+  "bugs": {
+    "url": "https://github.com/scozu/karasu/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scozu/karasu.git"
+  },
+  "galleryBanner": {
+    "color": "#121212",
+    "theme": "dark"
+  },
   "engines": {
-    "vscode": "^1.80.0"
+    "vscode": "^1.85.0"
   },
   "categories": [
     "Themes"
   ],
   "keywords": [
+    "karasu",
     "theme",
-    "colors",
-    "karasu"
+    "color theme",
+    "dark theme",
+    "light theme",
+    "night",
+    "snow",
+    "gruvbox",
+    "kanagawa",
+    "cursor"
   ],
+  "scripts": {
+    "build:themes": "cd ../.. && node scripts/build-themes.mjs",
+    "check:vscode": "cd ../.. && node scripts/check-vscode-theme.mjs",
+    "check:consistency": "cd ../.. && node scripts/check-consistency.mjs",
+    "package": "npm run build:themes && npm run check:consistency && npm run check:vscode && vsce package",
+    "publish:marketplace": "vsce publish",
+    "publish:openvsx": "ovsx publish",
+    "release:check": "npm run build:themes && npm run check:consistency && npm run check:vscode"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.7.1",
+    "ovsx": "^0.10.9"
+  },
   "contributes": {
     "themes": [
       {
@@ -24,13 +58,9 @@
       },
       {
         "label": "Karasu Snow",
-        "uiTheme": "vs-light",
+        "uiTheme": "vs",
         "path": "./themes/karasu-snow-color-theme.json"
       }
     ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/scozu/karasu"
   }
 }

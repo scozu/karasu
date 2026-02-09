@@ -1,0 +1,8 @@
+.gitignore
+.vscode/**
+.vscode-test/**
+node_modules/**
+*.vsix
+bun.lock
+spec.mjs
+assets/*.svg

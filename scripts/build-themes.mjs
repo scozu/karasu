@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { buildVSCodeTheme } from "../platforms/vscode/spec.mjs";
 
 const root = process.cwd();
 
@@ -283,84 +284,7 @@ function writeOpencode(variant, paletteMap, tokenMap, palette) {
 }
 
 function writeVSCode(variant, paletteMap, tokenMap, palette) {
-  const isDark = variant === "night";
-  const theme = {
-    name: variant === "night" ? "Karasu Night" : "Karasu Snow",
-    type: isDark ? "dark" : "light",
-    colors: {
-      "editor.background": paletteMap.karasuBg0,
-      "editor.foreground": paletteMap.karasuFg0,
-      "editorCursor.foreground": tokenMap.cursor,
-      "editorCursor.background": tokenMap.cursorText,
-      "editor.selectionBackground": tokenMap.selectionBg,
-      "editor.selectionForeground": tokenMap.selectionFg,
-      "editor.lineHighlightBackground": paletteMap.karasuBg1,
-      "editorLineNumber.foreground": paletteMap.karasuFg3,
-      "editorLineNumber.activeForeground": paletteMap.karasuYellow,
-      "editorIndentGuide.background": paletteMap.karasuBg3,
-      "editorIndentGuide.activeBackground": paletteMap.karasuBg4,
-      "editorGroup.border": paletteMap.karasuBg3,
-      "editorWidget.background": paletteMap.karasuBg1,
-      "sideBar.background": paletteMap.karasuBg1,
-      "sideBar.foreground": paletteMap.karasuFg1,
-      "activityBar.background": paletteMap.karasuBg1,
-      "activityBar.foreground": paletteMap.karasuFg0,
-      "statusBar.background": paletteMap.karasuBg1,
-      "statusBar.foreground": paletteMap.karasuFg1,
-      "tab.activeBackground": paletteMap.karasuBg2,
-      "tab.inactiveBackground": paletteMap.karasuBg1,
-      "terminal.ansiBlack": palette.ansi.normal.black,
-      "terminal.ansiRed": palette.ansi.normal.red,
-      "terminal.ansiGreen": palette.ansi.normal.green,
-      "terminal.ansiYellow": palette.ansi.normal.yellow,
-      "terminal.ansiBlue": palette.ansi.normal.blue,
-      "terminal.ansiMagenta": palette.ansi.normal.magenta,
-      "terminal.ansiCyan": palette.ansi.normal.cyan,
-      "terminal.ansiWhite": palette.ansi.normal.white,
-      "terminal.ansiBrightBlack": palette.ansi.bright.black,
-      "terminal.ansiBrightRed": palette.ansi.bright.red,
-      "terminal.ansiBrightGreen": palette.ansi.bright.green,
-      "terminal.ansiBrightYellow": palette.ansi.bright.yellow,
-      "terminal.ansiBrightBlue": palette.ansi.bright.blue,
-      "terminal.ansiBrightMagenta": palette.ansi.bright.magenta,
-      "terminal.ansiBrightCyan": palette.ansi.bright.cyan,
-      "terminal.ansiBrightWhite": palette.ansi.bright.white,
-    },
-    tokenColors: [
-      {
-        scope: ["comment", "punctuation.definition.comment"],
-        settings: { foreground: paletteMap.karasuFgDim, fontStyle: "italic" },
-      },
-      {
-        scope: ["string", "constant.other.symbol"],
-        settings: { foreground: paletteMap.karasuGreen },
-      },
-      {
-        scope: ["keyword", "storage.type"],
-        settings: { foreground: paletteMap.karasuPurple },
-      },
-      {
-        scope: ["entity.name.function", "support.function"],
-        settings: { foreground: paletteMap.karasuBlue },
-      },
-      {
-        scope: ["variable", "identifier"],
-        settings: { foreground: paletteMap.karasuFg0 },
-      },
-      {
-        scope: ["constant.numeric", "constant.language.boolean"],
-        settings: { foreground: paletteMap.karasuYellow },
-      },
-      {
-        scope: ["entity.name.type", "support.type"],
-        settings: { foreground: paletteMap.karasuAqua },
-      },
-      {
-        scope: ["keyword.operator", "punctuation"],
-        settings: { foreground: paletteMap.karasuOrange },
-      },
-    ],
-  };
+  const theme = buildVSCodeTheme({ variant, paletteMap, tokenMap, palette });
 
   writeFile(
     `platforms/vscode/themes/karasu-${variant}-color-theme.json`,

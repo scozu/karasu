@@ -84,6 +84,7 @@ node scripts/build-themes.mjs
 ```
 
 Package with `vsce package` if you want a VSIX.
+Marketplace links will be added here after the first public release.
 
 ## Development
 
