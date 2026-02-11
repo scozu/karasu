@@ -19,6 +19,7 @@ Config example:
 }
 ```
 
-## ANSI Notes
+## Color Notes
 
-OpenCode themes reference **ANSI 0–255**. For best fidelity in the terminal UI and desktop beta, set your terminal ANSI palette to Karasu (Ghostty/iTerm2).
+Karasu OpenCode themes use explicit hex values for stable, deterministic rendering.
+Matching your terminal ANSI palette to Karasu (Ghostty/iTerm2) is optional, but improves cross-tool consistency.

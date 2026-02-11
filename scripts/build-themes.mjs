@@ -10,8 +10,6 @@ const palettes = {
 };
 const tokens = readJson("palette/tokens.json");
 
-const xtermColors = buildXtermColors();
-
 function readJson(relPath) {
   return JSON.parse(fs.readFileSync(path.join(root, relPath), "utf8"));
 }
@@ -47,18 +45,6 @@ function flattenPalette(palette) {
   };
 }
 
-function getAnsiHexMap(palette) {
-  const order = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white"];
-  const map = {};
-  order.forEach((name, idx) => {
-    map[palette.ansi.normal[name]] = idx;
-  });
-  order.forEach((name, idx) => {
-    map[palette.ansi.bright[name]] = idx + 8;
-  });
-  return map;
-}
-
 function resolveToken(tokenValue, paletteMap) {
   if (tokenValue.startsWith("#")) return tokenValue;
   if (!paletteMap[tokenValue]) {
@@ -77,6 +63,11 @@ function renderTemplate(template, paletteMap) {
   });
 }
 
+function withAlpha(hex, alpha) {
+  if (!hex.startsWith("#") || hex.length !== 7) return hex;
+  return `${hex}${alpha}`;
+}
+
 function hexToRgb(hex) {
   const clean = hex.replace("#", "");
   return [
@@ -86,74 +77,19 @@ function hexToRgb(hex) {
   ];
 }
 
-function rgbDistance(a, b) {
-  const dr = a[0] - b[0];
-  const dg = a[1] - b[1];
-  const db = a[2] - b[2];
-  return dr * dr + dg * dg + db * db;
-}
-
-function nearestXtermIndex(hex) {
-  const rgb = hexToRgb(hex);
-  let bestIndex = 0;
-  let bestDistance = Number.POSITIVE_INFINITY;
-  for (let i = 0; i < xtermColors.length; i += 1) {
-    const distance = rgbDistance(rgb, xtermColors[i]);
-    if (distance < bestDistance) {
-      bestDistance = distance;
-      bestIndex = i;
-    }
+function assertOpencodeUsesHex(value, pathParts = []) {
+  if (typeof value === "number") {
+    throw new Error(`OpenCode output must use hex colors only. Found numeric value at ${pathParts.join(".")}`);
   }
-  return bestIndex;
-}
-
-function ansiIndexForHex(hex, ansiHexMap) {
-  if (ansiHexMap[hex] !== undefined) return ansiHexMap[hex];
-  return nearestXtermIndex(hex);
-}
-
-function buildXtermColors() {
-  const colors = [];
-  const base = [
-    [0, 0, 0],
-    [205, 0, 0],
-    [0, 205, 0],
-    [205, 205, 0],
-    [0, 0, 238],
-    [205, 0, 205],
-    [0, 205, 205],
-    [229, 229, 229],
-    [127, 127, 127],
-    [255, 0, 0],
-    [0, 255, 0],
-    [255, 255, 0],
-    [92, 92, 255],
-    [255, 0, 255],
-    [0, 255, 255],
-    [255, 255, 255],
-  ];
-  colors.push(...base);
-
-  const steps = [0, 95, 135, 175, 215, 255];
-  for (let r = 0; r < 6; r += 1) {
-    for (let g = 0; g < 6; g += 1) {
-      for (let b = 0; b < 6; b += 1) {
-        colors.push([steps[r], steps[g], steps[b]]);
-      }
-    }
+  if (Array.isArray(value)) {
+    value.forEach((item, idx) => assertOpencodeUsesHex(item, [...pathParts, String(idx)]));
+    return;
   }
-
-  for (let i = 0; i < 24; i += 1) {
-    const level = 8 + i * 10;
-    colors.push([level, level, level]);
+  if (value && typeof value === "object") {
+    Object.entries(value).forEach(([key, item]) => {
+      assertOpencodeUsesHex(item, [...pathParts, key]);
+    });
   }
-
-  return colors;
-}
-
-function withAlpha(hex, alpha) {
-  if (!hex.startsWith("#") || hex.length !== 7) return hex;
-  return `${hex}${alpha}`;
 }
 
 function writeGhostty(variant, palette, paletteMap, tokenMap) {
@@ -237,48 +173,17 @@ function writeZed(variant, paletteMap, tokenMap) {
   writeFile(`platforms/zed/themes/karasu-${variant}.json`, `${JSON.stringify(theme, null, 2)}\n`);
 }
 
-function writeOpencode(variant, paletteMap, tokenMap, palette) {
+function writeOpencode(variant, paletteMap, tokenMap) {
   const templatePath = path.join(root, "platforms/opencode/templates", `karasu-${variant}.json`);
   const template = fs.readFileSync(templatePath, "utf8");
   const rendered = renderTemplate(template, paletteMap);
   const theme = JSON.parse(rendered);
 
-  const ansiHexMap = getAnsiHexMap(palette);
-  const defs = {};
-  const hexToKey = {};
-
-  Object.entries(paletteMap).forEach(([key, value]) => {
-    defs[key] = ansiIndexForHex(value, ansiHexMap);
-    hexToKey[value] = key;
-  });
-  Object.entries(tokenMap).forEach(([key, value]) => {
-    defs[key] = ansiIndexForHex(value, ansiHexMap);
-    hexToKey[value] = key;
-  });
-
-  theme.defs = defs;
-
-  function convertValue(value) {
-    if (typeof value === "string") {
-      if (defs[value] !== undefined) return value;
-      if (value.startsWith("#")) {
-        if (hexToKey[value]) return hexToKey[value];
-        return ansiIndexForHex(value, ansiHexMap);
-      }
-      return value;
-    }
-    if (Array.isArray(value)) return value.map(convertValue);
-    if (value && typeof value === "object") {
-      const next = {};
-      for (const [key, item] of Object.entries(value)) {
-        next[key] = convertValue(item);
-      }
-      return next;
-    }
-    return value;
-  }
-
-  theme.theme = convertValue(theme.theme);
+  theme.defs = {
+    ...paletteMap,
+    ...tokenMap,
+  };
+  assertOpencodeUsesHex(theme, ["theme"]);
 
   writeFile(`platforms/opencode/themes/karasu-${variant}.json`, `${JSON.stringify(theme, null, 2)}\n`);
 }
@@ -371,7 +276,7 @@ function buildVariant(variant) {
   writeGhostty(variant, palette, paletteMap, tokenMap);
   writeIterm2(variant, palette, paletteMap, tokenMap);
   writeZed(variant, paletteMap, tokenMap);
-  writeOpencode(variant, paletteMap, tokenMap, palette);
+  writeOpencode(variant, paletteMap, tokenMap);
   writeVSCode(variant, paletteMap, tokenMap, palette);
   writeNeovimPalette(variant, paletteMap, palette);
 }
