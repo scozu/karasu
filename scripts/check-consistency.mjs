@@ -204,7 +204,11 @@ function checkVariant(variant) {
   assertEqual(`vscode selection (${variant})`, vscodeSelection, expectedSelectionHex);
 
   const opencodeCursor = parseOpenCodeCursor(`platforms/opencode/themes/karasu-${variant}.json`);
-  assertEqual(`opencode cursor (${variant})`, opencodeCursor, expectedCursorAnsi);
+  if (typeof opencodeCursor === "number") {
+    assertEqual(`opencode cursor (${variant})`, opencodeCursor, expectedCursorAnsi);
+  } else {
+    assertEqual(`opencode cursor (${variant})`, opencodeCursor, expectedCursorHex);
+  }
 
   const neovimCursor = parseNeovimCursor();
   if (!neovimCursor) {
