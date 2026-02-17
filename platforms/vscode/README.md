@@ -36,7 +36,7 @@ The marketplace listing will be linked here after first public release.
 From this repository root:
 
 ```bash
-node scripts/build-themes.mjs
+bun run ./scripts/build-themes.mjs
 cd platforms/vscode
 bun install
 bun run package
@@ -62,14 +62,14 @@ Then install the generated `.vsix` file in VS Code or Cursor.
 Generate themes from the monorepo source palette:
 
 ```bash
-node scripts/build-themes.mjs
+bun run ./scripts/build-themes.mjs
 ```
 
 Run validation checks:
 
 ```bash
-node scripts/check-consistency.mjs
-node scripts/check-vscode-theme.mjs
+bun run ./scripts/check-consistency.mjs
+bun run ./scripts/check-vscode-theme.mjs
 ```
 
 Package from the extension directory:

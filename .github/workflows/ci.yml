@@ -24,18 +24,27 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
 
+      - name: Install Neovim
+        run: sudo apt-get update && sudo apt-get install -y neovim
+
       - name: Install extension dependencies
         working-directory: platforms/vscode
         run: bun install --frozen-lockfile
 
       - name: Generate themes
-        run: node scripts/build-themes.mjs
+        run: bun run ./scripts/build-themes.mjs
 
       - name: Run consistency checks
-        run: node scripts/check-consistency.mjs
+        run: bun run ./scripts/check-consistency.mjs
 
       - name: Run VS Code theme checks
-        run: node scripts/check-vscode-theme.mjs
+        run: bun run ./scripts/check-vscode-theme.mjs
+
+      - name: Run Neovim smoke checks
+        run: bun run ./scripts/check-neovim-smoke.mjs
+
+      - name: Run OpenCode compatibility checks
+        run: bun run ./scripts/check-opencode-config-compat.mjs
 
       - name: Package VSIX
         working-directory: platforms/vscode

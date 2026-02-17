@@ -11,12 +11,15 @@ cp /path/to/karasu/platforms/opencode/themes/karasu-snow.json ~/.config/opencode
 Config example:
 ```json
 {
-  "theme": {
-    "mode": "system",
-    "light": "karasu-snow",
-    "dark": "karasu-night"
-  }
+  "theme": "karasu-night"
 }
+```
+
+`"theme"` as a string is the safest cross-version setting.
+For OpenCode `>=1.2.0`, you can opt into system mode:
+
+```bash
+./scripts/install-all.sh --configure-opencode --opencode-mode system
 ```
 
 ## Color Notes

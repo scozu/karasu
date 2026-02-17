@@ -10,5 +10,5 @@ Source of truth for all colors.
 
 ## Workflow
 1. Edit `night.json`, `snow.json`, or `tokens.json`
-2. Run `node scripts/build-themes.mjs`
-3. Run `node scripts/check-consistency.mjs`
+2. Run `bun run ./scripts/build-themes.mjs`
+3. Run `bun run ./scripts/check-consistency.mjs`

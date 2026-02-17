@@ -37,13 +37,13 @@
     "cursor"
   ],
   "scripts": {
-    "build:themes": "cd ../.. && node scripts/build-themes.mjs",
-    "check:vscode": "cd ../.. && node scripts/check-vscode-theme.mjs",
-    "check:consistency": "cd ../.. && node scripts/check-consistency.mjs",
-    "package": "npm run build:themes && npm run check:consistency && npm run check:vscode && vsce package",
+    "build:themes": "cd ../.. && bun run ./scripts/build-themes.mjs",
+    "check:vscode": "cd ../.. && bun run ./scripts/check-vscode-theme.mjs",
+    "check:consistency": "cd ../.. && bun run ./scripts/check-consistency.mjs",
+    "package": "bun run build:themes && bun run check:consistency && bun run check:vscode && bun x @vscode/vsce package",
     "publish:marketplace": "vsce publish",
     "publish:openvsx": "ovsx publish",
-    "release:check": "npm run build:themes && npm run check:consistency && npm run check:vscode"
+    "release:check": "bun run build:themes && bun run check:consistency && bun run check:vscode"
   },
   "devDependencies": {
     "@vscode/vsce": "^3.7.1",
