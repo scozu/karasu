@@ -1,94 +1,128 @@
 {
   "$schema": "https://opencode.ai/theme.json",
   "defs": {
-    "karasuBg0": "#121212",
-    "karasuBg1": "#1a1a1a",
-    "karasuBg2": "#222222",
-    "karasuBg3": "#2a2a2a",
-    "karasuBg4": "#333333",
-    "karasuBgVisual": "#2d3437",
-    "karasuBgSearch": "#3c4144",
-    "karasuFg0": "#d4c5b9",
-    "karasuFg1": "#c5b6aa",
-    "karasuFg2": "#a89984",
-    "karasuFg3": "#928374",
-    "karasuFgDim": "#665c54",
-    "karasuRed": "#c4746e",
-    "karasuGreen": "#95b572",
-    "karasuYellow": "#c4a657",
-    "karasuBlue": "#7c9fa8",
-    "karasuPurple": "#a987a8",
-    "karasuAqua": "#85a585",
-    "karasuOrange": "#d6936b",
-    "karasuBrightRed": "#ea6962",
-    "karasuBrightGreen": "#a9b665",
-    "karasuBrightYellow": "#d8a657",
-    "karasuBrightBlue": "#8ba4b0",
-    "karasuBrightMagenta": "#d3869b",
-    "karasuBrightCyan": "#89b482",
-    "karasuBrightWhite": "#fbf1c7",
-    "ansi_black": "#121212",
-    "ansi_red": "#c4746e",
-    "ansi_green": "#95b572",
-    "ansi_yellow": "#c4a657",
-    "ansi_blue": "#7c9fa8",
-    "ansi_magenta": "#a987a8",
-    "ansi_cyan": "#85a585",
-    "ansi_white": "#d4c5b9",
-    "ansi_bright_black": "#665c54",
-    "ansi_bright_red": "#ea6962",
-    "ansi_bright_green": "#a9b665",
-    "ansi_bright_yellow": "#d8a657",
-    "ansi_bright_blue": "#8ba4b0",
-    "ansi_bright_magenta": "#d3869b",
-    "ansi_bright_cyan": "#89b482",
-    "ansi_bright_white": "#fbf1c7",
-    "cursor": "#d8a657",
-    "cursorText": "#121212",
-    "selectionBg": "#2d3437",
-    "selectionFg": "#d4c5b9",
-    "searchBg": "#3c4144",
-    "searchFg": "#d4c5b9",
-    "diffAddedBg": "#1a2d1f",
-    "diffRemovedBg": "#2d1f1f",
-    "diffContextBg": "#1a1a1a"
+    "karasuBg0": "#0A0A0A",
+    "karasuBg1": "#171717",
+    "karasuBg2": "#1C1917",
+    "karasuBg3": "#292524",
+    "karasuBg4": "#44403C",
+    "karasuBgVisual": "#262626",
+    "karasuBgSearch": "#262626",
+    "karasuFg0": "#F5F5F5",
+    "karasuFg1": "#D4D4D4",
+    "karasuFg2": "#A3A3A3",
+    "karasuFg3": "#737373",
+    "karasuFgDim": "#7C7C74",
+    "karasuRed": "#E06C75",
+    "karasuGreen": "#8FBF7A",
+    "karasuYellow": "#D4B86A",
+    "karasuBlue": "#7AA2C8",
+    "karasuPurple": "#B4A1D8",
+    "karasuAqua": "#76B7B2",
+    "karasuOrange": "#D19A66",
+    "karasuBrightRed": "#FF5C5C",
+    "karasuBrightGreen": "#A6D189",
+    "karasuBrightYellow": "#E8D07D",
+    "karasuBrightBlue": "#8CB4E2",
+    "karasuBrightMagenta": "#C7B3EE",
+    "karasuBrightCyan": "#8AD4CE",
+    "karasuBrightWhite": "#E7E5E4",
+    "ansi_black": "#0A0A0A",
+    "ansi_red": "#E06C75",
+    "ansi_green": "#8FBF7A",
+    "ansi_yellow": "#D4B86A",
+    "ansi_blue": "#7AA2C8",
+    "ansi_magenta": "#B4A1D8",
+    "ansi_cyan": "#76B7B2",
+    "ansi_white": "#F5F5F5",
+    "ansi_bright_black": "#44403C",
+    "ansi_bright_red": "#FF5C5C",
+    "ansi_bright_green": "#A6D189",
+    "ansi_bright_yellow": "#E8D07D",
+    "ansi_bright_blue": "#8CB4E2",
+    "ansi_bright_magenta": "#C7B3EE",
+    "ansi_bright_cyan": "#8AD4CE",
+    "ansi_bright_white": "#E7E5E4",
+    "cursor": "#F5F5F5",
+    "cursorText": "#E7E5E4",
+    "selectionBg": "#262626",
+    "selectionFg": "#F5F5F5",
+    "searchBg": "#262626",
+    "searchFg": "#F5F5F5",
+    "syntaxComment": "#7C7C74",
+    "syntaxKeyword": "#E06C75",
+    "syntaxType": "#D4B86A",
+    "syntaxFunction": "#8FBF7A",
+    "syntaxString": "#76B7B2",
+    "syntaxNumber": "#B4A1D8",
+    "syntaxOperator": "#D19A66",
+    "syntaxProperty": "#7AA2C8",
+    "syntaxVariable": "#E6E6E6",
+    "syntaxPunctuation": "#B7B7B7",
+    "syntaxLink": "#7AA2C8",
+    "diagError": "#FF5C5C",
+    "diagWarning": "#E0C46C",
+    "diagInfo": "#7DCFFF",
+    "diagHint": "#B4A1D8",
+    "diffAddedBg": "#1F2A22",
+    "diffRemovedBg": "#2D1F1F",
+    "diffContextBg": "#1C1917",
+    "errorBg": "#2A1D1D",
+    "warningBg": "#2A261C",
+    "infoBg": "#1C2530",
+    "hintBg": "#241F2E",
+    "successBg": "#1E2A22",
+    "createdBg": "#1E2A22",
+    "modifiedBg": "#2A261C",
+    "deletedBg": "#2A1D1D",
+    "renamedBg": "#1C2530",
+    "ignoredBg": "#292524",
+    "conflictBg": "#2D2520",
+    "terminalDimBlack": "#171717",
+    "terminalDimRed": "#9E5A61",
+    "terminalDimGreen": "#6F916A",
+    "terminalDimYellow": "#9C8757",
+    "terminalDimBlue": "#5F7F9A",
+    "terminalDimMagenta": "#7E6A9B",
+    "terminalDimCyan": "#5E908B",
+    "terminalDimWhite": "#A3A3A3"
   },
   "theme": {
     "primary": {
-      "dark": "karasuBlue",
-      "light": "karasuBlue"
+      "dark": "syntaxProperty",
+      "light": "syntaxProperty"
     },
     "secondary": {
-      "dark": "karasuPurple",
-      "light": "karasuPurple"
+      "dark": "syntaxNumber",
+      "light": "syntaxNumber"
     },
     "accent": {
-      "dark": "karasuAqua",
-      "light": "karasuAqua"
+      "dark": "syntaxString",
+      "light": "syntaxString"
     },
     "error": {
-      "dark": "karasuRed",
-      "light": "karasuRed"
+      "dark": "diagError",
+      "light": "diagError"
     },
     "warning": {
-      "dark": "karasuYellow",
-      "light": "karasuYellow"
+      "dark": "diagWarning",
+      "light": "diagWarning"
     },
     "success": {
-      "dark": "karasuGreen",
-      "light": "karasuGreen"
+      "dark": "syntaxFunction",
+      "light": "syntaxFunction"
     },
     "info": {
-      "dark": "karasuBlue",
-      "light": "karasuBlue"
+      "dark": "diagInfo",
+      "light": "diagInfo"
     },
     "text": {
-      "dark": "karasuFg0",
-      "light": "karasuBg0"
+      "dark": "syntaxVariable",
+      "light": "syntaxVariable"
     },
     "textMuted": {
-      "dark": "karasuFg3",
-      "light": "karasuFg2"
+      "dark": "syntaxComment",
+      "light": "syntaxComment"
     },
     "background": {
       "dark": "karasuBg0",
@@ -107,156 +141,156 @@
       "light": "karasuFg3"
     },
     "borderActive": {
-      "dark": "karasuBlue",
-      "light": "karasuBlue"
+      "dark": "syntaxProperty",
+      "light": "syntaxProperty"
     },
     "borderSubtle": {
       "dark": "karasuBg2",
       "light": "karasuFg2"
     },
     "diffAdded": {
-      "dark": "karasuGreen",
-      "light": "karasuGreen"
+      "dark": "syntaxFunction",
+      "light": "syntaxFunction"
     },
     "diffRemoved": {
-      "dark": "karasuRed",
-      "light": "karasuRed"
+      "dark": "diagError",
+      "light": "diagError"
     },
     "diffContext": {
-      "dark": "karasuBg3",
-      "light": "karasuFg3"
+      "dark": "syntaxComment",
+      "light": "syntaxComment"
     },
     "diffHunkHeader": {
       "dark": "karasuBg3",
       "light": "karasuFg3"
     },
     "diffHighlightAdded": {
-      "dark": "karasuGreen",
-      "light": "karasuGreen"
+      "dark": "syntaxFunction",
+      "light": "syntaxFunction"
     },
     "diffHighlightRemoved": {
-      "dark": "karasuRed",
-      "light": "karasuRed"
+      "dark": "diagError",
+      "light": "diagError"
     },
     "diffAddedBg": {
-      "dark": "#1a2d1f",
-      "light": "#e8f2e8"
+      "dark": "diffAddedBg",
+      "light": "diffAddedBg"
     },
     "diffRemovedBg": {
-      "dark": "#2d1f1f",
-      "light": "#f2e8e8"
+      "dark": "diffRemovedBg",
+      "light": "diffRemovedBg"
     },
     "diffContextBg": {
-      "dark": "karasuBg1",
-      "light": "karasuFg1"
+      "dark": "diffContextBg",
+      "light": "diffContextBg"
     },
     "diffLineNumber": {
-      "dark": "karasuFg3",
-      "light": "karasuFg2"
+      "dark": "syntaxComment",
+      "light": "syntaxComment"
     },
     "diffAddedLineNumberBg": {
-      "dark": "#1a2d1f",
-      "light": "#e8f2e8"
+      "dark": "diffAddedBg",
+      "light": "diffAddedBg"
     },
     "diffRemovedLineNumberBg": {
-      "dark": "#2d1f1f",
-      "light": "#f2e8e8"
+      "dark": "diffRemovedBg",
+      "light": "diffRemovedBg"
     },
     "markdownText": {
       "dark": "karasuFg0",
       "light": "karasuBg0"
     },
     "markdownHeading": {
-      "dark": "karasuBlue",
-      "light": "karasuBlue"
+      "dark": "syntaxLink",
+      "light": "syntaxLink"
     },
     "markdownLink": {
-      "dark": "karasuBlue",
-      "light": "karasuBlue"
+      "dark": "syntaxLink",
+      "light": "syntaxLink"
     },
     "markdownLinkText": {
-      "dark": "karasuAqua",
-      "light": "karasuAqua"
+      "dark": "syntaxProperty",
+      "light": "syntaxProperty"
     },
     "markdownCode": {
-      "dark": "karasuGreen",
-      "light": "karasuGreen"
+      "dark": "syntaxString",
+      "light": "syntaxString"
     },
     "markdownBlockQuote": {
-      "dark": "karasuFg3",
-      "light": "karasuFg2"
+      "dark": "syntaxComment",
+      "light": "syntaxComment"
     },
     "markdownEmph": {
-      "dark": "karasuYellow",
-      "light": "karasuYellow"
+      "dark": "syntaxKeyword",
+      "light": "syntaxKeyword"
     },
     "markdownStrong": {
-      "dark": "karasuOrange",
-      "light": "karasuOrange"
+      "dark": "syntaxOperator",
+      "light": "syntaxOperator"
     },
     "markdownHorizontalRule": {
       "dark": "karasuBg3",
       "light": "karasuFg3"
     },
     "markdownListItem": {
-      "dark": "karasuBlue",
-      "light": "karasuBlue"
+      "dark": "syntaxProperty",
+      "light": "syntaxProperty"
     },
     "markdownListEnumeration": {
-      "dark": "karasuAqua",
-      "light": "karasuAqua"
+      "dark": "syntaxNumber",
+      "light": "syntaxNumber"
     },
     "markdownImage": {
-      "dark": "karasuBlue",
-      "light": "karasuBlue"
+      "dark": "syntaxLink",
+      "light": "syntaxLink"
     },
     "markdownImageText": {
-      "dark": "karasuAqua",
-      "light": "karasuAqua"
+      "dark": "syntaxProperty",
+      "light": "syntaxProperty"
     },
     "markdownCodeBlock": {
       "dark": "karasuFg0",
       "light": "karasuBg0"
     },
     "syntaxComment": {
-      "dark": "karasuFgDim",
-      "light": "karasuFg3"
+      "dark": "syntaxComment",
+      "light": "syntaxComment"
     },
     "syntaxKeyword": {
-      "dark": "karasuPurple",
-      "light": "karasuPurple"
+      "dark": "syntaxKeyword",
+      "light": "syntaxKeyword"
     },
     "syntaxFunction": {
-      "dark": "karasuBlue",
-      "light": "karasuBlue"
+      "dark": "syntaxFunction",
+      "light": "syntaxFunction"
     },
     "syntaxVariable": {
-      "dark": "karasuFg0",
-      "light": "karasuBg0"
+      "dark": "syntaxVariable",
+      "light": "syntaxVariable"
     },
     "syntaxString": {
-      "dark": "karasuGreen",
-      "light": "karasuGreen"
+      "dark": "syntaxString",
+      "light": "syntaxString"
     },
     "syntaxNumber": {
-      "dark": "karasuYellow",
-      "light": "karasuYellow"
+      "dark": "syntaxNumber",
+      "light": "syntaxNumber"
     },
     "syntaxType": {
-      "dark": "karasuAqua",
-      "light": "karasuAqua"
+      "dark": "syntaxType",
+      "light": "syntaxType"
     },
     "syntaxOperator": {
-      "dark": "karasuOrange",
-      "light": "karasuOrange"
+      "dark": "syntaxOperator",
+      "light": "syntaxOperator"
     },
     "syntaxPunctuation": {
-      "dark": "karasuFg2",
-      "light": "karasuFg2"
+      "dark": "syntaxPunctuation",
+      "light": "syntaxPunctuation"
     },
     "cursor": {
-      "dark": "karasuBrightYellow",
-      "light": "karasuBrightYellow"
+      "dark": "cursor",
+      "light": "cursor"
     }
   }
 }

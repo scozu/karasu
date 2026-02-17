@@ -1,10 +1,10 @@
 {
   "$schema": "https://zed.dev/schema/themes/v0.2.0.json",
-      "name": "Karasu Night",
+  "name": "Karasu Night",
   "author": "Karasu Contributors",
   "themes": [
     {
-  "name": "Karasu Night",
+      "name": "Karasu Night",
       "appearance": "dark",
       "style": {
         "background": "{{ansi_black}}",
@@ -73,254 +73,254 @@
         "search.match_background": "{{karasuBgSearch}}",
         "syntax": {
           "attribute": {
-            "color": "{{karasuOrange}}",
+            "color": "{{syntaxOperator}}",
             "font_style": null,
             "font_weight": null
           },
           "boolean": {
-            "color": "{{ansi_yellow}}",
+            "color": "{{syntaxNumber}}",
             "font_style": null,
             "font_weight": null
           },
           "comment": {
-            "color": "{{ansi_bright_black}}",
+            "color": "{{syntaxComment}}",
             "font_style": "italic",
             "font_weight": null
           },
           "comment.doc": {
-            "color": "{{ansi_bright_black}}",
+            "color": "{{syntaxComment}}",
             "font_style": "italic",
             "font_weight": null
           },
           "constant": {
-            "color": "{{ansi_yellow}}",
+            "color": "{{syntaxNumber}}",
             "font_style": null,
             "font_weight": null
           },
           "constructor": {
-            "color": "{{ansi_blue}}",
+            "color": "{{syntaxFunction}}",
             "font_style": null,
             "font_weight": null
           },
           "embedded": {
-            "color": "{{ansi_green}}",
+            "color": "{{syntaxString}}",
             "font_style": null,
             "font_weight": null
           },
           "emphasis": {
-            "color": "{{ansi_white}}",
+            "color": "{{syntaxVariable}}",
             "font_style": "italic",
             "font_weight": null
           },
           "emphasis.strong": {
-            "color": "{{ansi_white}}",
+            "color": "{{syntaxVariable}}",
             "font_style": null,
             "font_weight": 700
           },
           "enum": {
-            "color": "{{ansi_cyan}}",
+            "color": "{{syntaxType}}",
             "font_style": null,
             "font_weight": null
           },
           "function": {
-            "color": "{{ansi_blue}}",
+            "color": "{{syntaxFunction}}",
             "font_style": null,
             "font_weight": null
           },
           "function.builtin": {
-            "color": "{{ansi_blue}}",
+            "color": "{{syntaxFunction}}",
             "font_style": null,
             "font_weight": null
           },
           "hint": {
-            "color": "{{karasuFg3}}",
+            "color": "{{diagHint}}",
             "font_style": "italic",
             "font_weight": null
           },
           "keyword": {
-            "color": "{{ansi_magenta}}",
+            "color": "{{syntaxKeyword}}",
             "font_style": null,
             "font_weight": null
           },
           "label": {
-            "color": "{{ansi_magenta}}",
+            "color": "{{syntaxKeyword}}",
             "font_style": null,
             "font_weight": null
           },
           "link_text": {
-            "color": "{{ansi_blue}}",
+            "color": "{{syntaxLink}}",
             "font_style": null,
             "font_weight": null
           },
           "link_uri": {
-            "color": "{{ansi_green}}",
+            "color": "{{syntaxLink}}",
             "font_style": "italic",
             "font_weight": null
           },
           "namespace": {
-            "color": "{{ansi_cyan}}",
+            "color": "{{syntaxType}}",
             "font_style": null,
             "font_weight": null
           },
           "number": {
-            "color": "{{ansi_yellow}}",
+            "color": "{{syntaxNumber}}",
             "font_style": null,
             "font_weight": null
           },
           "operator": {
-            "color": "{{karasuOrange}}",
+            "color": "{{syntaxOperator}}",
             "font_style": null,
             "font_weight": null
           },
           "predictive": {
-            "color": "{{karasuFg3}}",
+            "color": "{{syntaxComment}}",
             "font_style": "italic",
             "font_weight": null
           },
           "preproc": {
-            "color": "{{ansi_magenta}}",
+            "color": "{{syntaxOperator}}",
             "font_style": null,
             "font_weight": null
           },
           "primary": {
-            "color": "{{ansi_white}}",
+            "color": "{{syntaxVariable}}",
             "font_style": null,
             "font_weight": null
           },
           "property": {
-            "color": "{{karasuFg1}}",
+            "color": "{{syntaxProperty}}",
             "font_style": null,
             "font_weight": null
           },
           "punctuation": {
-            "color": "{{karasuFg2}}",
+            "color": "{{syntaxPunctuation}}",
             "font_style": null,
             "font_weight": null
           },
           "punctuation.bracket": {
-            "color": "{{karasuFg2}}",
+            "color": "{{syntaxPunctuation}}",
             "font_style": null,
             "font_weight": null
           },
           "punctuation.delimiter": {
-            "color": "{{karasuFg2}}",
+            "color": "{{syntaxPunctuation}}",
             "font_style": null,
             "font_weight": null
           },
           "punctuation.special": {
-            "color": "{{karasuOrange}}",
+            "color": "{{syntaxOperator}}",
             "font_style": null,
             "font_weight": null
           },
           "selector": {
-            "color": "{{ansi_magenta}}",
+            "color": "{{syntaxKeyword}}",
             "font_style": null,
             "font_weight": null
           },
           "string": {
-            "color": "{{ansi_green}}",
+            "color": "{{syntaxString}}",
             "font_style": null,
             "font_weight": null
           },
           "string.escape": {
-            "color": "{{karasuOrange}}",
+            "color": "{{syntaxOperator}}",
             "font_style": null,
             "font_weight": null
           },
           "string.regex": {
-            "color": "{{karasuOrange}}",
+            "color": "{{syntaxOperator}}",
             "font_style": null,
             "font_weight": null
           },
           "string.special": {
-            "color": "{{karasuOrange}}",
+            "color": "{{syntaxOperator}}",
             "font_style": null,
             "font_weight": null
           },
           "string.special.symbol": {
-            "color": "{{ansi_yellow}}",
+            "color": "{{syntaxNumber}}",
             "font_style": null,
             "font_weight": null
           },
           "tag": {
-            "color": "{{karasuOrange}}",
+            "color": "{{syntaxOperator}}",
             "font_style": null,
             "font_weight": null
           },
           "text.literal": {
-            "color": "{{ansi_green}}",
+            "color": "{{syntaxString}}",
             "font_style": null,
             "font_weight": null
           },
           "title": {
-            "color": "{{ansi_blue}}",
+            "color": "{{syntaxLink}}",
             "font_style": null,
             "font_weight": 700
           },
           "type": {
-            "color": "{{ansi_cyan}}",
+            "color": "{{syntaxType}}",
             "font_style": null,
             "font_weight": null
           },
           "type.builtin": {
-            "color": "{{ansi_cyan}}",
+            "color": "{{syntaxType}}",
             "font_style": null,
             "font_weight": null
           },
           "type.super": {
-            "color": "{{ansi_cyan}}",
+            "color": "{{syntaxType}}",
             "font_style": null,
             "font_weight": null
           },
           "variable": {
-            "color": "{{ansi_white}}",
+            "color": "{{syntaxVariable}}",
             "font_style": null,
             "font_weight": null
           },
           "variable.special": {
-            "color": "{{ansi_yellow}}",
+            "color": "{{syntaxVariable}}",
             "font_style": null,
             "font_weight": null
           },
           "variant": {
-            "color": "{{ansi_magenta}}",
+            "color": "{{syntaxKeyword}}",
             "font_style": null,
             "font_weight": null
           }
         },
-        "error": "{{ansi_red}}",
-        "error.background": "#2d1f1f",
-        "error.border": "{{ansi_red}}",
-        "warning": "{{ansi_yellow}}",
-        "warning.background": "#2d2a1f",
-        "warning.border": "{{ansi_yellow}}",
-        "info": "{{ansi_blue}}",
-        "info.background": "#1f2d2a",
-        "info.border": "{{ansi_blue}}",
-        "hint": "{{karasuFg3}}",
-        "hint.background": "#2a2d2a",
-        "hint.border": "{{karasuFg3}}",
-        "success": "{{ansi_green}}",
-        "success.background": "#1f2d1f",
-        "success.border": "{{ansi_green}}",
-        "created": "{{ansi_green}}",
-        "created.background": "#1f2d1f",
-        "created.border": "{{ansi_green}}",
-        "modified": "{{ansi_yellow}}",
-        "modified.background": "#2d2a1f",
-        "modified.border": "{{ansi_yellow}}",
-        "deleted": "{{ansi_red}}",
-        "deleted.background": "#2d1f1f",
-        "deleted.border": "{{ansi_red}}",
-        "renamed": "{{ansi_blue}}",
-        "renamed.background": "#1f2d2a",
-        "renamed.border": "{{ansi_blue}}",
-        "ignored": "{{ansi_bright_black}}",
-        "ignored.background": "{{karasuBg3}}",
-        "ignored.border": "{{ansi_bright_black}}",
-        "conflict": "{{karasuOrange}}",
-        "conflict.background": "#2d2520",
-        "conflict.border": "{{karasuOrange}}",
+        "error": "{{diagError}}",
+        "error.background": "{{errorBg}}",
+        "error.border": "{{diagError}}",
+        "warning": "{{diagWarning}}",
+        "warning.background": "{{warningBg}}",
+        "warning.border": "{{diagWarning}}",
+        "info": "{{diagInfo}}",
+        "info.background": "{{infoBg}}",
+        "info.border": "{{diagInfo}}",
+        "hint": "{{diagHint}}",
+        "hint.background": "{{hintBg}}",
+        "hint.border": "{{diagHint}}",
+        "success": "{{syntaxFunction}}",
+        "success.background": "{{successBg}}",
+        "success.border": "{{syntaxFunction}}",
+        "created": "{{syntaxFunction}}",
+        "created.background": "{{createdBg}}",
+        "created.border": "{{syntaxFunction}}",
+        "modified": "{{diagWarning}}",
+        "modified.background": "{{modifiedBg}}",
+        "modified.border": "{{diagWarning}}",
+        "deleted": "{{diagError}}",
+        "deleted.background": "{{deletedBg}}",
+        "deleted.border": "{{diagError}}",
+        "renamed": "{{diagInfo}}",
+        "renamed.background": "{{renamedBg}}",
+        "renamed.border": "{{diagInfo}}",
+        "ignored": "{{karasuFg3}}",
+        "ignored.background": "{{ignoredBg}}",
+        "ignored.border": "{{karasuFg3}}",
+        "conflict": "{{syntaxOperator}}",
+        "conflict.background": "{{conflictBg}}",
+        "conflict.border": "{{syntaxOperator}}",
         "terminal.background": "{{ansi_black}}",
         "terminal.foreground": "{{ansi_white}}",
         "terminal.bright_foreground": "{{ansi_bright_white}}",
@@ -341,14 +341,14 @@
         "terminal.ansi.bright_magenta": "{{ansi_bright_magenta}}",
         "terminal.ansi.bright_cyan": "{{ansi_bright_cyan}}",
         "terminal.ansi.bright_white": "{{ansi_bright_white}}",
-        "terminal.ansi.dim_black": "{{karasuBg1}}",
-        "terminal.ansi.dim_red": "#9d3d38",
-        "terminal.ansi.dim_green": "#6b7834",
-        "terminal.ansi.dim_yellow": "#8a7a2c",
-        "terminal.ansi.dim_blue": "#56696e",
-        "terminal.ansi.dim_magenta": "#7a5a6c",
-        "terminal.ansi.dim_cyan": "#5a7352",
-        "terminal.ansi.dim_white": "{{karasuFg3}}",
+        "terminal.ansi.dim_black": "{{terminalDimBlack}}",
+        "terminal.ansi.dim_red": "{{terminalDimRed}}",
+        "terminal.ansi.dim_green": "{{terminalDimGreen}}",
+        "terminal.ansi.dim_yellow": "{{terminalDimYellow}}",
+        "terminal.ansi.dim_blue": "{{terminalDimBlue}}",
+        "terminal.ansi.dim_magenta": "{{terminalDimMagenta}}",
+        "terminal.ansi.dim_cyan": "{{terminalDimCyan}}",
+        "terminal.ansi.dim_white": "{{terminalDimWhite}}",
         "players": [
           {
             "background": "{{ansi_bright_yellow}}33",

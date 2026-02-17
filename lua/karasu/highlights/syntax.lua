@@ -6,51 +6,51 @@ local function setup(colors, config)
   
   -- Comments
   utils.hl("Comment", {
-    fg = colors.fgDim,
+    fg = colors.role_comment,
     italic = config.italic_comments,
   })
   
   -- Constants
-  utils.hl("Constant", { fg = colors.yellow })
-  utils.hl("String", { fg = colors.green, italic = config.italic_strings })
-  utils.hl("Character", { fg = colors.green })
-  utils.hl("Number", { fg = colors.yellow })
-  utils.hl("Boolean", { fg = colors.yellow })
-  utils.hl("Float", { fg = colors.yellow })
+  utils.hl("Constant", { fg = colors.role_number })
+  utils.hl("String", { fg = colors.role_string, italic = config.italic_strings })
+  utils.hl("Character", { fg = colors.role_string })
+  utils.hl("Number", { fg = colors.role_number })
+  utils.hl("Boolean", { fg = colors.role_number })
+  utils.hl("Float", { fg = colors.role_number })
   
   -- Identifiers
-  utils.hl("Identifier", { fg = colors.fg0, italic = config.italic_variables })
-  utils.hl("Function", { fg = colors.blue, italic = config.italic_functions })
+  utils.hl("Identifier", { fg = colors.role_variable, italic = config.italic_variables })
+  utils.hl("Function", { fg = colors.role_function, italic = config.italic_functions })
   
   -- Statements
-  utils.hl("Statement", { fg = colors.purple, italic = config.italic_keywords })
-  utils.hl("Conditional", { fg = colors.purple, italic = config.italic_keywords })
-  utils.hl("Repeat", { fg = colors.purple, italic = config.italic_keywords })
-  utils.hl("Label", { fg = colors.purple })
-  utils.hl("Operator", { fg = colors.orange })
-  utils.hl("Keyword", { fg = colors.purple, italic = config.italic_keywords })
-  utils.hl("Exception", { fg = colors.purple })
+  utils.hl("Statement", { fg = colors.role_keyword, italic = config.italic_keywords })
+  utils.hl("Conditional", { fg = colors.role_keyword, italic = config.italic_keywords })
+  utils.hl("Repeat", { fg = colors.role_keyword, italic = config.italic_keywords })
+  utils.hl("Label", { fg = colors.role_keyword })
+  utils.hl("Operator", { fg = colors.role_operator })
+  utils.hl("Keyword", { fg = colors.role_keyword, italic = config.italic_keywords })
+  utils.hl("Exception", { fg = colors.role_keyword })
   
   -- Preprocessor
-  utils.hl("PreProc", { fg = colors.aqua })
-  utils.hl("Include", { fg = colors.purple })
-  utils.hl("Define", { fg = colors.aqua })
-  utils.hl("Macro", { fg = colors.aqua })
-  utils.hl("PreCondit", { fg = colors.aqua })
+  utils.hl("PreProc", { fg = colors.role_operator })
+  utils.hl("Include", { fg = colors.role_keyword })
+  utils.hl("Define", { fg = colors.role_operator })
+  utils.hl("Macro", { fg = colors.role_operator })
+  utils.hl("PreCondit", { fg = colors.role_operator })
   
   -- Types
-  utils.hl("Type", { fg = colors.aqua })
-  utils.hl("StorageClass", { fg = colors.purple })
-  utils.hl("Structure", { fg = colors.aqua })
-  utils.hl("Typedef", { fg = colors.aqua })
+  utils.hl("Type", { fg = colors.role_type })
+  utils.hl("StorageClass", { fg = colors.role_operator })
+  utils.hl("Structure", { fg = colors.role_type })
+  utils.hl("Typedef", { fg = colors.role_type })
   
   -- Special
-  utils.hl("Special", { fg = colors.orange })
-  utils.hl("SpecialChar", { fg = colors.orange })
-  utils.hl("Tag", { fg = colors.orange })
-  utils.hl("Delimiter", { fg = colors.fg2 })
-  utils.hl("SpecialComment", { fg = colors.fgDim })
-  utils.hl("Debug", { fg = colors.red })
+  utils.hl("Special", { fg = colors.role_operator })
+  utils.hl("SpecialChar", { fg = colors.role_operator })
+  utils.hl("Tag", { fg = colors.role_operator })
+  utils.hl("Delimiter", { fg = colors.role_punctuation })
+  utils.hl("SpecialComment", { fg = colors.role_comment })
+  utils.hl("Debug", { fg = colors.role_error })
   
   -- Underlined
   utils.hl("Underlined", { underline = true })
@@ -59,8 +59,8 @@ local function setup(colors, config)
   utils.hl("Ignore", { fg = colors.fg3 })
   
   -- Error
-  utils.hl("Error", { fg = colors.red })
-  utils.hl("Todo", { fg = colors.orange, bg = colors.bg1 })
+  utils.hl("Error", { fg = colors.role_error })
+  utils.hl("Todo", { fg = colors.role_operator, bg = colors.bg1 })
 end
 
 return { setup = setup }

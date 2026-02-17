@@ -30,40 +30,40 @@
   },
   "theme": {
     "primary": {
-      "dark": "karasuBlue",
-      "light": "karasuBlue"
+      "dark": "syntaxProperty",
+      "light": "syntaxProperty"
     },
     "secondary": {
-      "dark": "karasuPurple",
-      "light": "karasuPurple"
+      "dark": "syntaxNumber",
+      "light": "syntaxNumber"
     },
     "accent": {
-      "dark": "karasuAqua",
-      "light": "karasuAqua"
+      "dark": "syntaxString",
+      "light": "syntaxString"
     },
     "error": {
-      "dark": "karasuRed",
-      "light": "karasuRed"
+      "dark": "diagError",
+      "light": "diagError"
     },
     "warning": {
-      "dark": "karasuYellow",
-      "light": "karasuYellow"
+      "dark": "diagWarning",
+      "light": "diagWarning"
     },
     "success": {
-      "dark": "karasuGreen",
-      "light": "karasuGreen"
+      "dark": "syntaxFunction",
+      "light": "syntaxFunction"
     },
     "info": {
-      "dark": "karasuBlue",
-      "light": "karasuBlue"
+      "dark": "diagInfo",
+      "light": "diagInfo"
     },
     "text": {
-      "dark": "karasuFg0",
-      "light": "karasuBg0"
+      "dark": "syntaxVariable",
+      "light": "syntaxVariable"
     },
     "textMuted": {
-      "dark": "karasuFg3",
-      "light": "karasuFg2"
+      "dark": "syntaxComment",
+      "light": "syntaxComment"
     },
     "background": {
       "dark": "karasuBg0",
@@ -82,156 +82,156 @@
       "light": "karasuFg3"
     },
     "borderActive": {
-      "dark": "karasuBlue",
-      "light": "karasuBlue"
+      "dark": "syntaxProperty",
+      "light": "syntaxProperty"
     },
     "borderSubtle": {
       "dark": "karasuBg2",
       "light": "karasuFg2"
     },
     "diffAdded": {
-      "dark": "karasuGreen",
-      "light": "karasuGreen"
+      "dark": "syntaxFunction",
+      "light": "syntaxFunction"
     },
     "diffRemoved": {
-      "dark": "karasuRed",
-      "light": "karasuRed"
+      "dark": "diagError",
+      "light": "diagError"
     },
     "diffContext": {
-      "dark": "karasuBg3",
-      "light": "karasuFg3"
+      "dark": "syntaxComment",
+      "light": "syntaxComment"
     },
     "diffHunkHeader": {
       "dark": "karasuBg3",
       "light": "karasuFg3"
     },
     "diffHighlightAdded": {
-      "dark": "karasuGreen",
-      "light": "karasuGreen"
+      "dark": "syntaxFunction",
+      "light": "syntaxFunction"
     },
     "diffHighlightRemoved": {
-      "dark": "karasuRed",
-      "light": "karasuRed"
+      "dark": "diagError",
+      "light": "diagError"
     },
     "diffAddedBg": {
-      "dark": "#e8f2e8",
-      "light": "#e8f2e8"
+      "dark": "diffAddedBg",
+      "light": "diffAddedBg"
     },
     "diffRemovedBg": {
-      "dark": "#f2e8e8",
-      "light": "#f2e8e8"
+      "dark": "diffRemovedBg",
+      "light": "diffRemovedBg"
     },
     "diffContextBg": {
-      "dark": "karasuBg1",
-      "light": "karasuFg1"
+      "dark": "diffContextBg",
+      "light": "diffContextBg"
     },
     "diffLineNumber": {
-      "dark": "karasuFg3",
-      "light": "karasuFg2"
+      "dark": "syntaxComment",
+      "light": "syntaxComment"
     },
     "diffAddedLineNumberBg": {
-      "dark": "#e8f2e8",
-      "light": "#e8f2e8"
+      "dark": "diffAddedBg",
+      "light": "diffAddedBg"
     },
     "diffRemovedLineNumberBg": {
-      "dark": "#f2e8e8",
-      "light": "#f2e8e8"
+      "dark": "diffRemovedBg",
+      "light": "diffRemovedBg"
     },
     "markdownText": {
       "dark": "karasuFg0",
       "light": "karasuBg0"
     },
     "markdownHeading": {
-      "dark": "karasuBlue",
-      "light": "karasuBlue"
+      "dark": "syntaxLink",
+      "light": "syntaxLink"
     },
     "markdownLink": {
-      "dark": "karasuBlue",
-      "light": "karasuBlue"
+      "dark": "syntaxLink",
+      "light": "syntaxLink"
     },
     "markdownLinkText": {
-      "dark": "karasuAqua",
-      "light": "karasuAqua"
+      "dark": "syntaxProperty",
+      "light": "syntaxProperty"
     },
     "markdownCode": {
-      "dark": "karasuGreen",
-      "light": "karasuGreen"
+      "dark": "syntaxString",
+      "light": "syntaxString"
     },
     "markdownBlockQuote": {
-      "dark": "karasuFg3",
-      "light": "karasuFg2"
+      "dark": "syntaxComment",
+      "light": "syntaxComment"
     },
     "markdownEmph": {
-      "dark": "karasuYellow",
-      "light": "karasuYellow"
+      "dark": "syntaxKeyword",
+      "light": "syntaxKeyword"
     },
     "markdownStrong": {
-      "dark": "karasuOrange",
-      "light": "karasuOrange"
+      "dark": "syntaxOperator",
+      "light": "syntaxOperator"
     },
     "markdownHorizontalRule": {
       "dark": "karasuBg3",
       "light": "karasuFg3"
     },
     "markdownListItem": {
-      "dark": "karasuBlue",
-      "light": "karasuBlue"
+      "dark": "syntaxProperty",
+      "light": "syntaxProperty"
     },
     "markdownListEnumeration": {
-      "dark": "karasuAqua",
-      "light": "karasuAqua"
+      "dark": "syntaxNumber",
+      "light": "syntaxNumber"
     },
     "markdownImage": {
-      "dark": "karasuBlue",
-      "light": "karasuBlue"
+      "dark": "syntaxLink",
+      "light": "syntaxLink"
     },
     "markdownImageText": {
-      "dark": "karasuAqua",
-      "light": "karasuAqua"
+      "dark": "syntaxProperty",
+      "light": "syntaxProperty"
     },
     "markdownCodeBlock": {
       "dark": "karasuFg0",
       "light": "karasuBg0"
     },
     "syntaxComment": {
-      "dark": "karasuFgDim",
-      "light": "karasuFg3"
+      "dark": "syntaxComment",
+      "light": "syntaxComment"
     },
     "syntaxKeyword": {
-      "dark": "karasuPurple",
-      "light": "karasuPurple"
+      "dark": "syntaxKeyword",
+      "light": "syntaxKeyword"
     },
     "syntaxFunction": {
-      "dark": "karasuBlue",
-      "light": "karasuBlue"
+      "dark": "syntaxFunction",
+      "light": "syntaxFunction"
     },
     "syntaxVariable": {
-      "dark": "karasuFg0",
-      "light": "karasuBg0"
+      "dark": "syntaxVariable",
+      "light": "syntaxVariable"
     },
     "syntaxString": {
-      "dark": "karasuGreen",
-      "light": "karasuGreen"
+      "dark": "syntaxString",
+      "light": "syntaxString"
     },
     "syntaxNumber": {
-      "dark": "karasuYellow",
-      "light": "karasuYellow"
+      "dark": "syntaxNumber",
+      "light": "syntaxNumber"
     },
     "syntaxType": {
-      "dark": "karasuAqua",
-      "light": "karasuAqua"
+      "dark": "syntaxType",
+      "light": "syntaxType"
     },
     "syntaxOperator": {
-      "dark": "karasuOrange",
-      "light": "karasuOrange"
+      "dark": "syntaxOperator",
+      "light": "syntaxOperator"
     },
     "syntaxPunctuation": {
-      "dark": "karasuFg2",
-      "light": "karasuFg2"
+      "dark": "syntaxPunctuation",
+      "light": "syntaxPunctuation"
     },
     "cursor": {
-      "dark": "karasuBrightYellow",
-      "light": "karasuBrightYellow"
+      "dark": "cursor",
+      "light": "cursor"
     }
   }
 }

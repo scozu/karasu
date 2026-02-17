@@ -6,60 +6,60 @@
 local M = {}
 
 -- Background Layers
-M.bg0 = "#121212"      -- Main background - Material dark
-M.bg1 = "#1a1a1a"      -- Elevated surfaces
-M.bg2 = "#222222"      -- Popups, menus
-M.bg3 = "#2a2a2a"      -- Higher elevation
-M.bg4 = "#333333"      -- Borders, separators
-M.bgVisual = "#2d3437" -- Visual selection
-M.bgSearch = "#3c4144" -- Search highlights
+M.bg0 = "#0A0A0A"      -- Main background
+M.bg1 = "#171717"      -- Elevated surfaces
+M.bg2 = "#1C1917"      -- Popups, menus
+M.bg3 = "#292524"      -- Higher elevation
+M.bg4 = "#44403C"      -- Borders, separators
+M.bgVisual = "#262626" -- Visual selection
+M.bgSearch = "#262626" -- Search highlights
 
 -- Foreground Tones
-M.fg0 = "#d4c5b9"      -- Primary text - warm cream
-M.fg1 = "#c5b6aa"      -- Secondary text
-M.fg2 = "#a89984"      -- Tertiary text
-M.fg3 = "#928374"      -- Muted text
-M.fgDim = "#665c54"    -- Dimmed text, comments
+M.fg0 = "#F5F5F5"      -- Primary text
+M.fg1 = "#D4D4D4"      -- Secondary text
+M.fg2 = "#A3A3A3"      -- Tertiary text
+M.fg3 = "#737373"      -- Muted text
+M.fgDim = "#7C7C74"    -- Dimmed text, comments
 
--- Syntax Colors (Saturated)
-M.red = "#c4746e"      -- Errors, deletions, important keywords
-M.green = "#95b572"    -- Strings, additions, success
-M.yellow = "#c4a657"   -- Warnings, numbers, constants
-M.blue = "#7c9fa8"     -- Functions, methods, identifiers
-M.purple = "#a987a8"   -- Keywords, control flow
-M.aqua = "#85a585"     -- Classes, types, special
-M.orange = "#d6936b"   -- Parameters, attributes, operators
+-- Syntax Colors (Strict Gruvbox-role mapping)
+M.red = "#E06C75"      -- Keywords/control flow
+M.green = "#8FBF7A"    -- Functions/methods
+M.yellow = "#D4B86A"   -- Types/classes
+M.blue = "#7AA2C8"     -- Properties/members/links
+M.purple = "#B4A1D8"   -- Numbers/constants/hints
+M.aqua = "#76B7B2"     -- Strings/chars
+M.orange = "#D19A66"   -- Operators/modifiers
 
 -- Bright Accents
-M.brightRed = "#ea6962"
-M.brightGreen = "#a9b665"
-M.brightYellow = "#d8a657"
-M.brightBlue = "#8ba4b0"
-M.brightMagenta = "#d3869b"
-M.brightCyan = "#89b482"
-M.brightWhite = "#fbf1c7"
+M.brightRed = "#FF5C5C"
+M.brightGreen = "#A6D189"
+M.brightYellow = "#E8D07D"
+M.brightBlue = "#8CB4E2"
+M.brightMagenta = "#C7B3EE"
+M.brightCyan = "#8AD4CE"
+M.brightWhite = "#E7E5E4"
 
 -- ANSI Terminal Colors
 M.ansi = {
   normal = {
-    black = "#121212",
-    red = "#c4746e",
-    green = "#95b572",
-    yellow = "#c4a657",
-    blue = "#7c9fa8",
-    magenta = "#a987a8",
-    cyan = "#85a585",
-    white = "#d4c5b9",
+    black = "#0A0A0A",
+    red = "#E06C75",
+    green = "#8FBF7A",
+    yellow = "#D4B86A",
+    blue = "#7AA2C8",
+    magenta = "#B4A1D8",
+    cyan = "#76B7B2",
+    white = "#F5F5F5",
   },
   bright = {
-    black = "#665c54",
-    red = "#ea6962",
-    green = "#a9b665",
-    yellow = "#d8a657",
-    blue = "#8ba4b0",
-    magenta = "#d3869b",
-    cyan = "#89b482",
-    white = "#fbf1c7",
+    black = "#44403C",
+    red = "#FF5C5C",
+    green = "#A6D189",
+    yellow = "#E8D07D",
+    blue = "#8CB4E2",
+    magenta = "#C7B3EE",
+    cyan = "#8AD4CE",
+    white = "#E7E5E4",
   },
 }
 

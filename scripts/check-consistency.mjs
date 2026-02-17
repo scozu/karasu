@@ -166,10 +166,19 @@ function parseOpenCodeCursor(fileRel) {
 
 function parseNeovimCursor() {
   const file = fs.readFileSync(path.join(root, "lua/karasu/highlights/editor.lua"), "utf8");
-  return file.includes("Cursor") && file.includes("bright_yellow");
+  return file.includes("Cursor") && file.includes("colors.cursor");
 }
 
 function assertEqual(label, actual, expected) {
+  if (
+    typeof actual === "string" &&
+    typeof expected === "string" &&
+    actual.startsWith("#") &&
+    expected.startsWith("#")
+  ) {
+    actual = actual.toLowerCase();
+    expected = expected.toLowerCase();
+  }
   if (actual !== expected) {
     throw new Error(`${label} mismatch: expected ${expected}, got ${actual}`);
   }
@@ -212,7 +221,7 @@ function checkVariant(variant) {
 
   const neovimCursor = parseNeovimCursor();
   if (!neovimCursor) {
-    throw new Error("neovim cursor highlight is not using bright_yellow");
+    throw new Error("neovim cursor highlight is not using the cursor token");
   }
 }
 

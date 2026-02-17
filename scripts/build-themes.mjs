@@ -53,9 +53,9 @@ function resolveToken(tokenValue, paletteMap) {
   return paletteMap[tokenValue];
 }
 
-function renderTemplate(template, paletteMap) {
+function renderTemplate(template, templateMap) {
   return template.replace(/\{\{([^}]+)\}\}/g, (_, key) => {
-    const value = paletteMap[key];
+    const value = templateMap[key];
     if (!value) {
       throw new Error(`Unknown template key: ${key}`);
     }
@@ -158,7 +158,7 @@ function writeIterm2(variant, palette, paletteMap, tokenMap) {
 function writeZed(variant, paletteMap, tokenMap) {
   const templatePath = path.join(root, "platforms/zed/templates", `karasu-${variant}.json`);
   const template = fs.readFileSync(templatePath, "utf8");
-  const rendered = renderTemplate(template, paletteMap);
+  const rendered = renderTemplate(template, { ...paletteMap, ...tokenMap });
   const theme = JSON.parse(rendered);
 
   const players = theme.themes?.[0]?.style?.players;
@@ -176,7 +176,7 @@ function writeZed(variant, paletteMap, tokenMap) {
 function writeOpencode(variant, paletteMap, tokenMap) {
   const templatePath = path.join(root, "platforms/opencode/templates", `karasu-${variant}.json`);
   const template = fs.readFileSync(templatePath, "utf8");
-  const rendered = renderTemplate(template, paletteMap);
+  const rendered = renderTemplate(template, { ...paletteMap, ...tokenMap });
   const theme = JSON.parse(rendered);
 
   theme.defs = {
@@ -197,7 +197,7 @@ function writeVSCode(variant, paletteMap, tokenMap, palette) {
   );
 }
 
-function writeNeovimPalette(variant, paletteMap, palette) {
+function writeNeovimPalette(variant, paletteMap, palette, tokenMap) {
   const isNight = variant === "night";
   const lines = [];
   lines.push(`-- Karasu ${isNight ? "Night" : "Snow"} Palette`);
@@ -211,7 +211,9 @@ function writeNeovimPalette(variant, paletteMap, palette) {
   lines.push(`  bg3 = "${paletteMap.karasuBg3}",`);
   lines.push(`  bg4 = "${paletteMap.karasuBg4}",`);
   lines.push(`  bg_visual = "${paletteMap.karasuBgVisual}",`);
+  lines.push(`  bgVisual = "${paletteMap.karasuBgVisual}",`);
   lines.push(`  bg_search = "${paletteMap.karasuBgSearch}",`);
+  lines.push(`  bgSearch = "${paletteMap.karasuBgSearch}",`);
   lines.push("");
   lines.push("  -- Foreground tones");
   lines.push(`  fg0 = "${paletteMap.karasuFg0}",`);
@@ -219,6 +221,38 @@ function writeNeovimPalette(variant, paletteMap, palette) {
   lines.push(`  fg2 = "${paletteMap.karasuFg2}",`);
   lines.push(`  fg3 = "${paletteMap.karasuFg3}",`);
   lines.push(`  fg_dim = "${paletteMap.karasuFgDim}",`);
+  lines.push(`  fgDim = "${paletteMap.karasuFgDim}",`);
+  lines.push("");
+  lines.push("  -- Core tokens");
+  lines.push(`  cursor = "${tokenMap.cursor}",`);
+  lines.push(`  cursor_text = "${tokenMap.cursorText}",`);
+  lines.push(`  cursorText = "${tokenMap.cursorText}",`);
+  lines.push(`  selection_bg = "${tokenMap.selectionBg}",`);
+  lines.push(`  selectionBg = "${tokenMap.selectionBg}",`);
+  lines.push(`  search_bg = "${tokenMap.searchBg}",`);
+  lines.push(`  searchBg = "${tokenMap.searchBg}",`);
+  lines.push(`  search_fg = "${tokenMap.searchFg}",`);
+  lines.push(`  searchFg = "${tokenMap.searchFg}",`);
+  lines.push(`  diff_added_bg = "${tokenMap.diffAddedBg}",`);
+  lines.push(`  diff_removed_bg = "${tokenMap.diffRemovedBg}",`);
+  lines.push(`  diff_context_bg = "${tokenMap.diffContextBg}",`);
+  lines.push("");
+  lines.push("  -- Strict syntax/diagnostic roles");
+  lines.push(`  role_comment = "${tokenMap.syntaxComment}",`);
+  lines.push(`  role_keyword = "${tokenMap.syntaxKeyword}",`);
+  lines.push(`  role_type = "${tokenMap.syntaxType}",`);
+  lines.push(`  role_function = "${tokenMap.syntaxFunction}",`);
+  lines.push(`  role_string = "${tokenMap.syntaxString}",`);
+  lines.push(`  role_number = "${tokenMap.syntaxNumber}",`);
+  lines.push(`  role_operator = "${tokenMap.syntaxOperator}",`);
+  lines.push(`  role_property = "${tokenMap.syntaxProperty}",`);
+  lines.push(`  role_variable = "${tokenMap.syntaxVariable}",`);
+  lines.push(`  role_punctuation = "${tokenMap.syntaxPunctuation}",`);
+  lines.push(`  role_link = "${tokenMap.syntaxLink}",`);
+  lines.push(`  role_error = "${tokenMap.diagError}",`);
+  lines.push(`  role_warning = "${tokenMap.diagWarning}",`);
+  lines.push(`  role_info = "${tokenMap.diagInfo}",`);
+  lines.push(`  role_hint = "${tokenMap.diagHint}",`);
   lines.push("");
   lines.push("  -- Syntax colors");
   lines.push(`  red = "${paletteMap.karasuRed}",`);
@@ -231,12 +265,19 @@ function writeNeovimPalette(variant, paletteMap, palette) {
   lines.push("");
   lines.push("  -- Bright colors for terminal");
   lines.push(`  bright_red = "${paletteMap.karasuBrightRed}",`);
+  lines.push(`  brightRed = "${paletteMap.karasuBrightRed}",`);
   lines.push(`  bright_green = "${paletteMap.karasuBrightGreen}",`);
+  lines.push(`  brightGreen = "${paletteMap.karasuBrightGreen}",`);
   lines.push(`  bright_yellow = "${paletteMap.karasuBrightYellow}",`);
+  lines.push(`  brightYellow = "${paletteMap.karasuBrightYellow}",`);
   lines.push(`  bright_blue = "${paletteMap.karasuBrightBlue}",`);
+  lines.push(`  brightBlue = "${paletteMap.karasuBrightBlue}",`);
   lines.push(`  bright_magenta = "${paletteMap.karasuBrightMagenta}",`);
+  lines.push(`  brightMagenta = "${paletteMap.karasuBrightMagenta}",`);
   lines.push(`  bright_cyan = "${paletteMap.karasuBrightCyan}",`);
+  lines.push(`  brightCyan = "${paletteMap.karasuBrightCyan}",`);
   lines.push(`  bright_white = "${paletteMap.karasuBrightWhite}",`);
+  lines.push(`  brightWhite = "${paletteMap.karasuBrightWhite}",`);
   lines.push("");
   lines.push("  -- ANSI color mapping");
   lines.push("  ansi = {");
@@ -278,7 +319,7 @@ function buildVariant(variant) {
   writeZed(variant, paletteMap, tokenMap);
   writeOpencode(variant, paletteMap, tokenMap);
   writeVSCode(variant, paletteMap, tokenMap, palette);
-  writeNeovimPalette(variant, paletteMap, palette);
+  writeNeovimPalette(variant, paletteMap, palette, tokenMap);
 }
 
 buildVariant("night");

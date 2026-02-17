@@ -34,26 +34,27 @@ function M.load_with_colors(colors, config)
   end
   
   -- Set background based on palette
-  local is_dark = (colors.bg0 == "#121212")
+  local bg0 = string.lower(colors.bg0 or "")
+  local is_dark = not (bg0 == "#fafafa" or bg0 == "#f8f7f6")
   vim.o.background = is_dark and "dark" or "light"
   
   -- Set terminal colors
-  vim.g.terminal_color_0 = colors.bg0
-  vim.g.terminal_color_1 = colors.red
-  vim.g.terminal_color_2 = colors.green
-  vim.g.terminal_color_3 = colors.yellow
-  vim.g.terminal_color_4 = colors.blue
-  vim.g.terminal_color_5 = colors.purple
-  vim.g.terminal_color_6 = colors.aqua
-  vim.g.terminal_color_7 = colors.fg0
-  vim.g.terminal_color_8 = colors.fgDim
-  vim.g.terminal_color_9 = colors.bright_red
-  vim.g.terminal_color_10 = colors.bright_green
-  vim.g.terminal_color_11 = colors.bright_yellow
-  vim.g.terminal_color_12 = colors.bright_blue
-  vim.g.terminal_color_13 = colors.bright_magenta
-  vim.g.terminal_color_14 = colors.bright_cyan
-  vim.g.terminal_color_15 = colors.bright_white
+  vim.g.terminal_color_0 = colors.ansi.black
+  vim.g.terminal_color_1 = colors.ansi.red
+  vim.g.terminal_color_2 = colors.ansi.green
+  vim.g.terminal_color_3 = colors.ansi.yellow
+  vim.g.terminal_color_4 = colors.ansi.blue
+  vim.g.terminal_color_5 = colors.ansi.magenta
+  vim.g.terminal_color_6 = colors.ansi.cyan
+  vim.g.terminal_color_7 = colors.ansi.white
+  vim.g.terminal_color_8 = colors.ansi.bright_black
+  vim.g.terminal_color_9 = colors.ansi.bright_red
+  vim.g.terminal_color_10 = colors.ansi.bright_green
+  vim.g.terminal_color_11 = colors.ansi.bright_yellow
+  vim.g.terminal_color_12 = colors.ansi.bright_blue
+  vim.g.terminal_color_13 = colors.ansi.bright_magenta
+  vim.g.terminal_color_14 = colors.ansi.bright_cyan
+  vim.g.terminal_color_15 = colors.ansi.bright_white
   
   -- Load all highlight groups
   load_highlights(config, colors)
