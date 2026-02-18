@@ -1,6 +1,6 @@
-# カラス (Karasu)
+# カラス
 
-Karasu is a terminal-first colorscheme with two variants: **Night** (dark) and **Snow** (light).
+Karasu is an atmospheric, terminal-first colorscheme with two variants: **Night** (dark) and **Snow** (light).
 
 ## Repo Layout
 
@@ -71,7 +71,8 @@ Config example:
 }
 ```
 
-OpenCode themes reference **ANSI 0–255**. For best fidelity, set your terminal ANSI palette to Karasu (Ghostty/iTerm2).
+Karasu OpenCode themes use explicit hex values for stable, deterministic rendering.
+Matching your terminal ANSI palette to Karasu (Ghostty/iTerm2) is optional, but improves cross-tool consistency.
 
 `"theme"` as a plain string is the safest cross-version setting.
 If you're on OpenCode `>=1.2.0` and want auto light/dark switching, run:
@@ -121,7 +122,7 @@ Regenerate themes:
 bun run ./scripts/build-themes.mjs
 ```
 
-Check cursor/ANSI parity:
+Check cross-platform color consistency:
 ```bash
 bun run ./scripts/check-consistency.mjs
 ```
@@ -166,7 +167,7 @@ bun run ./scripts/check-opencode-config-compat.mjs
 
 ## References
 
-Karasu draws inspiration from:
+Karasu draws inspiration from all of these excellent themes:
 - [Gruvbox Material Dark](https://github.com/sainnhe/gruvbox-material)
 - [Kanagawa Dragon](https://github.com/rebelot/kanagawa.nvim)
 - [Kanso](https://github.com/webhooked/kanso.nvim)
