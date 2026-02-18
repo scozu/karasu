@@ -21,6 +21,7 @@ const requiredFamilies = [
   "peekView",
   "scrollbar",
   "settings",
+  "statusBar",
   "statusBarItem",
   "editorGroupHeader",
   "editorGutter",

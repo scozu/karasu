@@ -36,6 +36,7 @@ function pruneColors(colors) {
     "peekView",
     "scrollbar",
     "settings",
+    "statusBar",
     "statusBarItem",
     "editorGroupHeader",
     "editorGutter",
@@ -81,7 +82,7 @@ function pruneColors(colors) {
     "terminalCursor",
   ];
 
-  const maxKeys = 190;
+  const maxKeys = 199;
   const entries = Object.entries(colors);
   const include = new Set();
 
