@@ -9,11 +9,11 @@
     "karasuBgSearch": "#E5E5E5"
   },
   "foreground": {
-    "karasuFg0": "#1C1917",
-    "karasuFg1": "#292524",
-    "karasuFg2": "#44403C",
-    "karasuFg3": "#57534E",
-    "karasuFgDim": "#78716C"
+    "karasuFg0": "#292524",
+    "karasuFg1": "#44403C",
+    "karasuFg2": "#57534E",
+    "karasuFg3": "#78716C",
+    "karasuFgDim": "#A8A29E"
   },
   "syntax": {
     "karasuRed": "#B84755",
