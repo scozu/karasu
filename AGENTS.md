@@ -2,7 +2,7 @@
 
 ## Build/Test Commands
 - No automated build system - this is a colorscheme repository
-- Manual testing: Load theme in target editors (Neovim, Zed, Cursor, etc.)
+- Manual testing: Load theme in target editors (Neovim, Zed, VS Code-compatible editors, etc.)
 - Validation: Visual inspection of syntax highlighting and UI elements
 - Color consistency: Verify palette matches across all platform files
 
@@ -15,7 +15,7 @@
 - Configuration options with sensible defaults
 - No auto-execution on require - user must call setup()
 
-### JSON Themes (Cursor/Zed)
+### JSON Themes (VS Code/Cursor/Zed)
 - Follow platform-specific schema versions (Zed v0.2.0, VS Code compatible)
 - Use consistent hex color values from palette/colors.json
 - Maintain semantic color mappings across platforms

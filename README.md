@@ -83,7 +83,8 @@ If you're on OpenCode `>=1.2.0` and want auto light/dark switching, run:
 
 ### VS Code / Cursor
 
-Use the VS Code extension in `platforms/vscode/` (Cursor supports VS Code themes):
+Use the VS Code extension in `platforms/vscode/`.
+Cursor note: the same VS Code extension works in Cursor (no separate Cursor package needed).
 
 ```bash
 bun run ./scripts/build-themes.mjs
@@ -161,8 +162,7 @@ bun run ./scripts/check-opencode-config-compat.mjs
 - [Ghostty](platforms/ghostty/README.md)
 - [Zed](platforms/zed/README.md)
 - [OpenCode](platforms/opencode/themes/README.md)
-- [VS Code](platforms/vscode/README.md)
-- [Cursor](platforms/cursor/README.md)
+- [VS Code / Cursor](platforms/vscode/README.md)
 - [iTerm2](platforms/iterm2/README.md)
 
 ## References
