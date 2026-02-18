@@ -8,11 +8,11 @@
     "karasuBg4": "#D6D3D1",
     "karasuBgVisual": "#E5E5E5",
     "karasuBgSearch": "#E5E5E5",
-    "karasuFg0": "#0A0A0A",
-    "karasuFg1": "#171717",
-    "karasuFg2": "#404040",
-    "karasuFg3": "#737373",
-    "karasuFgDim": "#6A6A62",
+    "karasuFg0": "#1C1917",
+    "karasuFg1": "#292524",
+    "karasuFg2": "#44403C",
+    "karasuFg3": "#57534E",
+    "karasuFgDim": "#78716C",
     "karasuRed": "#B84755",
     "karasuGreen": "#3F7E4A",
     "karasuYellow": "#8A6A1F",
@@ -46,10 +46,10 @@
     "cursor": "#0A0A0A",
     "cursorText": "#292524",
     "selectionBg": "#E5E5E5",
-    "selectionFg": "#0A0A0A",
+    "selectionFg": "#1C1917",
     "searchBg": "#E5E5E5",
-    "searchFg": "#0A0A0A",
-    "syntaxComment": "#6A6A62",
+    "searchFg": "#1C1917",
+    "syntaxComment": "#78716C",
     "syntaxKeyword": "#B84755",
     "syntaxType": "#8A6A1F",
     "syntaxFunction": "#3F7E4A",
@@ -117,8 +117,8 @@
       "light": "diagInfo"
     },
     "text": {
-      "dark": "syntaxVariable",
-      "light": "syntaxVariable"
+      "dark": "karasuFg0",
+      "light": "karasuFg0"
     },
     "textMuted": {
       "dark": "syntaxComment",

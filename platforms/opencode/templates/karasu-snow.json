@@ -58,8 +58,8 @@
       "light": "diagInfo"
     },
     "text": {
-      "dark": "syntaxVariable",
-      "light": "syntaxVariable"
+      "dark": "karasuFg0",
+      "light": "karasuFg0"
     },
     "textMuted": {
       "dark": "syntaxComment",

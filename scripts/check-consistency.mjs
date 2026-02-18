@@ -26,7 +26,11 @@ function flattenPalette(palette) {
 
 function resolveToken(tokenValue, paletteMap) {
   if (tokenValue.startsWith("#")) return tokenValue;
-  return paletteMap[tokenValue];
+  const resolved = paletteMap[tokenValue];
+  if (!resolved) {
+    throw new Error(`Unknown palette token: ${tokenValue}`);
+  }
+  return resolved;
 }
 
 function getAnsiHexMap(palette) {
@@ -139,29 +143,39 @@ function parseIterm2Color(fileRel, keyName) {
   return `#${toHex(red)}${toHex(green)}${toHex(blue)}`;
 }
 
-function parseZedCursor(fileRel) {
+function parseZedTheme(fileRel) {
   const theme = readJson(fileRel);
-  const players = theme.themes?.[0]?.style?.players ?? [];
-  return players[0]?.cursor ?? null;
+  return {
+    style: theme.themes?.[0]?.style ?? {},
+    players: theme.themes?.[0]?.style?.players ?? [],
+  };
 }
 
-function parseVSCodeCursor(fileRel) {
+function parseVSCodeColor(fileRel, colorKey) {
   const theme = readJson(fileRel);
-  return theme.colors?.["editorCursor.foreground"] ?? null;
+  return theme.colors?.[colorKey] ?? null;
 }
 
-function parseVSCodeSelection(fileRel) {
-  const theme = readJson(fileRel);
-  return theme.colors?.["editor.selectionBackground"] ?? null;
+function parseOpenCodeTheme(fileRel) {
+  return readJson(fileRel);
 }
 
-function parseOpenCodeCursor(fileRel) {
-  const theme = readJson(fileRel);
-  const value = theme.theme?.cursor?.dark ?? theme.theme?.cursor?.light;
-  if (typeof value === "string") {
-    return theme.defs?.[value];
-  }
+function resolveOpenCodeRef(theme, value) {
+  if (typeof value !== "string") return value;
+  if (value.startsWith("#")) return value;
+  if (theme.defs?.[value] !== undefined) return theme.defs[value];
   return value;
+}
+
+function parseOpenCodeRole(theme, role, mode) {
+  const value = theme.theme?.[role]?.[mode];
+  return resolveOpenCodeRef(theme, value);
+}
+
+function parseNeovimPaletteColor(variant, key) {
+  const file = fs.readFileSync(path.join(root, `lua/karasu/palette/${variant}.lua`), "utf8");
+  const pattern = new RegExp(`^\\s*${key}\\s*=\\s*"(#[0-9A-Fa-f]{6})"`, "m");
+  return file.match(pattern)?.[1] ?? null;
 }
 
 function parseNeovimCursor() {
@@ -191,32 +205,161 @@ function checkVariant(variant) {
     Object.entries(tokens).map(([key, value]) => [key, resolveToken(value[variant], paletteMap)])
   );
   const ansiHexMap = getAnsiHexMap(palette);
-  const expectedCursorHex = tokenMap.cursor;
-  const expectedSelectionHex = tokenMap.selectionBg;
-  const expectedCursorAnsi = ansiIndexForHex(expectedCursorHex, ansiHexMap);
+  const expected = {
+    primaryText: paletteMap.karasuFg0,
+    secondaryText: paletteMap.karasuFg1,
+    tertiaryText: paletteMap.karasuFg2,
+    mutedText: paletteMap.karasuFg3,
+    dimText: paletteMap.karasuFgDim,
+    commentText: tokenMap.syntaxComment,
+    background: paletteMap.karasuBg0,
+    selectionBg: tokenMap.selectionBg,
+    selectionFg: tokenMap.selectionFg,
+    cursorHex: tokenMap.cursor,
+  };
+  const expectedCursorAnsi = ansiIndexForHex(expected.cursorHex, ansiHexMap);
+
+  assertEqual(
+    `neovim primary text (${variant})`,
+    parseNeovimPaletteColor(variant, "fg0"),
+    expected.primaryText
+  );
+  assertEqual(
+    `neovim secondary text (${variant})`,
+    parseNeovimPaletteColor(variant, "fg1"),
+    expected.secondaryText
+  );
+  assertEqual(
+    `neovim tertiary text (${variant})`,
+    parseNeovimPaletteColor(variant, "fg2"),
+    expected.tertiaryText
+  );
+  assertEqual(
+    `neovim muted text (${variant})`,
+    parseNeovimPaletteColor(variant, "fg3"),
+    expected.mutedText
+  );
+  assertEqual(
+    `neovim dim text (${variant})`,
+    parseNeovimPaletteColor(variant, "fg_dim"),
+    expected.dimText
+  );
 
   const ghostty = parseGhostty(`platforms/ghostty/karasu-${variant}`);
-  assertEqual(`ghostty cursor (${variant})`, ghostty["cursor-color"], expectedCursorHex);
-  assertEqual(`ghostty selection (${variant})`, ghostty["selection-background"], expectedSelectionHex);
+  assertEqual(`ghostty primary text (${variant})`, ghostty.foreground, expected.primaryText);
+  assertEqual(`ghostty background (${variant})`, ghostty.background, expected.background);
+  assertEqual(`ghostty cursor (${variant})`, ghostty["cursor-color"], expected.cursorHex);
+  assertEqual(`ghostty selection bg (${variant})`, ghostty["selection-background"], expected.selectionBg);
+  assertEqual(`ghostty selection fg (${variant})`, ghostty["selection-foreground"], expected.selectionFg);
 
-  const itermCursor = parseIterm2Color(`platforms/iterm2/karasu-${variant}.itermcolors`, "Cursor Color");
-  const itermSelection = parseIterm2Color(`platforms/iterm2/karasu-${variant}.itermcolors`, "Selection Color");
-  assertEqual(`iterm2 cursor (${variant})`, itermCursor, expectedCursorHex);
-  assertEqual(`iterm2 selection (${variant})`, itermSelection, expectedSelectionHex);
+  const itermTheme = `platforms/iterm2/karasu-${variant}.itermcolors`;
+  assertEqual(
+    `iterm2 primary text (${variant})`,
+    parseIterm2Color(itermTheme, "Foreground Color"),
+    expected.primaryText
+  );
+  assertEqual(
+    `iterm2 background (${variant})`,
+    parseIterm2Color(itermTheme, "Background Color"),
+    expected.background
+  );
+  assertEqual(`iterm2 cursor (${variant})`, parseIterm2Color(itermTheme, "Cursor Color"), expected.cursorHex);
+  assertEqual(
+    `iterm2 selection bg (${variant})`,
+    parseIterm2Color(itermTheme, "Selection Color"),
+    expected.selectionBg
+  );
+  assertEqual(
+    `iterm2 selection fg (${variant})`,
+    parseIterm2Color(itermTheme, "Selected Text Color"),
+    expected.selectionFg
+  );
 
-  const zedCursor = parseZedCursor(`platforms/zed/themes/karasu-${variant}.json`);
-  assertEqual(`zed cursor (${variant})`, zedCursor, expectedCursorHex);
+  const vscodeTheme = `platforms/vscode/themes/karasu-${variant}-color-theme.json`;
+  assertEqual(
+    `vscode theme foreground (${variant})`,
+    parseVSCodeColor(vscodeTheme, "foreground"),
+    expected.primaryText
+  );
+  assertEqual(
+    `vscode editor foreground (${variant})`,
+    parseVSCodeColor(vscodeTheme, "editor.foreground"),
+    expected.primaryText
+  );
+  assertEqual(
+    `cursor editor foreground (${variant})`,
+    parseVSCodeColor(vscodeTheme, "editor.foreground"),
+    expected.primaryText
+  );
+  assertEqual(
+    `vscode sidebar foreground (${variant})`,
+    parseVSCodeColor(vscodeTheme, "sideBar.foreground"),
+    expected.secondaryText
+  );
+  assertEqual(
+    `vscode editor line number (${variant})`,
+    parseVSCodeColor(vscodeTheme, "editorLineNumber.foreground"),
+    expected.mutedText
+  );
+  assertEqual(
+    `vscode background (${variant})`,
+    parseVSCodeColor(vscodeTheme, "editor.background"),
+    expected.background
+  );
+  assertEqual(
+    `vscode cursor (${variant})`,
+    parseVSCodeColor(vscodeTheme, "editorCursor.foreground"),
+    expected.cursorHex
+  );
+  assertEqual(
+    `vscode selection bg (${variant})`,
+    parseVSCodeColor(vscodeTheme, "editor.selectionBackground"),
+    expected.selectionBg
+  );
+  assertEqual(
+    `vscode selection fg (${variant})`,
+    parseVSCodeColor(vscodeTheme, "editor.selectionForeground"),
+    expected.selectionFg
+  );
 
-  const vscodeCursor = parseVSCodeCursor(`platforms/vscode/themes/karasu-${variant}-color-theme.json`);
-  const vscodeSelection = parseVSCodeSelection(`platforms/vscode/themes/karasu-${variant}-color-theme.json`);
-  assertEqual(`vscode cursor (${variant})`, vscodeCursor, expectedCursorHex);
-  assertEqual(`vscode selection (${variant})`, vscodeSelection, expectedSelectionHex);
+  const zedTheme = parseZedTheme(`platforms/zed/themes/karasu-${variant}.json`);
+  assertEqual(`zed primary text (${variant})`, zedTheme.style.text, expected.primaryText);
+  assertEqual(`zed foreground (${variant})`, zedTheme.style.foreground, expected.primaryText);
+  assertEqual(
+    `zed editor foreground (${variant})`,
+    zedTheme.style["editor.foreground"],
+    expected.primaryText
+  );
+  assertEqual(`zed muted text (${variant})`, zedTheme.style["text.muted"], expected.mutedText);
+  assertEqual(`zed cursor (${variant})`, zedTheme.players[0]?.cursor ?? null, expected.cursorHex);
 
-  const opencodeCursor = parseOpenCodeCursor(`platforms/opencode/themes/karasu-${variant}.json`);
-  if (typeof opencodeCursor === "number") {
-    assertEqual(`opencode cursor (${variant})`, opencodeCursor, expectedCursorAnsi);
+  const openCodeTheme = parseOpenCodeTheme(`platforms/opencode/themes/karasu-${variant}.json`);
+  assertEqual(
+    `opencode primary text dark (${variant})`,
+    parseOpenCodeRole(openCodeTheme, "text", "dark"),
+    expected.primaryText
+  );
+  assertEqual(
+    `opencode primary text light (${variant})`,
+    parseOpenCodeRole(openCodeTheme, "text", "light"),
+    expected.primaryText
+  );
+  assertEqual(
+    `opencode muted text dark (${variant})`,
+    parseOpenCodeRole(openCodeTheme, "textMuted", "dark"),
+    expected.commentText
+  );
+  assertEqual(
+    `opencode muted text light (${variant})`,
+    parseOpenCodeRole(openCodeTheme, "textMuted", "light"),
+    expected.commentText
+  );
+
+  const openCodeCursor = parseOpenCodeRole(openCodeTheme, "cursor", "dark");
+  if (typeof openCodeCursor === "number") {
+    assertEqual(`opencode cursor (${variant})`, openCodeCursor, expectedCursorAnsi);
   } else {
-    assertEqual(`opencode cursor (${variant})`, opencodeCursor, expectedCursorHex);
+    assertEqual(`opencode cursor (${variant})`, openCodeCursor, expected.cursorHex);
   }
 
   const neovimCursor = parseNeovimCursor();

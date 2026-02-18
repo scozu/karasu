@@ -14,12 +14,12 @@ local M = {
   bgSearch = "#E5E5E5",
 
   -- Foreground tones
-  fg0 = "#0A0A0A",
-  fg1 = "#171717",
-  fg2 = "#404040",
-  fg3 = "#737373",
-  fg_dim = "#6A6A62",
-  fgDim = "#6A6A62",
+  fg0 = "#1C1917",
+  fg1 = "#292524",
+  fg2 = "#44403C",
+  fg3 = "#57534E",
+  fg_dim = "#78716C",
+  fgDim = "#78716C",
 
   -- Core tokens
   cursor = "#0A0A0A",
@@ -29,14 +29,14 @@ local M = {
   selectionBg = "#E5E5E5",
   search_bg = "#E5E5E5",
   searchBg = "#E5E5E5",
-  search_fg = "#0A0A0A",
-  searchFg = "#0A0A0A",
+  search_fg = "#1C1917",
+  searchFg = "#1C1917",
   diff_added_bg = "#E8F1EA",
   diff_removed_bg = "#F5E9E9",
   diff_context_bg = "#F5F5F4",
 
   -- Strict syntax/diagnostic roles
-  role_comment = "#6A6A62",
+  role_comment = "#78716C",
   role_keyword = "#B84755",
   role_type = "#8A6A1F",
   role_function = "#3F7E4A",
