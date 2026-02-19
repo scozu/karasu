@@ -228,12 +228,12 @@
             "font_weight": null
           },
           "string.regex": {
-            "color": "{{syntaxOperator}}",
+            "color": "{{syntaxString}}",
             "font_style": null,
             "font_weight": null
           },
           "string.special": {
-            "color": "{{syntaxOperator}}",
+            "color": "{{syntaxString}}",
             "font_style": null,
             "font_weight": null
           },
