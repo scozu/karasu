@@ -116,6 +116,15 @@ Examples:
 ./scripts/install-all.sh --sync-neovim --neovim-auto-stash
 ```
 
+## Screenshots
+
+| App | Night | Snow |
+| --- | --- | --- |
+| Neovim | ![Neovim Night](screenshots/neovim-night.png) | ![Neovim Snow](screenshots/neovim-snow.png) |
+| Zed | ![Zed Night](screenshots/zed-night.png) | ![Zed Snow](screenshots/zed-snow.png) |
+
+Replace screenshots by overwriting files in `screenshots/` with the same names.
+
 ## Development
 
 Regenerate themes:

@@ -32,11 +32,6 @@ __pycache__/
 *.temp
 *.log
 
-# Screenshot generation
-screenshots/*.png
-!screenshots/*.md
-!screenshots/sample-code/
-
 # Backup files
 *.bak
 *.backup

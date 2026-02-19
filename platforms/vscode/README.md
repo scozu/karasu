@@ -15,16 +15,6 @@ This extension is built from Karasu's shared palette source-of-truth so VS Code 
 - Rich TextMate token coverage for common languages.
 - ANSI terminal colors mapped to the Karasu palette.
 
-## Theme Preview
-
-### Karasu Night
-
-![Karasu Night Preview](./assets/karasu-night-vscode.png)
-
-### Karasu Snow
-
-![Karasu Snow Preview](./assets/karasu-snow-vscode.png)
-
 ## Installation
 
 ### VS Code Marketplace

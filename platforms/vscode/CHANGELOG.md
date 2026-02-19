@@ -10,7 +10,6 @@ All notable changes to the `karasu-theme` extension are documented here.
 - Expanded TextMate token rules to 82 entries.
 - Added extension packaging metadata for marketplace readiness.
 - Added dedicated VS Code validation script: `scripts/check-vscode-theme.mjs`.
-- Added preview assets, icon, and a marketplace-focused extension README.
 - Added CI and release workflows for packaging + publishing.
 
 ## 0.1.0
