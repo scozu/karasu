@@ -2,21 +2,13 @@
 
 Karasu is an atmospheric, terminal-first colorscheme with two variants: **Night** (dark) and **Snow** (light).
 
-## Screenshots
-
-### Neovim Night
 ![Neovim Night](screenshots/neovim-night.png)
 
-### Neovim Snow
 ![Neovim Snow](screenshots/neovim-snow.png)
 
-### Zed Night
 ![Zed Night](screenshots/zed-night.png)
 
-### Zed Snow
 ![Zed Snow](screenshots/zed-snow.png)
-
-Replace screenshots by overwriting files in `screenshots/` with the same names.
 
 ## Repo Layout
 
