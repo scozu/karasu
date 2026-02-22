@@ -34,6 +34,11 @@ jobs:
       - name: Generate themes
         run: bun run ./scripts/build-themes.mjs
 
+      - name: Ensure generated files are committed
+        run: |
+          git status --porcelain
+          git diff --exit-code
+
       - name: Run consistency checks
         run: bun run ./scripts/check-consistency.mjs
 
