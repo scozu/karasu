@@ -54,15 +54,26 @@ jobs:
         working-directory: platforms/vscode
         run: bun run package
 
+      - name: Resolve VSIX path
+        run: |
+          shopt -s nullglob
+          files=(platforms/vscode/*.vsix)
+          if [ ${#files[@]} -ne 1 ]; then
+            echo "Expected exactly one VSIX file, found ${#files[@]}"
+            ls -la platforms/vscode
+            exit 1
+          fi
+          echo "VSIX_PATH=${files[0]}" >> "$GITHUB_ENV"
+
       - name: Publish to Open VSX
         uses: HaaLeo/publish-vscode-extension@v2
         with:
           pat: ${{ secrets.OPEN_VSX_TOKEN }}
-          packagePath: platforms/vscode/*.vsix
+          packagePath: ${{ env.VSIX_PATH }}
 
       - name: Publish to VS Marketplace
         uses: HaaLeo/publish-vscode-extension@v2
         with:
           pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
           registryUrl: https://marketplace.visualstudio.com
-          packagePath: platforms/vscode/*.vsix
+          packagePath: ${{ env.VSIX_PATH }}
