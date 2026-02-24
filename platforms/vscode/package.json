@@ -3,7 +3,7 @@
   "displayName": "Karasu Theme",
   "description": "Karasu is an atmospheric terminal-first theme for VS Code with Night and Snow variants.",
   "version": "0.2.0",
-  "publisher": "scozu",
+  "publisher": "graveoffice",
   "license": "MIT",
   "icon": "icon.png",
   "homepage": "https://github.com/scozu/karasu/tree/main/platforms/vscode",
