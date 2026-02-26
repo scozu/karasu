@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { buildObsidianMinimalVariantVars } from "../platforms/obsidian/spec.mjs";
 
 const root = process.cwd();
 
@@ -237,6 +238,23 @@ const OPENCODE_SYNTAX_ROLE_EXPECTATIONS = {
   syntaxPunctuation: "syntaxPunctuation",
 };
 
+const OBSIDIAN_MARKER_BY_VARIANT = {
+  night: "karasu-dark",
+  snow: "karasu-light",
+};
+
+const OBSIDIAN_REQUIRED_SELECTORS = [
+  ".theme-light.minimal-default-light",
+  ".theme-dark.minimal-default-dark",
+  ".theme-light.minimal-karasu-light",
+  ".theme-dark.minimal-karasu-dark",
+  "minimal-light-contrast",
+  "minimal-light-tonal",
+  "minimal-light-white",
+  "minimal-dark-tonal",
+  "minimal-dark-black",
+];
+
 function readJson(relPath) {
   return JSON.parse(fs.readFileSync(path.join(root, relPath), "utf8"));
 }
@@ -259,8 +277,12 @@ function resolveToken(tokenValue, paletteMap) {
 
 function normalizeHex(value) {
   if (typeof value !== "string") return value;
-  if (value.startsWith("#")) return value.toLowerCase();
-  return value;
+  const trimmed = value.trim();
+  if (trimmed.startsWith("#")) return trimmed.toLowerCase();
+  if (/^\d+\s*,\s*\d+\s*,\s*\d+$/.test(trimmed)) {
+    return trimmed.replace(/\s+/g, "");
+  }
+  return trimmed;
 }
 
 function assert(condition, message) {
@@ -359,6 +381,34 @@ function resolveOpenCodeRef(theme, value) {
 function parseOpenCodeRole(theme, role, mode) {
   const value = theme.theme?.[role]?.[mode];
   return resolveOpenCodeRef(theme, value);
+}
+
+function parseObsidianCssVarsByMarker(css, marker) {
+  const markerText = `/* ${marker} */`;
+  const markerIndex = css.indexOf(markerText);
+  assert(markerIndex !== -1, `obsidian snippet missing marker: ${markerText}`);
+  const openBraceIndex = css.indexOf("{", markerIndex);
+  const closeBraceIndex = css.indexOf("}", openBraceIndex + 1);
+  assert(openBraceIndex !== -1 && closeBraceIndex !== -1, `obsidian snippet invalid block for marker: ${marker}`);
+
+  const body = css.slice(openBraceIndex + 1, closeBraceIndex);
+  const vars = {};
+  const pattern = /--([a-z0-9-]+)\s*:\s*([^;]+);/gi;
+  let match = pattern.exec(body);
+  while (match) {
+    vars[match[1]] = match[2].trim();
+    match = pattern.exec(body);
+  }
+  return vars;
+}
+
+function parseObsidianSnippet(fileRel) {
+  const css = fs.readFileSync(path.join(root, fileRel), "utf8");
+  return {
+    css,
+    darkVars: parseObsidianCssVarsByMarker(css, OBSIDIAN_MARKER_BY_VARIANT.night),
+    lightVars: parseObsidianCssVarsByMarker(css, OBSIDIAN_MARKER_BY_VARIANT.snow),
+  };
 }
 
 function parseNeovimPaletteColor(variant, key) {
@@ -643,6 +693,29 @@ function checkOpenCode(variant, expected, tokenMap, expectedCursorAnsi) {
   }
 }
 
+let obsidianSelectorsChecked = false;
+
+function checkObsidian(variant, paletteMap, tokenMap) {
+  const parsed = parseObsidianSnippet("platforms/obsidian/snippets/karasu-minimal.css");
+  assert(!parsed.css.includes("{{"), "obsidian snippet contains unresolved template placeholders");
+
+  if (!obsidianSelectorsChecked) {
+    OBSIDIAN_REQUIRED_SELECTORS.forEach((selector) => {
+      assert(parsed.css.includes(selector), `obsidian snippet missing selector fragment: ${selector}`);
+    });
+    obsidianSelectorsChecked = true;
+  }
+
+  const expectedVars = buildObsidianMinimalVariantVars({ variant, paletteMap, tokenMap });
+  const vars = variant === "night" ? parsed.darkVars : parsed.lightVars;
+
+  Object.entries(expectedVars).forEach(([key, expected]) => {
+    const cssVarName = key.replaceAll("_", "-");
+    assert(vars[cssVarName] !== undefined, `obsidian ${variant} missing CSS variable --${cssVarName}`);
+    assertEqual(`obsidian --${cssVarName} (${variant})`, vars[cssVarName], expected);
+  });
+}
+
 function checkVariant(variant) {
   const palette = palettes[variant];
   const paletteMap = flattenPalette(palette);
@@ -669,13 +742,14 @@ function checkVariant(variant) {
   checkVSCode(variant, expected, tokenMap, palette);
   checkZed(variant, expected, tokenMap);
   checkOpenCode(variant, expected, tokenMap, expectedCursorAnsi);
+  checkObsidian(variant, paletteMap, tokenMap);
 }
 
 try {
   checkNeovimStaticMappings();
   checkVariant("night");
   checkVariant("snow");
-  console.log("Consistency checks passed (syntax roles + terminal ANSI + UI tokens).");
+  console.log("Consistency checks passed (syntax roles + terminal ANSI + UI tokens + Obsidian snippet).");
 } catch (error) {
   console.error(error.message);
   process.exit(1);

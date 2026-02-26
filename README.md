@@ -60,6 +60,20 @@ cp -r /path/to/karasu/platforms/zed/* ~/.config/zed/extensions/karasu/
 ```
 Select **Karasu Night** or **Karasu Snow** in Zed.
 
+### Obsidian (Minimal overlay)
+
+Karasu for Obsidian is delivered as a CSS snippet on top of Minimal.
+
+```bash
+mkdir -p "<vault>/.obsidian/snippets"
+cp /path/to/karasu/platforms/obsidian/snippets/karasu-minimal.css "<vault>/.obsidian/snippets/"
+```
+
+In Obsidian:
+1. Enable Minimal theme.
+2. Enable `karasu-minimal.css` in `Settings -> Appearance -> CSS snippets`.
+3. In Minimal Theme Settings, set light/dark color schemes to `Default`.
+
 ### OpenCode
 
 ```bash
@@ -165,6 +179,7 @@ bun run ./scripts/check-opencode-config-compat.mjs
 - [Neovim](platforms/neovim/README.md)
 - [Ghostty](platforms/ghostty/README.md)
 - [Zed](platforms/zed/README.md)
+- [Obsidian (Minimal overlay)](platforms/obsidian/README.md)
 - [OpenCode](platforms/opencode/themes/README.md)
 - [VS Code / Cursor](platforms/vscode/README.md)
 - [iTerm2](platforms/iterm2/README.md)

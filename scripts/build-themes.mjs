@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { buildVSCodeTheme } from "../platforms/vscode/spec.mjs";
+import { buildObsidianMinimalSnippet } from "../platforms/obsidian/spec.mjs";
 
 const root = process.cwd();
 
@@ -306,6 +307,17 @@ function writeNeovimPalette(variant, paletteMap, palette, tokenMap) {
   writeFile(`lua/karasu/palette/${variant}.lua`, lines.join("\n"));
 }
 
+function writeObsidian(nightPaletteMap, nightTokenMap, snowPaletteMap, snowTokenMap) {
+  const snippet = buildObsidianMinimalSnippet({
+    nightPaletteMap,
+    nightTokenMap,
+    snowPaletteMap,
+    snowTokenMap,
+  });
+
+  writeFile("platforms/obsidian/snippets/karasu-minimal.css", snippet);
+}
+
 function buildVariant(variant) {
   const palette = palettes[variant];
   const paletteMap = flattenPalette(palette);
@@ -320,9 +332,12 @@ function buildVariant(variant) {
   writeOpencode(variant, paletteMap, tokenMap);
   writeVSCode(variant, paletteMap, tokenMap, palette);
   writeNeovimPalette(variant, paletteMap, palette, tokenMap);
+
+  return { paletteMap, tokenMap };
 }
 
-buildVariant("night");
-buildVariant("snow");
+const night = buildVariant("night");
+const snow = buildVariant("snow");
+writeObsidian(night.paletteMap, night.tokenMap, snow.paletteMap, snow.tokenMap);
 
 console.log("Themes generated for Night and Snow.");

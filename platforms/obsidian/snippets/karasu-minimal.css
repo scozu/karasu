@@ -1,0 +1,145 @@
+/*
+Karasu for Obsidian Minimal (generated snippet)
+Source of truth: palette/*.json + palette/tokens.json
+*/
+
+/* karasu-light */
+.theme-light.minimal-default-light,
+.theme-light.minimal-karasu-light {
+  --bg1: #FAFAFA;
+  --bg2: #F5F5F5;
+  --bg3: #E5E5E566;
+  --ui1: #E7E5E4;
+  --ui2: #D6D3D1;
+  --ui3: #2E5E9B;
+  --tx1: #292524;
+  --tx2: #44403C;
+  --tx3: #78716C;
+  --hl1: #E5E5E599;
+  --hl2: #8A6A1F59;
+  --sp1: #FFFFFF;
+  --ax1: #2E5E9B;
+  --ax2: #2B72C7;
+  --ax3: #2D7E7A;
+  --color-red-rgb: 184,71,85;
+  --color-orange-rgb: 138,90,47;
+  --color-yellow-rgb: 138,106,31;
+  --color-green-rgb: 63,126,74;
+  --color-cyan-rgb: 45,126,122;
+  --color-blue-rgb: 46,94,155;
+  --color-purple-rgb: 108,75,184;
+  --color-pink-rgb: 123,89,214;
+  --color-red: #B84755;
+  --color-orange: #8A5A2F;
+  --color-yellow: #8A6A1F;
+  --color-green: #3F7E4A;
+  --color-cyan: #2D7E7A;
+  --color-blue: #2E5E9B;
+  --color-purple: #6C4BB8;
+  --color-pink: #7B59D6;
+  --code-background: #F5F5F5;
+  --code-normal: #292524;
+  --code-comment: #A8A29E;
+  --code-function: #3F7E4A;
+  --code-keyword: #B84755;
+  --code-important: #D93C3C;
+  --code-operator: #8A5A2F;
+  --code-property: #2E5E9B;
+  --code-punctuation: #3A3A3A;
+  --code-string: #2D7E7A;
+  --code-tag: #B84755;
+  --code-value: #6C4BB8;
+  --link-color: #2E5E9B;
+  --link-color-hover: #2B72C7;
+  --link-external-color: #2D7E7A;
+  --link-external-color-hover: #1F968F;
+}
+
+/* karasu-light-tonal */
+.theme-light.minimal-default-light.minimal-light-tonal,
+.theme-light.minimal-karasu-light.minimal-light-tonal {
+  --bg2: #FAFAFA;
+}
+
+/* karasu-light-white */
+.theme-light.minimal-default-light.minimal-light-white,
+.theme-light.minimal-karasu-light.minimal-light-white {
+  --bg3: #F5F5F5;
+}
+
+/* karasu-dark */
+.theme-light.minimal-default-light.minimal-light-contrast .titlebar,
+.theme-light.minimal-default-light.minimal-light-contrast.minimal-status-off .status-bar,
+.theme-light.minimal-default-light.minimal-light-contrast .workspace-drawer.mod-left,
+.theme-light.minimal-default-light.minimal-light-contrast .mod-left-split,
+.theme-light.minimal-default-light.minimal-light-contrast .workspace-ribbon.mod-left:not(.is-collapsed),
+.theme-light.minimal-default-light.minimal-light-contrast .theme-dark,
+.theme-dark.minimal-default-dark,
+.theme-light.minimal-karasu-light.minimal-light-contrast .titlebar,
+.theme-light.minimal-karasu-light.minimal-light-contrast.minimal-status-off .status-bar,
+.theme-light.minimal-karasu-light.minimal-light-contrast .workspace-drawer.mod-left,
+.theme-light.minimal-karasu-light.minimal-light-contrast .mod-left-split,
+.theme-light.minimal-karasu-light.minimal-light-contrast .workspace-ribbon.mod-left:not(.is-collapsed),
+.theme-light.minimal-karasu-light.minimal-light-contrast .theme-dark,
+.theme-dark.minimal-karasu-dark {
+  --bg1: #0A0A0A;
+  --bg2: #171717;
+  --bg3: #26262666;
+  --ui1: #292524;
+  --ui2: #44403C;
+  --ui3: #7AA2C8;
+  --tx1: #E7E5E4;
+  --tx2: #D6D3D1;
+  --tx3: #78716C;
+  --hl1: #26262699;
+  --hl2: #D4B86A66;
+  --sp1: #FFFFFF;
+  --ax1: #7AA2C8;
+  --ax2: #8CB4E2;
+  --ax3: #76B7B2;
+  --color-red-rgb: 224,108,117;
+  --color-orange-rgb: 209,154,102;
+  --color-yellow-rgb: 212,184,106;
+  --color-green-rgb: 143,191,122;
+  --color-cyan-rgb: 118,183,178;
+  --color-blue-rgb: 122,162,200;
+  --color-purple-rgb: 180,161,216;
+  --color-pink-rgb: 199,179,238;
+  --color-red: #E06C75;
+  --color-orange: #D19A66;
+  --color-yellow: #D4B86A;
+  --color-green: #8FBF7A;
+  --color-cyan: #76B7B2;
+  --color-blue: #7AA2C8;
+  --color-purple: #B4A1D8;
+  --color-pink: #C7B3EE;
+  --code-background: #171717;
+  --code-normal: #E7E5E4;
+  --code-comment: #6A6A62;
+  --code-function: #8FBF7A;
+  --code-keyword: #E06C75;
+  --code-important: #FF5C5C;
+  --code-operator: #D19A66;
+  --code-property: #7AA2C8;
+  --code-punctuation: #B7B7B7;
+  --code-string: #76B7B2;
+  --code-tag: #E06C75;
+  --code-value: #B4A1D8;
+  --link-color: #7AA2C8;
+  --link-color-hover: #8CB4E2;
+  --link-external-color: #76B7B2;
+  --link-external-color-hover: #8AD4CE;
+}
+
+/* karasu-dark-tonal */
+.theme-dark.minimal-default-dark.minimal-dark-tonal,
+.theme-dark.minimal-karasu-dark.minimal-dark-tonal {
+  --bg2: #0A0A0A;
+}
+
+/* karasu-dark-black */
+.theme-dark.minimal-default-dark.minimal-dark-black,
+.theme-dark.minimal-karasu-dark.minimal-dark-black {
+  --bg3: #171717;
+  --ui1: #292524;
+}

@@ -1,0 +1,145 @@
+/*
+Karasu for Obsidian Minimal (generated snippet)
+Source of truth: palette/*.json + palette/tokens.json
+*/
+
+/* karasu-light */
+.theme-light.minimal-default-light,
+.theme-light.minimal-karasu-light {
+  --bg1: {{snow_bg1}};
+  --bg2: {{snow_bg2}};
+  --bg3: {{snow_bg3}};
+  --ui1: {{snow_ui1}};
+  --ui2: {{snow_ui2}};
+  --ui3: {{snow_ui3}};
+  --tx1: {{snow_tx1}};
+  --tx2: {{snow_tx2}};
+  --tx3: {{snow_tx3}};
+  --hl1: {{snow_hl1}};
+  --hl2: {{snow_hl2}};
+  --sp1: {{snow_sp1}};
+  --ax1: {{snow_ax1}};
+  --ax2: {{snow_ax2}};
+  --ax3: {{snow_ax3}};
+  --color-red-rgb: {{snow_color_red_rgb}};
+  --color-orange-rgb: {{snow_color_orange_rgb}};
+  --color-yellow-rgb: {{snow_color_yellow_rgb}};
+  --color-green-rgb: {{snow_color_green_rgb}};
+  --color-cyan-rgb: {{snow_color_cyan_rgb}};
+  --color-blue-rgb: {{snow_color_blue_rgb}};
+  --color-purple-rgb: {{snow_color_purple_rgb}};
+  --color-pink-rgb: {{snow_color_pink_rgb}};
+  --color-red: {{snow_color_red}};
+  --color-orange: {{snow_color_orange}};
+  --color-yellow: {{snow_color_yellow}};
+  --color-green: {{snow_color_green}};
+  --color-cyan: {{snow_color_cyan}};
+  --color-blue: {{snow_color_blue}};
+  --color-purple: {{snow_color_purple}};
+  --color-pink: {{snow_color_pink}};
+  --code-background: {{snow_code_background}};
+  --code-normal: {{snow_code_normal}};
+  --code-comment: {{snow_code_comment}};
+  --code-function: {{snow_code_function}};
+  --code-keyword: {{snow_code_keyword}};
+  --code-important: {{snow_code_important}};
+  --code-operator: {{snow_code_operator}};
+  --code-property: {{snow_code_property}};
+  --code-punctuation: {{snow_code_punctuation}};
+  --code-string: {{snow_code_string}};
+  --code-tag: {{snow_code_tag}};
+  --code-value: {{snow_code_value}};
+  --link-color: {{snow_link_color}};
+  --link-color-hover: {{snow_link_color_hover}};
+  --link-external-color: {{snow_link_external_color}};
+  --link-external-color-hover: {{snow_link_external_color_hover}};
+}
+
+/* karasu-light-tonal */
+.theme-light.minimal-default-light.minimal-light-tonal,
+.theme-light.minimal-karasu-light.minimal-light-tonal {
+  --bg2: {{snow_bg1}};
+}
+
+/* karasu-light-white */
+.theme-light.minimal-default-light.minimal-light-white,
+.theme-light.minimal-karasu-light.minimal-light-white {
+  --bg3: {{snow_bg2}};
+}
+
+/* karasu-dark */
+.theme-light.minimal-default-light.minimal-light-contrast .titlebar,
+.theme-light.minimal-default-light.minimal-light-contrast.minimal-status-off .status-bar,
+.theme-light.minimal-default-light.minimal-light-contrast .workspace-drawer.mod-left,
+.theme-light.minimal-default-light.minimal-light-contrast .mod-left-split,
+.theme-light.minimal-default-light.minimal-light-contrast .workspace-ribbon.mod-left:not(.is-collapsed),
+.theme-light.minimal-default-light.minimal-light-contrast .theme-dark,
+.theme-dark.minimal-default-dark,
+.theme-light.minimal-karasu-light.minimal-light-contrast .titlebar,
+.theme-light.minimal-karasu-light.minimal-light-contrast.minimal-status-off .status-bar,
+.theme-light.minimal-karasu-light.minimal-light-contrast .workspace-drawer.mod-left,
+.theme-light.minimal-karasu-light.minimal-light-contrast .mod-left-split,
+.theme-light.minimal-karasu-light.minimal-light-contrast .workspace-ribbon.mod-left:not(.is-collapsed),
+.theme-light.minimal-karasu-light.minimal-light-contrast .theme-dark,
+.theme-dark.minimal-karasu-dark {
+  --bg1: {{night_bg1}};
+  --bg2: {{night_bg2}};
+  --bg3: {{night_bg3}};
+  --ui1: {{night_ui1}};
+  --ui2: {{night_ui2}};
+  --ui3: {{night_ui3}};
+  --tx1: {{night_tx1}};
+  --tx2: {{night_tx2}};
+  --tx3: {{night_tx3}};
+  --hl1: {{night_hl1}};
+  --hl2: {{night_hl2}};
+  --sp1: {{night_sp1}};
+  --ax1: {{night_ax1}};
+  --ax2: {{night_ax2}};
+  --ax3: {{night_ax3}};
+  --color-red-rgb: {{night_color_red_rgb}};
+  --color-orange-rgb: {{night_color_orange_rgb}};
+  --color-yellow-rgb: {{night_color_yellow_rgb}};
+  --color-green-rgb: {{night_color_green_rgb}};
+  --color-cyan-rgb: {{night_color_cyan_rgb}};
+  --color-blue-rgb: {{night_color_blue_rgb}};
+  --color-purple-rgb: {{night_color_purple_rgb}};
+  --color-pink-rgb: {{night_color_pink_rgb}};
+  --color-red: {{night_color_red}};
+  --color-orange: {{night_color_orange}};
+  --color-yellow: {{night_color_yellow}};
+  --color-green: {{night_color_green}};
+  --color-cyan: {{night_color_cyan}};
+  --color-blue: {{night_color_blue}};
+  --color-purple: {{night_color_purple}};
+  --color-pink: {{night_color_pink}};
+  --code-background: {{night_code_background}};
+  --code-normal: {{night_code_normal}};
+  --code-comment: {{night_code_comment}};
+  --code-function: {{night_code_function}};
+  --code-keyword: {{night_code_keyword}};
+  --code-important: {{night_code_important}};
+  --code-operator: {{night_code_operator}};
+  --code-property: {{night_code_property}};
+  --code-punctuation: {{night_code_punctuation}};
+  --code-string: {{night_code_string}};
+  --code-tag: {{night_code_tag}};
+  --code-value: {{night_code_value}};
+  --link-color: {{night_link_color}};
+  --link-color-hover: {{night_link_color_hover}};
+  --link-external-color: {{night_link_external_color}};
+  --link-external-color-hover: {{night_link_external_color_hover}};
+}
+
+/* karasu-dark-tonal */
+.theme-dark.minimal-default-dark.minimal-dark-tonal,
+.theme-dark.minimal-karasu-dark.minimal-dark-tonal {
+  --bg2: {{night_bg1}};
+}
+
+/* karasu-dark-black */
+.theme-dark.minimal-default-dark.minimal-dark-black,
+.theme-dark.minimal-karasu-dark.minimal-dark-black {
+  --bg3: {{night_bg2}};
+  --ui1: {{night_ui1}};
+}
