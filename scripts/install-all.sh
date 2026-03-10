@@ -3,8 +3,8 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TARGET_HOME="${HOME}"
-OPENCODE_THEME="karasu-night"
-OPENCODE_MODE="string"
+OPENCODE_THEME="karasu"
+OPENCODE_MODE=""
 CONFIGURE_OPENCODE=0
 SYNC_NEOVIM=0
 NEOVIM_AUTO_STASH=0
@@ -27,19 +27,16 @@ Defaults are non-destructive:
 
 Options:
   --home <path>             Target home directory (default: $HOME)
-  --opencode-theme <name>   OpenCode theme string (default: karasu-night)
-  --opencode-mode <mode>    "string" (safe default) or "system"
-  --configure-opencode      Write OpenCode config theme settings
+  --opencode-theme <name>   OpenCode TUI theme string (default: karasu)
+  --opencode-mode <mode>    Deprecated. Accepted for compatibility; use --opencode-theme
+  --configure-opencode      Write OpenCode TUI theme settings to tui.json
   --force-rewrite-invalid-opencode-config
-                            Overwrite invalid OpenCode JSON when configuring
+                            Overwrite invalid OpenCode TUI JSON when configuring
   --sync-neovim             Run Neovim lazy.nvim sync for karasu
   --neovim-auto-stash       Auto-stash dirty karasu lazy checkout before sync
   --prune-zed               Delete unmanaged files in zed extension target dir
   --skip-neovim             Deprecated alias; no effect (sync is already opt-in)
   -h, --help                Show this message
-
-Environment:
-  OPENCODE_VERSION_OVERRIDE  Force OpenCode version for testing.
 EOF
 }
 
@@ -105,9 +102,13 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-if [[ "$OPENCODE_MODE" != "string" && "$OPENCODE_MODE" != "system" ]]; then
+if [[ -n "$OPENCODE_MODE" && "$OPENCODE_MODE" != "string" && "$OPENCODE_MODE" != "system" ]]; then
   echo "Invalid --opencode-mode: $OPENCODE_MODE"
   exit 1
+fi
+
+if [[ "$OPENCODE_MODE" == "system" ]]; then
+  echo "Warning: --opencode-mode system is deprecated for OpenCode themes. Use --opencode-theme karasu instead."
 fi
 
 if [[ "$NEOVIM_AUTO_STASH" -eq 1 && "$SYNC_NEOVIM" -eq 0 ]]; then
@@ -115,62 +116,17 @@ if [[ "$NEOVIM_AUTO_STASH" -eq 1 && "$SYNC_NEOVIM" -eq 0 ]]; then
   exit 1
 fi
 
-version_ge() {
-  local left="$1"
-  local right="$2"
-  local l r
-  l="$(echo "$left" | sed -E 's/^v//; s/[^0-9.].*$//')"
-  r="$(echo "$right" | sed -E 's/^v//; s/[^0-9.].*$//')"
-
-  local l1=0 l2=0 l3=0 r1=0 r2=0 r3=0
-  IFS='.' read -r l1 l2 l3 <<<"$l"
-  IFS='.' read -r r1 r2 r3 <<<"$r"
-  l1="${l1:-0}"; l2="${l2:-0}"; l3="${l3:-0}"
-  r1="${r1:-0}"; r2="${r2:-0}"; r3="${r3:-0}"
-
-  if (( l1 > r1 )); then return 0; fi
-  if (( l1 < r1 )); then return 1; fi
-  if (( l2 > r2 )); then return 0; fi
-  if (( l2 < r2 )); then return 1; fi
-  if (( l3 >= r3 )); then return 0; fi
-  return 1
-}
-
-detect_opencode_version() {
-  if [[ -n "${OPENCODE_VERSION_OVERRIDE:-}" ]]; then
-    printf '%s' "$OPENCODE_VERSION_OVERRIDE"
-    return
-  fi
-
-  if command -v opencode >/dev/null 2>&1; then
-    opencode --version 2>/dev/null | head -n 1
-    return
-  fi
-
-  printf ''
-}
-
-write_opencode_config() {
+write_opencode_tui_config() {
   local cfg="$1"
   local theme="$2"
-  local use_system="$3"
-  local force_rewrite_invalid="$4"
+  local force_rewrite_invalid="$3"
 
-  local light="karasu-snow"
-  local dark="karasu-night"
-  if [[ "$theme" == "karasu-snow" ]]; then
-    light="karasu-snow"
-    dark="karasu-night"
-  elif [[ "$theme" != "karasu-night" ]]; then
-    dark="$theme"
-  fi
-
-  python3 - "$cfg" "$theme" "$use_system" "$light" "$dark" "$force_rewrite_invalid" <<'PY'
+  python3 - "$cfg" "$theme" "$force_rewrite_invalid" <<'PY'
 import json
 import os
 import sys
 
-cfg_path, theme, use_system, light, dark, force_rewrite_invalid = sys.argv[1:]
+cfg_path, theme, force_rewrite_invalid = sys.argv[1:]
 data = {}
 if os.path.exists(cfg_path):
     try:
@@ -183,18 +139,15 @@ if os.path.exists(cfg_path):
     except Exception:
         if force_rewrite_invalid != "1":
             print(
-                f"Refusing to modify invalid OpenCode config at {cfg_path}. "
+                f"Refusing to modify invalid OpenCode TUI config at {cfg_path}. "
                 "Use --force-rewrite-invalid-opencode-config to overwrite.",
                 file=sys.stderr,
             )
             sys.exit(2)
         data = {}
 
-data["$schema"] = "https://opencode.ai/config.json"
-if use_system == "1":
-    data["theme"] = {"mode": "system", "light": light, "dark": dark}
-else:
-    data["theme"] = theme
+data["$schema"] = "https://opencode.ai/tui.json"
+data["theme"] = theme
 
 os.makedirs(os.path.dirname(cfg_path), exist_ok=True)
 with open(cfg_path, "w", encoding="utf-8") as f:
@@ -239,35 +192,25 @@ install -d "$TARGET_HOME/.config/zed/extensions/karasu"
 
 cp "$REPO_ROOT/platforms/ghostty/karasu-night" "$TARGET_HOME/.config/ghostty/themes/karasu-night"
 cp "$REPO_ROOT/platforms/ghostty/karasu-snow" "$TARGET_HOME/.config/ghostty/themes/karasu-snow"
-cp "$REPO_ROOT/platforms/opencode/themes/karasu-night.json" "$TARGET_HOME/.config/opencode/themes/karasu-night.json"
-cp "$REPO_ROOT/platforms/opencode/themes/karasu-snow.json" "$TARGET_HOME/.config/opencode/themes/karasu-snow.json"
+cp "$REPO_ROOT/platforms/opencode/themes/karasu.json" "$TARGET_HOME/.config/opencode/themes/karasu.json"
+rm -f "$TARGET_HOME/.config/opencode/themes/karasu-night.json"
+rm -f "$TARGET_HOME/.config/opencode/themes/karasu-snow.json"
 sync_zed_extension "$REPO_ROOT/platforms/zed" "$TARGET_HOME/.config/zed/extensions/karasu"
 
 opencode_mode_result="not configured"
 if [[ "$CONFIGURE_OPENCODE" -eq 1 ]]; then
-  opencode_version="$(detect_opencode_version)"
-  use_system="0"
-  if [[ "$OPENCODE_MODE" == "system" ]]; then
-    if [[ -n "$opencode_version" ]] && version_ge "$opencode_version" "1.2.0"; then
-      use_system="1"
-    else
-      echo "OpenCode ${opencode_version:-unknown} may not support object theme config; using string fallback."
-    fi
-  fi
-
-  opencode_cfg="$TARGET_HOME/.config/opencode/opencode.json"
+  opencode_cfg="$TARGET_HOME/.config/opencode/tui.json"
   if [[ -f "$opencode_cfg" ]]; then
     backup_path="$(backup_file "$opencode_cfg")"
-    echo "Backed up OpenCode config: $backup_path"
+    echo "Backed up OpenCode TUI config: $backup_path"
   fi
 
-  write_opencode_config \
+  write_opencode_tui_config \
     "$opencode_cfg" \
     "$OPENCODE_THEME" \
-    "$use_system" \
     "$FORCE_REWRITE_INVALID_OPENCODE_CONFIG"
 
-  opencode_mode_result="$([[ "$use_system" == "1" ]] && echo system || echo string)"
+  opencode_mode_result="tui theme '$OPENCODE_THEME'"
 fi
 
 neovim_result="not synced"

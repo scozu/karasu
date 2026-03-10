@@ -78,26 +78,25 @@ In Obsidian:
 
 ```bash
 mkdir -p ~/.config/opencode/themes
-cp /path/to/karasu/platforms/opencode/themes/karasu-night.json ~/.config/opencode/themes/
-cp /path/to/karasu/platforms/opencode/themes/karasu-snow.json ~/.config/opencode/themes/
+cp /path/to/karasu/platforms/opencode/themes/karasu.json ~/.config/opencode/themes/
 ```
 
-Config example:
+`~/.config/opencode/tui.json`:
 ```json
 {
-  "theme": "karasu-night"
+  "$schema": "https://opencode.ai/tui.json",
+  "theme": "karasu"
 }
 ```
 
+`karasu` follows OpenCode's built-in theme pattern: Karasu Night in dark mode and Karasu Snow in light mode.
+
 Karasu OpenCode themes use explicit hex values for stable, deterministic rendering.
 Matching your terminal ANSI palette to Karasu (Ghostty/iTerm2) is optional, but improves cross-tool consistency.
+OpenCode loads custom themes from `~/.config/opencode/themes`, `<project>/.opencode/themes`, and `./.opencode/themes`, with later locations taking priority.
+For full color fidelity, make sure your terminal is running in truecolor mode.
 
-`"theme"` as a plain string is the safest cross-version setting.
-If you're on OpenCode `>=1.2.0` and want auto light/dark switching, run:
-
-```bash
-./scripts/install-all.sh --configure-opencode --opencode-mode system
-```
+`"theme"` as a plain string in `tui.json` is the current OpenCode standard.
 
 ### VS Code / Cursor
 
@@ -126,9 +125,6 @@ Examples:
 ```bash
 # Configure OpenCode theme safely (with backup)
 ./scripts/install-all.sh --configure-opencode
-
-# Configure OpenCode system mode when supported
-./scripts/install-all.sh --configure-opencode --opencode-mode system
 
 # Sync Neovim plugin and auto-stash dirty local edits first
 ./scripts/install-all.sh --sync-neovim --neovim-auto-stash
@@ -167,9 +163,8 @@ bun run ./scripts/check-opencode-config-compat.mjs
 
 ## Migration Notes
 
-- If OpenCode fails with `Invalid input: expected string, received object theme`, set:
-  - `"theme": "karasu-night"` in `~/.config/opencode/opencode.json`
-  - or rerun `./scripts/install-all.sh --configure-opencode`.
+- If OpenCode is not picking up Karasu, set `"theme": "karasu"` in `~/.config/opencode/tui.json` and rerun `./scripts/install-all.sh --configure-opencode`.
+- If OpenCode still shows the wrong custom theme, check for higher-precedence overrides in `tui.json`, `<project>/.opencode/themes/`, or `./.opencode/themes/`.
 - If Neovim shows highlight-group spam on startup after updating Karasu, run:
   - `nvim --headless '+Lazy! sync karasu' +qa`
   - or run `./scripts/install-all.sh --sync-neovim --neovim-auto-stash`.

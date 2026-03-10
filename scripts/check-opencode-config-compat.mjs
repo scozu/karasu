@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { mkdtempSync, readFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
@@ -10,59 +10,89 @@ const __dirname = path.dirname(__filename);
 const root = path.resolve(__dirname, "..");
 const installScript = path.join(root, "scripts", "install-all.sh");
 
-function runInstall({ version, mode, theme = "karasu-night" }) {
-  const home = mkdtempSync(path.join(os.tmpdir(), "karasu-opencode-"));
+function runInstall({ theme = "karasu", extraArgs = [], home }) {
+  const targetHome = home ?? mkdtempSync(path.join(os.tmpdir(), "karasu-opencode-"));
   const res = spawnSync(
     "bash",
-      [
-        installScript,
-        "--home",
-        home,
-        "--configure-opencode",
-        "--opencode-mode",
-        mode,
-        "--opencode-theme",
-        theme,
-      ],
+    [
+      installScript,
+      "--home",
+      targetHome,
+      "--configure-opencode",
+      "--opencode-theme",
+      theme,
+      ...extraArgs,
+    ],
     {
       encoding: "utf8",
-      env: {
-        ...process.env,
-        OPENCODE_VERSION_OVERRIDE: version,
-      },
-    },
+    }
   );
 
-  if (res.status !== 0) {
-    throw new Error(`install-all.sh failed\n${res.stdout}\n${res.stderr}`);
-  }
+  return {
+    home: targetHome,
+    res,
+  };
+}
 
-  const configPath = path.join(home, ".config", "opencode", "opencode.json");
-  const parsed = JSON.parse(readFileSync(configPath, "utf8"));
-  return parsed;
+function readTuiConfig(home) {
+  const configPath = path.join(home, ".config", "opencode", "tui.json");
+  return JSON.parse(readFileSync(configPath, "utf8"));
 }
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
+function assertThemeFilesInstalled(home) {
+  const themeDir = path.join(home, ".config", "opencode", "themes");
+  ["karasu.json"].forEach((file) => {
+    assert(existsSync(path.join(themeDir, file)), `Missing installed OpenCode theme file: ${file}`);
+  });
+  ["karasu-night.json", "karasu-snow.json"].forEach((file) => {
+    assert(!existsSync(path.join(themeDir, file)), `Unexpected legacy OpenCode theme file: ${file}`);
+  });
+}
+
 function main() {
-  // Safe default should remain a simple string for broad compatibility.
-  const defaultOld = runInstall({ version: "1.1.60", mode: "string" });
-  assert(typeof defaultOld.theme === "string", "OpenCode 1.1.x default theme must be a string");
+  const defaultInstall = runInstall({});
+  assert(defaultInstall.res.status === 0, `install-all.sh failed\n${defaultInstall.res.stdout}\n${defaultInstall.res.stderr}`);
+  const defaultTui = readTuiConfig(defaultInstall.home);
+  assert(defaultTui.$schema === "https://opencode.ai/tui.json", "OpenCode TUI config schema must be tui.json");
+  assert(defaultTui.theme === "karasu", "Default OpenCode theme must be karasu");
+  assertThemeFilesInstalled(defaultInstall.home);
 
-  const defaultNew = runInstall({ version: "1.2.6", mode: "string" });
-  assert(typeof defaultNew.theme === "string", "Default mode must stay string for compatibility");
+  const customInstall = runInstall({ theme: "tokyonight" });
+  assert(customInstall.res.status === 0, `install-all.sh failed\n${customInstall.res.stdout}\n${customInstall.res.stderr}`);
+  const customTui = readTuiConfig(customInstall.home);
+  assert(customTui.theme === "tokyonight", "Custom OpenCode theme must be written to tui.json");
+  assertThemeFilesInstalled(customInstall.home);
 
-  // System mode is opt-in and only emitted for versions we consider compatible.
-  const systemOld = runInstall({ version: "1.1.60", mode: "system" });
-  assert(typeof systemOld.theme === "string", "OpenCode 1.1.x system mode must fall back to string");
+  const deprecatedModeInstall = runInstall({ extraArgs: ["--opencode-mode", "system"] });
+  assert(
+    deprecatedModeInstall.res.status === 0,
+    `install-all.sh failed with deprecated --opencode-mode\n${deprecatedModeInstall.res.stdout}\n${deprecatedModeInstall.res.stderr}`
+  );
+  const deprecatedModeTui = readTuiConfig(deprecatedModeInstall.home);
+  assert(deprecatedModeTui.theme === "karasu", "Deprecated --opencode-mode should preserve string TUI theme config");
 
-  const systemNew = runInstall({ version: "1.2.6", mode: "system" });
-  assert(typeof systemNew.theme === "object", "OpenCode >=1.2.0 should support object theme in system mode");
-  assert(systemNew.theme.mode === "system", "Object theme mode must be system");
-  assert(systemNew.theme.dark === "karasu-night", "Object dark theme should be karasu-night");
-  assert(systemNew.theme.light === "karasu-snow", "Object light theme should be karasu-snow");
+  const invalidHome = mkdtempSync(path.join(os.tmpdir(), "karasu-opencode-invalid-"));
+  const invalidTuiPath = path.join(invalidHome, ".config", "opencode", "tui.json");
+  mkdirSync(path.dirname(invalidTuiPath), { recursive: true });
+  writeFileSync(invalidTuiPath, "{ not valid json\n", "utf8");
+
+  const rejectedInvalidInstall = runInstall({ home: invalidHome });
+  assert(rejectedInvalidInstall.res.status === 2, "Invalid OpenCode TUI config should fail without force rewrite");
+
+  const forcedInvalidInstall = runInstall({
+    home: invalidHome,
+    extraArgs: ["--force-rewrite-invalid-opencode-config"],
+  });
+  assert(
+    forcedInvalidInstall.res.status === 0,
+    `Forced install-all.sh failed\n${forcedInvalidInstall.res.stdout}\n${forcedInvalidInstall.res.stderr}`
+  );
+  const forcedTui = readTuiConfig(invalidHome);
+  assert(forcedTui.theme === "karasu", "Forced rewrite should restore a valid TUI theme config");
 
   console.log("OpenCode config compatibility checks passed.");
 }

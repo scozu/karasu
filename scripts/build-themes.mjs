@@ -11,6 +11,59 @@ const palettes = {
 };
 const tokens = readJson("palette/tokens.json");
 
+const OPENCODE_ROLE_KEYS = {
+  primary: "syntaxProperty",
+  secondary: "syntaxNumber",
+  accent: "syntaxString",
+  error: "diagError",
+  warning: "diagWarning",
+  success: "syntaxFunction",
+  info: "diagInfo",
+  text: "karasuFg0",
+  textMuted: "syntaxComment",
+  background: "karasuBg0",
+  backgroundPanel: "karasuBg1",
+  backgroundElement: "karasuBg2",
+  border: "karasuBg3",
+  borderActive: "syntaxProperty",
+  borderSubtle: "karasuBg2",
+  diffAdded: "syntaxFunction",
+  diffRemoved: "diagError",
+  diffContext: "syntaxComment",
+  diffHunkHeader: "karasuBg3",
+  diffHighlightAdded: "syntaxFunction",
+  diffHighlightRemoved: "diagError",
+  diffAddedBg: "diffAddedBg",
+  diffRemovedBg: "diffRemovedBg",
+  diffContextBg: "diffContextBg",
+  diffLineNumber: "syntaxComment",
+  diffAddedLineNumberBg: "diffAddedBg",
+  diffRemovedLineNumberBg: "diffRemovedBg",
+  markdownText: "karasuFg0",
+  markdownHeading: "syntaxLink",
+  markdownLink: "syntaxLink",
+  markdownLinkText: "syntaxProperty",
+  markdownCode: "syntaxString",
+  markdownBlockQuote: "syntaxComment",
+  markdownEmph: "syntaxKeyword",
+  markdownStrong: "syntaxOperator",
+  markdownHorizontalRule: "karasuBg3",
+  markdownListItem: "syntaxProperty",
+  markdownListEnumeration: "syntaxNumber",
+  markdownImage: "syntaxLink",
+  markdownImageText: "syntaxProperty",
+  markdownCodeBlock: "karasuFg0",
+  syntaxComment: "syntaxComment",
+  syntaxKeyword: "syntaxKeyword",
+  syntaxFunction: "syntaxFunction",
+  syntaxVariable: "syntaxVariable",
+  syntaxString: "syntaxString",
+  syntaxNumber: "syntaxNumber",
+  syntaxType: "syntaxType",
+  syntaxOperator: "syntaxOperator",
+  syntaxPunctuation: "syntaxPunctuation",
+};
+
 function readJson(relPath) {
   return JSON.parse(fs.readFileSync(path.join(root, relPath), "utf8"));
 }
@@ -76,21 +129,6 @@ function hexToRgb(hex) {
     parseInt(clean.slice(2, 4), 16),
     parseInt(clean.slice(4, 6), 16),
   ];
-}
-
-function assertOpencodeUsesHex(value, pathParts = []) {
-  if (typeof value === "number") {
-    throw new Error(`OpenCode output must use hex colors only. Found numeric value at ${pathParts.join(".")}`);
-  }
-  if (Array.isArray(value)) {
-    value.forEach((item, idx) => assertOpencodeUsesHex(item, [...pathParts, String(idx)]));
-    return;
-  }
-  if (value && typeof value === "object") {
-    Object.entries(value).forEach(([key, item]) => {
-      assertOpencodeUsesHex(item, [...pathParts, key]);
-    });
-  }
 }
 
 function writeGhostty(variant, palette, paletteMap, tokenMap) {
@@ -174,19 +212,57 @@ function writeZed(variant, paletteMap, tokenMap) {
   writeFile(`platforms/zed/themes/karasu-${variant}.json`, `${JSON.stringify(theme, null, 2)}\n`);
 }
 
-function writeOpencode(variant, paletteMap, tokenMap) {
-  const templatePath = path.join(root, "platforms/opencode/templates", `karasu-${variant}.json`);
-  const template = fs.readFileSync(templatePath, "utf8");
-  const rendered = renderTemplate(template, { ...paletteMap, ...tokenMap });
-  const theme = JSON.parse(rendered);
+function buildOpencodeThemeRoles(resolveRoleValue) {
+  return Object.fromEntries(
+    Object.entries(OPENCODE_ROLE_KEYS).map(([role, key]) => [role, resolveRoleValue(key)])
+  );
+}
 
-  theme.defs = {
-    ...paletteMap,
-    ...tokenMap,
+function buildOpencodeThemeDefs(paletteMap, tokenMap) {
+  const source = { ...paletteMap, ...tokenMap };
+  return Object.fromEntries(
+    [...new Set(Object.values(OPENCODE_ROLE_KEYS))].map((key) => {
+      const value = source[key];
+      if (!value) {
+        throw new Error(`Unknown OpenCode key: ${key}`);
+      }
+      return [key, value];
+    })
+  );
+}
+
+function opencodeDefName(prefix, key) {
+  if (key.startsWith("karasu")) {
+    return `${prefix}${key.slice("karasu".length)}`;
+  }
+  return `${prefix}${key[0].toUpperCase()}${key.slice(1)}`;
+}
+
+function buildOpencodePrefixedDefs(prefix, paletteMap, tokenMap) {
+  return Object.fromEntries(
+    Object.entries(buildOpencodeThemeDefs(paletteMap, tokenMap)).map(([key, value]) => [opencodeDefName(prefix, key), value])
+  );
+}
+
+function buildOpencodeCombinedTheme(darkPaletteMap, darkTokenMap, lightPaletteMap, lightTokenMap) {
+  return {
+    $schema: "https://opencode.ai/theme.json",
+    defs: {
+      ...buildOpencodePrefixedDefs("dark", darkPaletteMap, darkTokenMap),
+      ...buildOpencodePrefixedDefs("light", lightPaletteMap, lightTokenMap),
+    },
+    theme: buildOpencodeThemeRoles((key) => ({
+      dark: opencodeDefName("dark", key),
+      light: opencodeDefName("light", key),
+    })),
   };
-  assertOpencodeUsesHex(theme, ["theme"]);
+}
 
-  writeFile(`platforms/opencode/themes/karasu-${variant}.json`, `${JSON.stringify(theme, null, 2)}\n`);
+function writeOpencodeCombined(nightPaletteMap, nightTokenMap, snowPaletteMap, snowTokenMap) {
+  const theme = buildOpencodeCombinedTheme(nightPaletteMap, nightTokenMap, snowPaletteMap, snowTokenMap);
+  fs.rmSync(path.join(root, "platforms/opencode/themes/karasu-night.json"), { force: true });
+  fs.rmSync(path.join(root, "platforms/opencode/themes/karasu-snow.json"), { force: true });
+  writeFile("platforms/opencode/themes/karasu.json", `${JSON.stringify(theme, null, 2)}\n`);
 }
 
 function writeVSCode(variant, paletteMap, tokenMap, palette) {
@@ -329,7 +405,6 @@ function buildVariant(variant) {
   writeGhostty(variant, palette, paletteMap, tokenMap);
   writeIterm2(variant, palette, paletteMap, tokenMap);
   writeZed(variant, paletteMap, tokenMap);
-  writeOpencode(variant, paletteMap, tokenMap);
   writeVSCode(variant, paletteMap, tokenMap, palette);
   writeNeovimPalette(variant, paletteMap, palette, tokenMap);
 
@@ -338,6 +413,7 @@ function buildVariant(variant) {
 
 const night = buildVariant("night");
 const snow = buildVariant("snow");
+writeOpencodeCombined(night.paletteMap, night.tokenMap, snow.paletteMap, snow.tokenMap);
 writeObsidian(night.paletteMap, night.tokenMap, snow.paletteMap, snow.tokenMap);
 
 console.log("Themes generated for Night and Snow.");

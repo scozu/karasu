@@ -238,6 +238,50 @@ const OPENCODE_SYNTAX_ROLE_EXPECTATIONS = {
   syntaxPunctuation: "syntaxPunctuation",
 };
 
+const OPENCODE_THEME_ROLE_EXPECTATIONS = {
+  primary: "syntaxProperty",
+  secondary: "syntaxNumber",
+  accent: "syntaxString",
+  error: "diagError",
+  warning: "diagWarning",
+  success: "syntaxFunction",
+  info: "diagInfo",
+  text: "karasuFg0",
+  textMuted: "syntaxComment",
+  background: "karasuBg0",
+  backgroundPanel: "karasuBg1",
+  backgroundElement: "karasuBg2",
+  border: "karasuBg3",
+  borderActive: "syntaxProperty",
+  borderSubtle: "karasuBg2",
+  diffAdded: "syntaxFunction",
+  diffRemoved: "diagError",
+  diffContext: "syntaxComment",
+  diffHunkHeader: "karasuBg3",
+  diffHighlightAdded: "syntaxFunction",
+  diffHighlightRemoved: "diagError",
+  diffAddedBg: "diffAddedBg",
+  diffRemovedBg: "diffRemovedBg",
+  diffContextBg: "diffContextBg",
+  diffLineNumber: "syntaxComment",
+  diffAddedLineNumberBg: "diffAddedBg",
+  diffRemovedLineNumberBg: "diffRemovedBg",
+  markdownText: "karasuFg0",
+  markdownHeading: "syntaxLink",
+  markdownLink: "syntaxLink",
+  markdownLinkText: "syntaxProperty",
+  markdownCode: "syntaxString",
+  markdownBlockQuote: "syntaxComment",
+  markdownEmph: "syntaxKeyword",
+  markdownStrong: "syntaxOperator",
+  markdownHorizontalRule: "karasuBg3",
+  markdownListItem: "syntaxProperty",
+  markdownListEnumeration: "syntaxNumber",
+  markdownImage: "syntaxLink",
+  markdownImageText: "syntaxProperty",
+  markdownCodeBlock: "karasuFg0",
+};
+
 const OBSIDIAN_MARKER_BY_VARIANT = {
   night: "karasu-dark",
   snow: "karasu-light",
@@ -371,16 +415,26 @@ function parseOpenCodeTheme(fileRel) {
   return readJson(fileRel);
 }
 
-function resolveOpenCodeRef(theme, value) {
+function resolveOpenCodeRef(theme, value, mode) {
   if (typeof value !== "string") return value;
   if (value.startsWith("#")) return value;
-  if (theme.defs?.[value] !== undefined) return theme.defs[value];
+  if (theme.defs?.[value] !== undefined) return resolveOpenCodeRef(theme, theme.defs[value], mode);
+  if (theme.theme?.[value] !== undefined) return parseOpenCodeRole(theme, value, mode);
   return value;
 }
 
 function parseOpenCodeRole(theme, role, mode) {
-  const value = theme.theme?.[role]?.[mode];
-  return resolveOpenCodeRef(theme, value);
+  const value = theme.theme?.[role];
+  if (value && typeof value === "object" && !Array.isArray(value) && (value.dark !== undefined || value.light !== undefined)) {
+    const variantValue = value[mode] !== undefined ? value[mode] : value.dark ?? value.light;
+    return resolveOpenCodeRef(theme, variantValue, mode);
+  }
+  return resolveOpenCodeRef(theme, value, mode);
+}
+
+function expectedOpenCodeColor(key, paletteMap, tokenMap) {
+  if (key.startsWith("karasu")) return paletteMap[key];
+  return tokenMap[key];
 }
 
 function parseObsidianCssVarsByMarker(css, marker) {
@@ -673,24 +727,46 @@ function checkZed(variant, expected, tokenMap) {
   });
 }
 
-function checkOpenCode(variant, expected, tokenMap, expectedCursorAnsi) {
-  const openCodeTheme = parseOpenCodeTheme(`platforms/opencode/themes/karasu-${variant}.json`);
-  assertEqual(`opencode primary text dark (${variant})`, parseOpenCodeRole(openCodeTheme, "text", "dark"), expected.primaryText);
-  assertEqual(`opencode primary text light (${variant})`, parseOpenCodeRole(openCodeTheme, "text", "light"), expected.primaryText);
-  assertEqual(`opencode muted text dark (${variant})`, parseOpenCodeRole(openCodeTheme, "textMuted", "dark"), tokenMap.syntaxComment);
-  assertEqual(`opencode muted text light (${variant})`, parseOpenCodeRole(openCodeTheme, "textMuted", "light"), tokenMap.syntaxComment);
+function checkOpenCodeTheme(themeName, fileRel, darkPaletteMap, darkTokenMap, lightPaletteMap, lightTokenMap) {
+  const openCodeTheme = parseOpenCodeTheme(fileRel);
+  assert(openCodeTheme.theme?.cursor === undefined, `opencode cursor role must not be emitted (${themeName})`);
 
-  Object.entries(OPENCODE_SYNTAX_ROLE_EXPECTATIONS).forEach(([role, tokenKey]) => {
-    assertEqual(`opencode ${role} dark (${variant})`, parseOpenCodeRole(openCodeTheme, role, "dark"), tokenMap[tokenKey]);
-    assertEqual(`opencode ${role} light (${variant})`, parseOpenCodeRole(openCodeTheme, role, "light"), tokenMap[tokenKey]);
+  Object.entries(OPENCODE_THEME_ROLE_EXPECTATIONS).forEach(([role, tokenKey]) => {
+    assertEqual(
+      `opencode ${role} dark (${themeName})`,
+      parseOpenCodeRole(openCodeTheme, role, "dark"),
+      expectedOpenCodeColor(tokenKey, darkPaletteMap, darkTokenMap)
+    );
+    assertEqual(
+      `opencode ${role} light (${themeName})`,
+      parseOpenCodeRole(openCodeTheme, role, "light"),
+      expectedOpenCodeColor(tokenKey, lightPaletteMap, lightTokenMap)
+    );
   });
 
-  const openCodeCursor = parseOpenCodeRole(openCodeTheme, "cursor", "dark");
-  if (typeof openCodeCursor === "number") {
-    assertEqual(`opencode cursor (${variant})`, openCodeCursor, expectedCursorAnsi);
-  } else {
-    assertEqual(`opencode cursor (${variant})`, openCodeCursor, expected.cursorHex);
-  }
+  Object.entries(OPENCODE_SYNTAX_ROLE_EXPECTATIONS).forEach(([role, tokenKey]) => {
+    assertEqual(
+      `opencode ${role} dark (${themeName})`,
+      parseOpenCodeRole(openCodeTheme, role, "dark"),
+      darkTokenMap[tokenKey]
+    );
+    assertEqual(
+      `opencode ${role} light (${themeName})`,
+      parseOpenCodeRole(openCodeTheme, role, "light"),
+      lightTokenMap[tokenKey]
+    );
+  });
+}
+
+function checkOpenCodeCombined(nightPaletteMap, nightTokenMap, snowPaletteMap, snowTokenMap) {
+  checkOpenCodeTheme(
+    "karasu",
+    "platforms/opencode/themes/karasu.json",
+    nightPaletteMap,
+    nightTokenMap,
+    snowPaletteMap,
+    snowTokenMap
+  );
 }
 
 let obsidianSelectorsChecked = false;
@@ -721,7 +797,6 @@ function checkVariant(variant) {
   const paletteMap = flattenPalette(palette);
   const tokenMap = tokenMapForVariant(variant, paletteMap);
   const canonicalRoles = buildCanonicalRoles(tokenMap);
-  const ansiHexMap = getAnsiHexMap(palette);
 
   const expected = {
     primaryText: paletteMap.karasuFg0,
@@ -734,21 +809,22 @@ function checkVariant(variant) {
     selectionFg: tokenMap.selectionFg,
     cursorHex: tokenMap.cursor,
   };
-  const expectedCursorAnsi = ansiIndexForHex(expected.cursorHex, ansiHexMap);
 
   checkNeovimVariant(variant, expected, canonicalRoles);
   checkGhostty(variant, expected, palette);
   checkIterm2(variant, expected, palette);
   checkVSCode(variant, expected, tokenMap, palette);
   checkZed(variant, expected, tokenMap);
-  checkOpenCode(variant, expected, tokenMap, expectedCursorAnsi);
   checkObsidian(variant, paletteMap, tokenMap);
+
+  return { paletteMap, tokenMap };
 }
 
 try {
   checkNeovimStaticMappings();
-  checkVariant("night");
-  checkVariant("snow");
+  const night = checkVariant("night");
+  const snow = checkVariant("snow");
+  checkOpenCodeCombined(night.paletteMap, night.tokenMap, snow.paletteMap, snow.tokenMap);
   console.log("Consistency checks passed (syntax roles + terminal ANSI + UI tokens + Obsidian snippet).");
 } catch (error) {
   console.error(error.message);
