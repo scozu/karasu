@@ -1,6 +1,6 @@
 # カラス
 
-Karasu is an atmospheric, terminal-first colorscheme with two variants: **Night** (dark) and **Snow** (light).
+Karasu is an atmospheric, terminal-first colorscheme with two variants: Night and Snow.
 
 ![Neovim](screenshots/neovim.png)
 
