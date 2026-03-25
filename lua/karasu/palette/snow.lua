@@ -23,8 +23,8 @@ local M = {
 
   -- Core tokens
   cursor = "#0A0A0A",
-  cursor_text = "#292524",
-  cursorText = "#292524",
+  cursor_text = "#FAFAFA",
+  cursorText = "#FAFAFA",
   selection_bg = "#E5E5E5",
   selectionBg = "#E5E5E5",
   search_bg = "#E5E5E5",
