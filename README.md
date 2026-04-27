@@ -43,13 +43,13 @@ Colorscheme commands:
 
 ```bash
 mkdir -p ~/.config/ghostty/themes
-cp /path/to/karasu/platforms/ghostty/karasu-night ~/.config/ghostty/themes/
-cp /path/to/karasu/platforms/ghostty/karasu-snow ~/.config/ghostty/themes/
+cp "/path/to/karasu/platforms/ghostty/Karasu Night" ~/.config/ghostty/themes/
+cp "/path/to/karasu/platforms/ghostty/Karasu Snow" ~/.config/ghostty/themes/
 ```
 
 Config example:
 ```
-theme = dark:karasu-night,light:karasu-snow
+theme = dark:Karasu Night,light:Karasu Snow
 ```
 
 ### Zed

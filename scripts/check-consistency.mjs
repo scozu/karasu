@@ -4,6 +4,11 @@ import { buildObsidianMinimalVariantVars } from "../platforms/obsidian/spec.mjs"
 
 const root = process.cwd();
 
+const displayNames = {
+  night: "Karasu Night",
+  snow: "Karasu Snow",
+};
+
 const palettes = {
   night: readJson("palette/night.json"),
   snow: readJson("palette/snow.json"),
@@ -621,7 +626,7 @@ function checkNeovimVariant(variant, expected, canonicalRoles) {
 }
 
 function checkGhostty(variant, expected, palette) {
-  const ghostty = parseGhostty(`platforms/ghostty/karasu-${variant}`);
+  const ghostty = parseGhostty(`platforms/ghostty/${displayNames[variant]}`);
   assertEqual(`ghostty primary text (${variant})`, ghostty.values.foreground, expected.primaryText);
   assertEqual(`ghostty background (${variant})`, ghostty.values.background, expected.background);
   assertEqual(`ghostty cursor (${variant})`, ghostty.values["cursor-color"], expected.cursorHex);
@@ -635,7 +640,7 @@ function checkGhostty(variant, expected, palette) {
 }
 
 function checkIterm2(variant, expected, palette) {
-  const itermTheme = `platforms/iterm2/karasu-${variant}.itermcolors`;
+  const itermTheme = `platforms/iterm2/${displayNames[variant]}.itermcolors`;
   assertEqual(`iterm2 primary text (${variant})`, parseIterm2Color(itermTheme, "Foreground Color"), expected.primaryText);
   assertEqual(`iterm2 background (${variant})`, parseIterm2Color(itermTheme, "Background Color"), expected.background);
   assertEqual(`iterm2 cursor (${variant})`, parseIterm2Color(itermTheme, "Cursor Color"), expected.cursorHex);

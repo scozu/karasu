@@ -5,6 +5,11 @@ import { buildObsidianMinimalSnippet } from "../platforms/obsidian/spec.mjs";
 
 const root = process.cwd();
 
+const displayNames = {
+  night: "Karasu Night",
+  snow: "Karasu Snow",
+};
+
 const palettes = {
   night: readJson("palette/night.json"),
   snow: readJson("palette/snow.json"),
@@ -148,7 +153,7 @@ function writeGhostty(variant, palette, paletteMap, tokenMap) {
   lines.push(`selection-background = ${tokenMap.selectionBg}`);
   lines.push(`selection-foreground = ${tokenMap.selectionFg}`);
 
-  writeFile(`platforms/ghostty/karasu-${variant}`, `${lines.join("\n")}\n`);
+  writeFile(`platforms/ghostty/${displayNames[variant]}`, `${lines.join("\n")}\n`);
 }
 
 function writeIterm2(variant, palette, paletteMap, tokenMap) {
@@ -191,7 +196,7 @@ function writeIterm2(variant, palette, paletteMap, tokenMap) {
     "",
   ].join("\n");
 
-  writeFile(`platforms/iterm2/karasu-${variant}.itermcolors`, plist);
+  writeFile(`platforms/iterm2/${displayNames[variant]}.itermcolors`, plist);
 }
 
 function writeZed(variant, paletteMap, tokenMap) {
